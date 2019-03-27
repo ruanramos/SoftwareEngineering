@@ -1,88 +1,131 @@
+package application;
+import java.io.IOException;
+
+import application.model.Customer;
+import application.view.CustomerEditDialogController;
+import application.view.CustomercrudController;
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+
 
 public class Main extends Application {
+	private Stage primaryStage;
+	private BorderPane rootLayout;
+	
+	
+	private ObservableList<Customer> customerData = FXCollections.observableArrayList();
+	
+	public Main() {
+		customerData.add(new Customer("Hans", "Muster"));
+        customerData.add(new Customer("Ruth", "Mueller"));
+        customerData.add(new Customer("Heinz", "Kurz"));
+        customerData.add(new Customer("Cornelia", "Meier"));
+        customerData.add(new Customer("Werner", "Meyer"));
+        customerData.add(new Customer("Lydia", "Kunz"));
+        customerData.add(new Customer("Anna", "Best"));
+        customerData.add(new Customer("Stefan", "Meier"));
+        customerData.add(new Customer("Martin", "Mueller"));
+		
+	}
+	@Override
 
-    static final int APP_WIDTH = 600;
-    static final int APP_HEIGHT = 400;
-
-    Stage stage;
-    Scene home = homeScene();
-    Scene register = registrationScene();
-
-
-    public static void main(String[] args)  {
-        launch(args);
+	public void start(Stage primaryStage) throws IOException {
+		this.primaryStage = primaryStage;
+		this.primaryStage.setTitle("Tela inicial");
+		initRootLayout();
+		showCustomerCrud();	
+	}
+	public ObservableList<Customer> getCustomerData() {	
+    	return customerData;
     }
+	/* Show Customer Crud in the root layout */
+	private void showCustomerCrud() {
+		// TODO Auto-generated method stub
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("view/Customercrud.fxml"));
+			AnchorPane CustomerCrud = (AnchorPane) loader.load();
+			
+			/* Define Customer Crud in root layout */
+			rootLayout.setCenter(CustomerCrud);
+			// Give to controller access to the main class
+	        CustomercrudController controller = loader.getController();
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        stage = primaryStage;
-        stage.setTitle("Sistema de Locação");
-        stage.setScene(home);
-        stage.show();
+	        controller.setMain(this);
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+    /**
+     * Returns the main stage.
+     * @return
+     */
+
+	private void initRootLayout() throws IOException {
+		// Load the root layout from fxml file
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("view/RootLayout.fxml"));
+			rootLayout = (BorderPane) loader.load();
+			
+			Scene scene = new Scene(rootLayout);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public Stage getPrimaryStage() {
+        return primaryStage;
     }
+	public static void main(String[] args) {
+		
+		launch(args);
+		
+	}
+	/**
+	 * Opens a dialog to edit details for the specified customer. If the user
+	 * clicks OK, the changes are saved into the provided person object and true
+	 * is returned.
+	 * 
+	 * @param customer, the customer object to be edited
+	 * @return true if the user clicked OK, false otherwise.
+	 */
+	public boolean showCustomerEditDialog(Customer customer ){
+	    try {
+	        // Load the fxml file and create a new stage for the popup dialog.
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(Main.class.getResource("view/CustomerEditDialog.fxml"));
+	        AnchorPane page = (AnchorPane) loader.load();
 
-    private Scene homeScene() {
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+	        // Create the dialog Stage.
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Editar Cliente");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);
+	        dialogStage.initOwner(primaryStage);
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
 
+	        // Set the person into the controller.
+	        CustomerEditDialogController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
+	        controller.setcustomer(customer);
 
-        Text sceneTitle = new Text("Tela inicial");
-        grid.add(sceneTitle, 0, 0);
+	        // Show the dialog and wait until the user closes it
+	        dialogStage.showAndWait();
 
-        Button registerBtn = new Button("Cadastrar");
-        registerBtn.setOnAction(e -> stage.setScene(register));
-        grid.add(registerBtn, 0, 1);
-
-        return new Scene(grid, APP_WIDTH, APP_HEIGHT);
-    }
-
-    private Scene registrationScene() {
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
-
-        Text sceneTitle = new Text("Cadastro de novo cliente:");
-        grid.add(sceneTitle, 0, 0, 2, 1);
-
-        Label customerName = new Label("Nome do cliente: ");
-        grid.add(customerName, 0, 1);
-
-        TextField nameTextField = new TextField();
-        grid.add(nameTextField, 1, 1);
-
-        Label customerCpf = new Label("CPF: ");
-        grid.add(customerCpf, 0, 2);
-
-        TextField cpfTextField = new TextField();
-        grid.add(cpfTextField, 1, 2);
-
-        Button customerBtn = new Button("Cadastrar");
-        customerBtn.setOnAction(e ->
-                System.out.println(nameTextField.getText() + " " +
-                        cpfTextField.getText()));
-        grid.add(customerBtn, 0, 3);
-
-        Button homeBtn = new Button("Início");
-        homeBtn.setOnAction(e ->
-                stage.setScene(home));
-        grid.add(homeBtn, 1, 3);
-
-        return new Scene(grid, APP_WIDTH, APP_HEIGHT);
-    }
+	        return controller.isOkClicked();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
 }
-
