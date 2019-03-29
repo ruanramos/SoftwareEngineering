@@ -17,131 +17,128 @@ public class Customer {
 	private StringProperty cnh;
 	private LocalDate birthday;
 	private StringProperty cellphone;
-	private StringProperty adress;
+	private StringProperty address;
+	private StringProperty email;
+
 	public Customer() {
         this(null, null);
     }
+
 	public Customer(String firstName, String lastName) {
 		this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
+
+        // daqui pra baixo sao valores padrao
+		// TODO: fazer construtor com todos os valores
         this.cpf = new SimpleStringProperty("cpf number");
         this.rg = new SimpleStringProperty("RG number");
 		this.cnh = new SimpleStringProperty("CNH number");
 		this.birthday = (LocalDate.of(2001, 9, 11));
 		this.cellphone = new SimpleStringProperty("4002-8922");
-		this.adress = new SimpleStringProperty("Rua ccmn");
+		this.address = new SimpleStringProperty("Rua ccmn");
 	}
 
-	/**
-	 * @return the firstName
-	 */
-	public StringProperty getFirstName() {
+	public String getFirstName() {
+		return firstName.get();
+	}
+
+	public StringProperty firstNameProperty() {
 		return firstName;
 	}
 
-	/**
-	 * @return the lastName
-	 */
-	public StringProperty getLastName() {
+	public void setFirstName(String firstName) {
+		this.firstName.set(firstName);
+	}
+
+	public String getLastName() {
+		return lastName.get();
+	}
+
+	public StringProperty lastNameProperty() {
 		return lastName;
 	}
 
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(StringProperty firstName) {
-		this.firstName = firstName;
+	public void setLastName(String lastName) {
+		this.lastName.set(lastName);
 	}
 
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(StringProperty lastName) {
-		this.lastName = lastName;
+	public String getCpf() {
+		return cpf.get();
 	}
 
-	/**
-	 * @param cpf the cpf to set
-	 */
-	public void setCpf(StringProperty cpf) {
-		this.cpf = cpf;
-	}
-
-	/**
-	 * @param rg the rg to set
-	 */
-	public void setRg(StringProperty rg) {
-		this.rg = rg;
-	}
-
-	/**
-	 * @param cnh the cnh to set
-	 */
-	public void setCnh(StringProperty cnh) {
-		this.cnh = cnh;
-	}
-
-	/**
-	 * @param birthday the birthday to set
-	 */
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
-	}
-
-	/**
-	 * @param cellphone the cellphone to set
-	 */
-	public void setCellphone(StringProperty cellphone) {
-		this.cellphone = cellphone;
-	}
-
-	/**
-	 * @param adress the adress to set
-	 */
-	public void setAdress(StringProperty adress) {
-		this.adress = adress;
-	}
-
-	/**
-	 * @return the cpf
-	 */
-	public StringProperty getCpf() {
+	public StringProperty cpfProperty() {
 		return cpf;
 	}
 
-	/**
-	 * @return the rg
-	 */
-	public StringProperty getRg() {
+	public void setCpf(String cpf) {
+		this.cpf.set(cpf);
+	}
+
+	public String getRg() {
+		return rg.get();
+	}
+
+	public StringProperty rgProperty() {
 		return rg;
 	}
 
-	/**
-	 * @return the cnh
-	 */
-	public StringProperty getCnh() {
+	public void setRg(String rg) {
+		this.rg.set(rg);
+	}
+
+	public String getCnh() {
+		return cnh.get();
+	}
+
+	public StringProperty cnhProperty() {
 		return cnh;
 	}
 
-	/**
-	 * @return the birthday
-	 */
+	public void setCnh(String cnh) {
+		this.cnh.set(cnh);
+	}
+
 	public LocalDate getBirthday() {
 		return birthday;
 	}
 
-	/**
-	 * @return the cellphone
-	 */
-	public StringProperty getCellphone() {
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getCellphone() {
+		return cellphone.get();
+	}
+
+	public StringProperty cellphoneProperty() {
 		return cellphone;
 	}
 
-	/**
-	 * @return the adress
-	 */
-	public StringProperty getAdress() {
-		return adress;
+	public void setCellphone(String cellphone) {
+		this.cellphone.set(cellphone);
 	}
-	
+
+	public String getAddress() {
+		return address.get();
+	}
+
+	public StringProperty addressProperty() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address.set(address);
+	}
+
+	public String getEmail() {
+		return email.get();
+	}
+
+	public StringProperty emailProperty() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email.set(email);
+	}
 }

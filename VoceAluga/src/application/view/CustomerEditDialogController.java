@@ -30,69 +30,72 @@ public class CustomerEditDialogController {
     private TextField cellphoneField;
     @FXML
     private TextField adressField;
-    
+
     private Stage dialogStage;
     private Customer customer;
     private boolean okClicked = false;
-    
+
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
-    
+
     @FXML
     private void initialize() {
     }
-    
-    
+
+
     /**
      * Sets the stage of this dialog.
-     * 
+     *
      * @param dialogStage
      */
 
-    
+
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
+
     /**
      * Sets the customer to be edited in the dialog.
-     * 
+     *
      * @param customer
      */
     public void setcustomer(Customer customer) {
         this.customer = customer;
-        firstNameField.setText(customer.getFirstName().get());
-        lastNameField.setText(customer.getLastName().get());
-        cpfField.setText(customer.getCpf().get());
-        rgField.setText(customer.getRg().get());
-        cnhField.setText(customer.getCnh().get());
+        firstNameField.setText(customer.getFirstName());
+        lastNameField.setText(customer.getLastName());
+        cpfField.setText(customer.getCpf());
+        rgField.setText(customer.getRg());
+        cnhField.setText(customer.getCnh());
         birthdayField.setPromptText("dd.mm.yyyy");
-        adressField.setText(customer.getAdress().get());
-        cellphoneField.setText(customer.getCellphone().get());
+        adressField.setText(customer.getAddress());
+        cellphoneField.setText(customer.getCellphone());
     }
+
     /**
      * Returns true if the user clicked OK, false otherwise.
-     * 
+     *
      * @return
      */
     public boolean isOkClicked() {
         return okClicked;
     }
+
     /**
      * Called when the user clicks ok.
      */
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            customer.setFirstName(new SimpleStringProperty(firstNameField.getText()));
-            customer.setLastName(new SimpleStringProperty(lastNameField.getText()));
-            customer.setCpf(new SimpleStringProperty(cpfField.getText()));
-            customer.setRg(new SimpleStringProperty(rgField.getText()));
-            customer.setCnh(new SimpleStringProperty(cnhField.getText()));           
-            customer.setBirthday(DateUtil.parse(birthdayField.getText()));            
-            customer.setAdress(new SimpleStringProperty(adressField.getText()));
-            customer.setCellphone(new SimpleStringProperty(cellphoneField.getText()));
+            customer.setFirstName(firstNameField.getText());
+            customer.setLastName(lastNameField.getText());
+            customer.setCpf(cpfField.getText());
+            customer.setRg(rgField.getText());
+            customer.setCnh(cnhField.getText());
+            customer.setBirthday(DateUtil.parse(birthdayField.getText()));
+            customer.setAddress(adressField.getText());
+            customer.setCellphone(cellphoneField.getText());
             okClicked = true;
             dialogStage.close();
         }
@@ -108,39 +111,39 @@ public class CustomerEditDialogController {
 
     /**
      * Validates the user input in the text fields.
-     * 
+     *
      * @return true if the input is valid
      */
     private boolean isInputValid() {
         String errorMessage = "";
 
         if (firstNameField.getText() == null || firstNameField.getText().length() == 0) {
-            errorMessage += "Campo nome obrigatório."; 
+            errorMessage += "Campo nome obrigatório.";
         }
         if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
-            errorMessage += "Campo Sobrenome obrigatório."; 
+            errorMessage += "Campo Sobrenome obrigatório.";
         }
         if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
-            errorMessage += "No valid last name!\n"; 
+            errorMessage += "No valid last name!\n";
         }
         if (cpfField.getText() == null || cpfField.getText().length() != 11) {
-            errorMessage += "Cpf inválido, o número de cpf deve ter 11 dígitos!\n"; 
+            errorMessage += "Cpf inválido, o número de cpf deve ter 11 dígitos!\n";
         } else {
             // try to parse the cpf into an int.
             try {
                 Integer.parseInt(cpfField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "Cpf inválido, use somente números!\n"; 
+                errorMessage += "Cpf inválido, use somente números!\n";
             }
         }
         if (rgField.getText() == null || rgField.getText().length() != 9) {
-            errorMessage += "RG inválido!,  o número de RG deve ter 9 dígitos\n"; 
+            errorMessage += "RG inválido!,  o número de RG deve ter 9 dígitos\n";
         } else {
             // try to parse the rg into an int.
             try {
                 Integer.parseInt(rgField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "RG inválido, use somente números!\n"; 
+                errorMessage += "RG inválido, use somente números!\n";
             }
         }
         if (cnhField.getText() == null || cnhField.getText().length() != 10) {
@@ -150,7 +153,7 @@ public class CustomerEditDialogController {
             try {
                 Integer.parseInt(cnhField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "CNH inválida, use somente números!\n"; 
+                errorMessage += "CNH inválida, use somente números!\n";
             }
         }
         if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
@@ -161,16 +164,16 @@ public class CustomerEditDialogController {
             }
         }
         if (adressField.getText() == null || adressField.getText().length() == 0) {
-            errorMessage += "Campo endereço obrigatório."; 
+            errorMessage += "Campo endereço obrigatório.";
         }
         if (rgField.getText() == null || rgField.getText().length() != 9) {
-            errorMessage += "RG inválido!,  o número de RG deve ter 9 dígitos\n"; 
+            errorMessage += "RG inválido!,  o número de RG deve ter 9 dígitos\n";
         } else {
             // try to parse the rg into an int.
             try {
                 Integer.parseInt(rgField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "RG inválido, use somente números!\n"; 
+                errorMessage += "RG inválido, use somente números!\n";
             }
         }
         if (cellphoneField.getText() == null || cellphoneField.getText().length() != 9) {
@@ -180,7 +183,7 @@ public class CustomerEditDialogController {
             try {
                 Integer.parseInt(cnhField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "Número de celular inválido, use somente números!\n"; 
+                errorMessage += "Número de celular inválido, use somente números!\n";
             }
         }
 
@@ -193,12 +196,10 @@ public class CustomerEditDialogController {
             alert.setTitle("Campo inválido");
             alert.setHeaderText("Por favor corrija os campos inválidos.");
             alert.setContentText(errorMessage);
-            
+
             alert.showAndWait();
-            
+
             return false;
         }
     }
-    
-    
 }

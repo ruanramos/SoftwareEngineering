@@ -47,8 +47,8 @@ public class CustomercrudController {
     @FXML
     private void initialize() {
         // Initialize the table with 2 columns
-        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().getFirstName());
-        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().getLastName());
+        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
 
         // Clears the details of the customer.
         showCustomerDetails(null);
@@ -79,18 +79,17 @@ public class CustomercrudController {
     private void showCustomerDetails(Customer customer) {
         if (customer != null) {
             // The labels receive the customer attributes 
-            firstNameLabel.setText(customer.getFirstName().get());
-            lastNameLabel.setText(customer.getLastName().get());
-            cpfLabel.setText(customer.getCpf().get());
-            rgLabel.setText(customer.getRg().get());
-            cnhLabel.setText(customer.getCnh().get());
+            firstNameLabel.setText(customer.getFirstName());
+            lastNameLabel.setText(customer.getLastName());
+            cpfLabel.setText(customer.getCpf());
+            rgLabel.setText(customer.getRg());
+            cnhLabel.setText(customer.getCnh());
             birthdayLabel.setText(customer.getBirthday().toString());
-            cellphoneLabel.setText(customer.getCellphone().get());
-            adressLabel.setText(customer.getAdress().get());
+            cellphoneLabel.setText(customer.getCellphone());
+            adressLabel.setText(customer.getAddress());
 
             birthdayLabel.setText(DateUtil.format(customer.getBirthday()));
         } else {
-            // customer é null, remove todo o texto.
             firstNameLabel.setText("");
             lastNameLabel.setText("");
             cpfLabel.setText("");
@@ -111,7 +110,7 @@ public class CustomercrudController {
             // Nothing selected.
           
         	Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Nenhuma seleção");
+                alert.setTitle("Nenhuma seleï¿½ï¿½o");
                 alert.setHeaderText("Nenhuma Pessoa Selecionada");
                 alert.setContentText("Por favor, selecione um cliente na tabela.");
 
