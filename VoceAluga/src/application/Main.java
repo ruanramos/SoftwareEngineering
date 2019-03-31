@@ -1,6 +1,9 @@
 package application;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import application.dbclass.CustomerDao;
 import application.model.Customer;
 import application.view.CustomerEditDialogController;
 import application.view.CustomercrudController;
@@ -18,36 +21,37 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-	
-	
+
 	private ObservableList<Customer> customerData = FXCollections.observableArrayList();
 	
 	public Main() {
-		customerData.add(new Customer("Hans", "Muster"));
-        customerData.add(new Customer("Ruth", "Mueller"));
-        customerData.add(new Customer("Heinz", "Kurz"));
-        customerData.add(new Customer("Cornelia", "Meier"));
-        customerData.add(new Customer("Werner", "Meyer"));
-        customerData.add(new Customer("Lydia", "Kunz"));
-        customerData.add(new Customer("Anna", "Best"));
-        customerData.add(new Customer("Stefan", "Meier"));
-        customerData.add(new Customer("Martin", "Mueller"));
-		
-	}
-	@Override
+		CustomerDao customerDao = new CustomerDao();
+		List<Customer> customers = new ArrayList<Customer>();
+		customerDao.selectToList(customers);
 
+		for (Customer c : customers) {
+			customerData.add(c);
+		}
+	}
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Tela inicial");
+
 		initRootLayout();
-		showCustomerCrud();	
+		showCustomerCrud();
 	}
-	public ObservableList<Customer> getCustomerData() {	
+	public ObservableList<Customer> getCustomerData() {
     	return customerData;
     }
+
 	/* Show Customer Crud in the root layout */
 	private void showCustomerCrud() {
-		// TODO Auto-generated method stub
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("view/Customercrud.fxml"));
@@ -86,11 +90,7 @@ public class Main extends Application {
 	public Stage getPrimaryStage() {
         return primaryStage;
     }
-	public static void main(String[] args) {
-		
-		launch(args);
-		
-	}
+
 	/**
 	 * Opens a dialog to edit details for the specified customer. If the user
 	 * clicks OK, the changes are saved into the provided person object and true

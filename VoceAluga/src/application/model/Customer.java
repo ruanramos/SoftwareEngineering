@@ -10,12 +10,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Customer {
+	private IntegerProperty id;
 	private StringProperty firstName;
 	private StringProperty lastName;
 	private StringProperty cpf;
 	private StringProperty rg;
 	private StringProperty cnh;
-	private LocalDate birthday;
+	private ObjectProperty<LocalDate> birthday;
 	private StringProperty cellphone;
 	private StringProperty address;
 	private StringProperty email;
@@ -30,12 +31,26 @@ public class Customer {
 
         // daqui pra baixo sao valores padrao
 		// TODO: fazer construtor com todos os valores
-        this.cpf = new SimpleStringProperty("cpf number");
-        this.rg = new SimpleStringProperty("RG number");
-		this.cnh = new SimpleStringProperty("CNH number");
-		this.birthday = (LocalDate.of(2001, 9, 11));
-		this.cellphone = new SimpleStringProperty("4002-8922");
-		this.address = new SimpleStringProperty("Rua ccmn");
+		this.id = new SimpleIntegerProperty();
+        this.cpf = new SimpleStringProperty("");
+        this.rg = new SimpleStringProperty("");
+		this.cnh = new SimpleStringProperty("");
+		this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1970,1,1));
+		this.cellphone = new SimpleStringProperty("");
+		this.address = new SimpleStringProperty("");
+		this.email = new SimpleStringProperty("");
+	}
+
+	public int getId() {
+		return id.get();
+	}
+
+	public IntegerProperty idProperty() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id.set(id);
 	}
 
 	public String getFirstName() {
@@ -99,11 +114,15 @@ public class Customer {
 	}
 
 	public LocalDate getBirthday() {
+		return birthday.get();
+	}
+
+	public ObjectProperty<LocalDate> birthdayProperty() {
 		return birthday;
 	}
 
 	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
+		this.birthday.set(birthday);
 	}
 
 	public String getCellphone() {

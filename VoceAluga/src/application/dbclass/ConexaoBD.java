@@ -4,22 +4,23 @@ import java.sql.*;
 
 public class ConexaoBD {
 	
-	private static String user = "root";	//usuario do BD
-	private static String password = "kakaroto490";	//senha do BD
-	private static String schema = "vc_aluga"; //nome do schema no mySQL
-	private static String serverName = "localHost"; //caminho do servidor do BD
+	private static String user = "testuser";	//usuario do BD
+	private static String password = "123test";	//senha do BD
+	private static String schema = "testdb"; //nome do schema no mySQL
+	private static String serverName = "localhost"; //caminho do servidor do BD
 	
 	private static String statusDaConexao = "";
 	
 	public static Connection getConexaoBD() throws SQLException {
-		
+
 		Connection conexao = null;
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver").newInstance(); 
-			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
 			String url = String.format("jdbc:mysql://%s/%s?useTimezone=true&serverTimezone=UTC&user=%s&password=%s",
 					serverName, schema, user, password);
+
 			conexao = DriverManager.getConnection(url);
 			
 			setStatusDaConexao("Connection opened");
@@ -29,10 +30,10 @@ public class ConexaoBD {
 			throw e;
 		}
 		catch(ClassNotFoundException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Exception:" + e.getMessage());
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("Exception:" + e.getMessage());
 		}
 		finally {}
 		
@@ -48,18 +49,14 @@ public class ConexaoBD {
         } catch (SQLException e) {
         	
         	throw e;
- 
         }
 	}
 	
 	public static java.sql.Connection ReiniciarConexao() throws SQLException {
 		 
 		FecharConexao();
-	 
-	  
-	 
+
 		return ConexaoBD.getConexaoBD();
-	 
 	}
 
 	public static String getStatusDaConexao() {

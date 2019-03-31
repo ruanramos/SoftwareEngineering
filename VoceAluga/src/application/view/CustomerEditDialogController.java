@@ -12,6 +12,8 @@ import javafx.scene.control.Alert.AlertType;
 import application.model.Customer;
 import application.util.DateUtil;
 
+//TODO: limpar isInputValid
+
 public class CustomerEditDialogController {
 
     @FXML
@@ -115,11 +117,10 @@ public class CustomerEditDialogController {
      * @return true if the input is valid
      */
     private boolean isInputValid() {
+        return true;
+        /*
         String errorMessage = "";
 
-        if (firstNameField.getText() == null || firstNameField.getText().length() == 0) {
-            errorMessage += "Campo nome obrigatório.";
-        }
         if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
             errorMessage += "Campo Sobrenome obrigatório.";
         }
@@ -201,5 +202,6 @@ public class CustomerEditDialogController {
 
             return false;
         }
+        */
     }
 }

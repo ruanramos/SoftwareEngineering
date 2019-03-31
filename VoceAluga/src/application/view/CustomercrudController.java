@@ -1,5 +1,6 @@
 package application.view;
 
+import application.dbclass.CustomerDao;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -84,7 +85,7 @@ public class CustomercrudController {
             cpfLabel.setText(customer.getCpf());
             rgLabel.setText(customer.getRg());
             cnhLabel.setText(customer.getCnh());
-            birthdayLabel.setText(customer.getBirthday().toString());
+            birthdayLabel.setText(String.valueOf(customer.getBirthday()));
             cellphoneLabel.setText(customer.getCellphone());
             adressLabel.setText(customer.getAddress());
 
@@ -105,16 +106,19 @@ public class CustomercrudController {
     private void handleDeleteCustomer() {
         int selectedIndex = customerTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
+            Customer selectedCustomer = customerTable.getItems().get(selectedIndex);
             customerTable.getItems().remove(selectedIndex);
-        } else {
-            // Nothing selected.
-          
-        	Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Nenhuma sele��o");
-                alert.setHeaderText("Nenhuma Pessoa Selecionada");
-                alert.setContentText("Por favor, selecione um cliente na tabela.");
 
-                alert.showAndWait();
+            CustomerDao customerDao = new CustomerDao();
+            customerDao.delete(selectedCustomer);
+
+        } else {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Nenhuma seleção");
+            alert.setHeaderText("Nenhuma Pessoa Selecionada");
+            alert.setContentText("Por favor, selecione um cliente na tabela.");
+
+            alert.showAndWait();
         }
     }
     /**
@@ -128,6 +132,8 @@ public class CustomercrudController {
         if (okClicked) {
             main.getCustomerData().add(tempCustomer);
         }
+        CustomerDao customerDao = new CustomerDao();
+        customerDao.insert(tempCustomer);
     }
 
     /**
@@ -141,8 +147,9 @@ public class CustomercrudController {
             boolean okClicked = main.showCustomerEditDialog(selectedCustomer);
             if (okClicked) {
                 showCustomerDetails(selectedCustomer);
+                CustomerDao customerDao = new CustomerDao();
+                customerDao.update(selectedCustomer);
             }
-
         } else {
             // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);
