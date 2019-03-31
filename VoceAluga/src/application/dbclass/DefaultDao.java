@@ -70,35 +70,51 @@ public abstract class DefaultDao<T> {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public <L extends java.util.List<T>> void selectToList( L list ) {
-		
 		String sqlCommandFormat = String.format("select * from %s", tableName);
-		
+
 		try (Connection dbConnection = ConexaoBD.getConexaoBD()){
-			
 			PreparedStatement sqlCommand = dbConnection.prepareStatement(sqlCommandFormat);
-			
 			ResultSet querySet = sqlCommand.executeQuery();
-			
+
 			while(querySet.next()) {
-				
 				T object = getObjectWithDbInformation(querySet);
 				list.add(object);
 			}
-			
+
 			querySet.close();
 			sqlCommand.close();
-			
+
 			sqlCommand.close();
-		}
-		
-		catch(SQLException e) {
+		} catch(SQLException e) {
 			System.out.println("Exception: " + e.getMessage());
 			throw new RuntimeException(e);
 		}
 	}
-	
+
+	public <L extends java.util.List<T>> void selectToList(L list, String predicate) {
+		String sqlCommandFormat = String.format("select * from %s where %s", tableName, predicate);
+
+		try (Connection dbConnection = ConexaoBD.getConexaoBD()){
+			PreparedStatement sqlCommand = dbConnection.prepareStatement(sqlCommandFormat);
+			ResultSet querySet = sqlCommand.executeQuery();
+
+			while(querySet.next()) {
+				T object = getObjectWithDbInformation(querySet);
+				list.add(object);
+			}
+
+			querySet.close();
+			sqlCommand.close();
+
+			sqlCommand.close();
+		} catch(SQLException e) {
+			System.out.println("Exception: " + e.getMessage());
+			throw new RuntimeException(e);
+		}
+	}
+
 	abstract protected void fillInsertStatement( PreparedStatement statement, T object ) throws SQLException;
 	abstract protected void fillDeleteStatement( PreparedStatement statement, T object ) throws SQLException;
 	abstract protected void fillUpdateStatement( PreparedStatement statement, T object ) throws SQLException;

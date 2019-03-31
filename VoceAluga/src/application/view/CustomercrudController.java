@@ -117,7 +117,6 @@ public class CustomercrudController {
             alert.setTitle("Nenhuma seleção");
             alert.setHeaderText("Nenhuma Pessoa Selecionada");
             alert.setContentText("Por favor, selecione um cliente na tabela.");
-
             alert.showAndWait();
         }
     }
@@ -160,6 +159,11 @@ public class CustomercrudController {
 
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void handleSearchCustomer() {
+        main.showCustomerSearchDialog();
     }
     
     

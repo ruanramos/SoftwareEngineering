@@ -50,7 +50,6 @@ public class Main extends Application {
     	return customerData;
     }
 
-	/* Show Customer Crud in the root layout */
 	private void showCustomerCrud() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -68,10 +67,6 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-    /**
-     * Returns the main stage.
-     * @return
-     */
 
 	private void initRootLayout() throws IOException {
 		// Load the root layout from fxml file
@@ -127,5 +122,26 @@ public class Main extends Application {
 	        e.printStackTrace();
 	        return false;
 	    }
+	}
+
+	public void showCustomerSearchDialog() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("view/CustomerSearchDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Buscar Cliente");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -122,69 +122,69 @@ public class CustomerEditDialogController {
         String errorMessage = "";
 
         if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
-            errorMessage += "Campo Sobrenome obrigatório.";
+            errorMessage += "Campo Sobrenome obrigatÃ³rio.";
         }
         if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
             errorMessage += "No valid last name!\n";
         }
         if (cpfField.getText() == null || cpfField.getText().length() != 11) {
-            errorMessage += "Cpf inválido, o número de cpf deve ter 11 dígitos!\n";
+            errorMessage += "Cpf invÃ¡lido, o nÃºmero de cpf deve ter 11 dÃ­gitos!\n";
         } else {
             // try to parse the cpf into an int.
             try {
                 Integer.parseInt(cpfField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "Cpf inválido, use somente números!\n";
+                errorMessage += "Cpf invÃ¡lido, use somente nÃºmeros!\n";
             }
         }
         if (rgField.getText() == null || rgField.getText().length() != 9) {
-            errorMessage += "RG inválido!,  o número de RG deve ter 9 dígitos\n";
+            errorMessage += "RG invÃ¡lido!,  o nÃºmero de RG deve ter 9 dÃ­gitos\n";
         } else {
             // try to parse the rg into an int.
             try {
                 Integer.parseInt(rgField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "RG inválido, use somente números!\n";
+                errorMessage += "RG invÃ¡lido, use somente nÃºmeros!\n";
             }
         }
         if (cnhField.getText() == null || cnhField.getText().length() != 10) {
-            errorMessage += "CNH inválida!,  o número da CNH deve ter 10 dígitos\n";
+            errorMessage += "CNH invÃ¡lida!,  o nÃºmero da CNH deve ter 10 dÃ­gitos\n";
         } else {
             // try to parse the cnh into an int.
             try {
                 Integer.parseInt(cnhField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "CNH inválida, use somente números!\n";
+                errorMessage += "CNH invÃ¡lida, use somente nÃºmeros!\n";
             }
         }
         if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
-            errorMessage += "Data de nascimento inválida!\n";
+            errorMessage += "Data de nascimento invÃ¡lida!\n";
         } else {
             if (!DateUtil.validDate(birthdayField.getText())) {
-                errorMessage += "Data de nascimento inválida. Use o formato dd.mm.aaaa!\n";
+                errorMessage += "Data de nascimento invÃ¡lida. Use o formato dd.mm.aaaa!\n";
             }
         }
         if (adressField.getText() == null || adressField.getText().length() == 0) {
-            errorMessage += "Campo endereço obrigatório.";
+            errorMessage += "Campo endereÃ§o obrigatÃ³rio.";
         }
         if (rgField.getText() == null || rgField.getText().length() != 9) {
-            errorMessage += "RG inválido!,  o número de RG deve ter 9 dígitos\n";
+            errorMessage += "RG invÃ¡lido!,  o nÃºmero de RG deve ter 9 dÃ­gitos\n";
         } else {
             // try to parse the rg into an int.
             try {
                 Integer.parseInt(rgField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "RG inválido, use somente números!\n";
+                errorMessage += "RG invÃ¡lido, use somente nÃºmeros!\n";
             }
         }
         if (cellphoneField.getText() == null || cellphoneField.getText().length() != 9) {
-            errorMessage += "Número de celular inválido!, o número do celular deve ter 9 dígitos\n";
+            errorMessage += "NÃºmero de celular invÃ¡lido!, o nÃºmero do celular deve ter 9 dÃ­gitos\n";
         } else {
             // try to parse the cellphone into an int.
             try {
                 Integer.parseInt(cnhField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "Número de celular inválido, use somente números!\n";
+                errorMessage += "NÃºmero de celular invÃ¡lido, use somente nÃºmeros!\n";
             }
         }
 
@@ -194,8 +194,8 @@ public class CustomerEditDialogController {
             // Show the error message.
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(dialogStage);
-            alert.setTitle("Campo inválido");
-            alert.setHeaderText("Por favor corrija os campos inválidos.");
+            alert.setTitle("Campo invÃ¡lido");
+            alert.setHeaderText("Por favor corrija os campos invÃ¡lidos.");
             alert.setContentText(errorMessage);
 
             alert.showAndWait();
