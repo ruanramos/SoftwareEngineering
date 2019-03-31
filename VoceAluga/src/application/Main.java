@@ -6,6 +6,7 @@ import java.util.List;
 import application.dbclass.CustomerDao;
 import application.model.Customer;
 import application.view.CustomerEditDialogController;
+import application.view.CustomerSearchDialogController;
 import application.view.CustomercrudController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -60,7 +61,6 @@ public class Main extends Application {
 			rootLayout.setCenter(CustomerCrud);
 			// Give to controller access to the main class
 	        CustomercrudController controller = loader.getController();
-
 	        controller.setMain(this);
 			
 		}catch(IOException e) {
@@ -137,6 +137,9 @@ public class Main extends Application {
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
+
+			CustomerSearchDialogController controller = loader.getController();
+			controller.setMain(this);
 
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();

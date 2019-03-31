@@ -60,15 +60,12 @@ public class CustomercrudController {
                 (observable, oldValue, newValue) -> showCustomerDetails(newValue));
     }
     
-    /* This is called for the main for make a reference 
-     * 
-     * @param main
-     */
+    /* This is called for the main for make a reference to itself */
     public void setMain(Main main) {
         this.main = main;
 
         // Adiciona os dados da observable list na tabela
-        customerTable.setItems(main.getCustomerData());
+//        customerTable.setItems(main.getCustomerData());
         
     }
     /**

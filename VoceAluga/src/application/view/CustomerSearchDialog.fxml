@@ -15,7 +15,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="54.0" prefWidth="598.0">
                <children>
-                  <Button layoutX="522.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleSearchCustomer" text="Button" />
+                  <Button layoutX="522.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleSearchCustomer" text="Buscar" />
                   <ChoiceBox fx:id="filterChoice" layoutX="360.0" layoutY="15.0" prefWidth="150.0" />
                   <TextField fx:id="searchTextField" layoutX="14.0" layoutY="15.0" prefHeight="26.0" prefWidth="336.0" />
                </children>
@@ -34,8 +34,8 @@
                   </TableView>
                   <ButtonBar layoutX="384.0" layoutY="280.0" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
-                      <Button mnemonicParsing="false" text="Editar" />
-                        <Button mnemonicParsing="false" text="Excluir" />
+                      <Button mnemonicParsing="false" onAction="#handleEditCustomer" text="Editar" />
+                        <Button mnemonicParsing="false" onAction="#handleDeleteCustomer" text="Excluir" />
                     </buttons>
                   </ButtonBar>
                </children>
