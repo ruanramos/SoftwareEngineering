@@ -14,12 +14,9 @@ public class Customer {
 	private StringProperty firstName;
 	private StringProperty lastName;
 	private StringProperty cpf;
-	private StringProperty rg;
 	private StringProperty cnh;
 	private ObjectProperty<LocalDate> birthday;
 	private StringProperty cellphone;
-	private StringProperty address;
-	private StringProperty email;
 
 	public Customer() {
         this(null, null);
@@ -33,12 +30,9 @@ public class Customer {
 		// TODO: fazer construtor com todos os valores
 		this.id = new SimpleIntegerProperty();
         this.cpf = new SimpleStringProperty("");
-        this.rg = new SimpleStringProperty("");
 		this.cnh = new SimpleStringProperty("");
 		this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1970,1,1));
 		this.cellphone = new SimpleStringProperty("");
-		this.address = new SimpleStringProperty("");
-		this.email = new SimpleStringProperty("");
 	}
 
 	public int getId() {
@@ -89,18 +83,6 @@ public class Customer {
 		this.cpf.set(cpf);
 	}
 
-	public String getRg() {
-		return rg.get();
-	}
-
-	public StringProperty rgProperty() {
-		return rg;
-	}
-
-	public void setRg(String rg) {
-		this.rg.set(rg);
-	}
-
 	public String getCnh() {
 		return cnh.get();
 	}
@@ -135,29 +117,5 @@ public class Customer {
 
 	public void setCellphone(String cellphone) {
 		this.cellphone.set(cellphone);
-	}
-
-	public String getAddress() {
-		return address.get();
-	}
-
-	public StringProperty addressProperty() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address.set(address);
-	}
-
-	public String getEmail() {
-		return email.get();
-	}
-
-	public StringProperty emailProperty() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email.set(email);
 	}
 }

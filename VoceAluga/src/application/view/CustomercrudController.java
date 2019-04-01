@@ -80,22 +80,17 @@ public class CustomercrudController {
             firstNameLabel.setText(customer.getFirstName());
             lastNameLabel.setText(customer.getLastName());
             cpfLabel.setText(customer.getCpf());
-            rgLabel.setText(customer.getRg());
             cnhLabel.setText(customer.getCnh());
             birthdayLabel.setText(String.valueOf(customer.getBirthday()));
             cellphoneLabel.setText(customer.getCellphone());
-            adressLabel.setText(customer.getAddress());
-
             birthdayLabel.setText(DateUtil.format(customer.getBirthday()));
         } else {
             firstNameLabel.setText("");
             lastNameLabel.setText("");
             cpfLabel.setText("");
-            rgLabel.setText("");
             cnhLabel.setText("");
             birthdayLabel.setText("");
             cellphoneLabel.setText("");
-            adressLabel.setText("");
         }
     }
     

@@ -34,6 +34,9 @@ public class CustomerSearchDialogController {
     @FXML
     private void initialize() {
         filterChoice.getItems().addAll("CPF", "Nome", "Sobrenome");
+        filterChoice.setValue("CPF");
+
+        customerTable.setPlaceholder(new Label("Nenhum cliente encontrado."));
 
         cpfColumn.setCellValueFactory(cellData -> cellData.getValue().cpfProperty());
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
@@ -67,7 +70,6 @@ public class CustomerSearchDialogController {
      if (selectedCustomer != null) {
          boolean okClicked = main.showCustomerEditDialog(selectedCustomer);
          if (okClicked) {
-             System.out.println("OMG it's finally happening");
              CustomerDao customerDao = new CustomerDao();
              customerDao.update(selectedCustomer);
          }

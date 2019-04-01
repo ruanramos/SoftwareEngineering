@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 
 public class DateUtil {
 	   /** Standard conversion date */
-    private static final String DATE_PATTERN = "dd.MM.yyyy";
+    private static final String DATE_PATTERN = "dd/MM/yyyy";
     
     /** date formater */
     private static final DateTimeFormatter DATE_FORMATTER = 

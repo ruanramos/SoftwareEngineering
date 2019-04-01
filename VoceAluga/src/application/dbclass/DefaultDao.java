@@ -71,7 +71,7 @@ public abstract class DefaultDao<T> {
 		}
 	}
 
-	public <L extends java.util.List<T>> void selectToList( L list ) {
+	public <L extends java.util.List<T>> void selectToList(L list) {
 		String sqlCommandFormat = String.format("select * from %s", tableName);
 
 		try (Connection dbConnection = ConexaoBD.getConexaoBD()){
