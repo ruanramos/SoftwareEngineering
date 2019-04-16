@@ -1,8 +1,6 @@
 package application.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 public class Car {
 	private IntegerProperty id;
@@ -10,6 +8,14 @@ public class Car {
 	private StringProperty category;
 	private IntegerProperty age;
 	private DoubleProperty mileage;
+
+	public Car() {
+		this.id = new SimpleIntegerProperty();
+		this.model = new SimpleStringProperty("");
+		this.category = new SimpleStringProperty("");
+		this.age = new SimpleIntegerProperty(0);
+		this.mileage = new SimpleDoubleProperty(0.0);
+	}
 
 	public int getId() {
 		return id.get();

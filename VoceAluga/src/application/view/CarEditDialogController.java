@@ -7,14 +7,27 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CarEditDialogController {
+
+    @FXML
+    TextField idField;
+    @FXML
+    TextField modelField;
+    @FXML
+    TextField categoryField;
+    @FXML
+    TextField ageField;
+    @FXML
+    TextField mileageField;
+
     private Stage dialogStage;
     private Car car;
     private boolean okClicked = false;
 
     @FXML
     private void initialize() {
+        // bloqueia edição do id
+        idField.setDisable(true);
     }
-
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
@@ -22,12 +35,11 @@ public class CarEditDialogController {
 
     public void setCar(Car car) {
         this.car = car;
-//        firstNameField.setText(car.getFirstName());
-//        lastNameField.setText(car.getLastName());
-//        cpfField.setText(car.getCpf());
-//        cnhField.setText(car.getCnh());
-//        birthdayField.setText(DateUtil.format(car.getBirthday()));
-//        cellphoneField.setText(car.getCellphone());
+        idField.setText(String.valueOf(car.getId()));
+        modelField.setText(car.getModel());
+        categoryField.setText(car.getCategory());
+        ageField.setText(String.valueOf(car.getAge()));
+        mileageField.setText(String.valueOf(car.getMileage()));
     }
 
     public boolean isOkClicked() {
@@ -37,12 +49,11 @@ public class CarEditDialogController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-//            car.setFirstName(firstNameField.getText());
-//            car.setLastName(lastNameField.getText());
-//            car.setCpf(cpfField.getText());
-//            car.setCnh(cnhField.getText());
-//            car.setBirthday(DateUtil.parse(birthdayField.getText()));
-//            car.setCellphone(cellphoneField.getText());
+            car.setModel(modelField.getText());
+            car.setCategory(categoryField.getText());
+            car.setAge(Integer.parseInt(ageField.getText()));
+            car.setMileage(Double.parseDouble(mileageField.getText()));
+
             okClicked = true;
             dialogStage.close();
         }

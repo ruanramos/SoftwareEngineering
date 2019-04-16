@@ -1,9 +1,10 @@
 -- executar como root
-create database testdb;
 create user 'testuser'@'localhost' identified by '123test'
+create database testdb;
 grant all privileges on testdb . * to 'testuser'@'localhost';
 
--- executar como testuser
+use testdb;
+
 create table Customer(
     Id int not null auto_increment primary key,
     Cpf varchar(20) unique not null,
@@ -15,7 +16,7 @@ create table Customer(
 );
 
 create table Carro(
-	idCarro int not null auto_increment primary key,
+	Id int not null auto_increment primary key,
 	Modelo varchar(40) not null default '',
 	Classe varchar(2) not null default '',
 	Idade int not null default 0,
@@ -27,3 +28,7 @@ INSERT INTO `Customer` VALUES
     (3,'11111111111','Joaquim José','da Silva Xavier','0000000000','1950-01-05','11111111'),
     (4,'33333333333','José','das Couves','0101010101','9631-12-31','33333333333'),
     (5,'44444444444','Nana','Shara','4444444444','0003-01-31','5521444444444');
+
+INSERT INTO `Carro` VALUES
+    (1,'Uno','A','0', '0'),
+    (2, 'Brasilia','A', '123', '456');

@@ -32,8 +32,8 @@ public class CarSearchDialogController {
 
     @FXML
     private void initialize() {
-        filterChoice.getItems().addAll("Código", "Modelo", "Categoria");
-        filterChoice.setValue("Categoria");
+        filterChoice.getItems().addAll("Código", "Modelo", "Classe");
+        filterChoice.setValue("Classe");
 
         carTable.setPlaceholder(new Label("Nenhum veículo encontrado."));
 

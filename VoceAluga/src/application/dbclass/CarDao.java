@@ -36,7 +36,7 @@ public class CarDao extends DefaultDao<Car> {
     protected Car getObjectWithDbInformation(ResultSet set) throws SQLException{
         Car car = new Car();
 
-        car.setId(set.getInt("idCarro"));
+        car.setId(set.getInt("Id"));
         car.setModel(set.getString("Modelo"));
         car.setCategory(set.getString("Classe"));
         car.setAge(set.getInt("Idade"));

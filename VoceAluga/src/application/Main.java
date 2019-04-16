@@ -1,13 +1,8 @@
 package application;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-import application.dbclass.CustomerDao;
 import application.model.Car;
 import application.model.Customer;
-import application.util.DateUtil;
 import application.view.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -25,6 +20,8 @@ public class Main extends Application {
 	private BorderPane rootLayout;
 
 	private ObservableList<Customer> customerData = FXCollections.observableArrayList();
+	private ObservableList<Car> carData = FXCollections.observableArrayList();
+
 
 	public Main() {
 	}
@@ -133,6 +130,10 @@ public class Main extends Application {
 		}
 	}
 
+	public ObservableList<Car> getCarData() {
+		return carData;
+	}
+
 	public boolean showCarEditDialog(Car car){
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
@@ -149,9 +150,9 @@ public class Main extends Application {
 			dialogStage.setScene(scene);
 
 			// Set the person into the controller.
-			CustomerEditDialogController controller = loader.getController();
+			CarEditDialogController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
-
+			controller.setCar(car);
 
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();

@@ -37,8 +37,6 @@ public class CustomerEditDialogController {
 
     public void setcustomer(Customer customer) {
         this.customer = customer;
-        System.out.println("Nome: " + customer.getFirstName());
-        System.out.println("Cnh:  " + customer.getCnh());
         firstNameField.setText(customer.getFirstName());
         lastNameField.setText(customer.getLastName());
         cpfField.setText(customer.getCpf());

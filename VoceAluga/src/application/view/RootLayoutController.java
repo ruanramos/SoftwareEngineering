@@ -1,7 +1,9 @@
 package application.view;
 
 import application.Main;
+import application.dbclass.CarDao;
 import application.dbclass.CustomerDao;
+import application.model.Car;
 import application.model.Customer;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -28,9 +30,9 @@ public class RootLayoutController {
         boolean okClicked = main.showCustomerEditDialog(tempCustomer);
         if (okClicked) {
             main.getCustomerData().add(tempCustomer);
+            CustomerDao customerDao = new CustomerDao();
+            customerDao.insert(tempCustomer);
         }
-        CustomerDao customerDao = new CustomerDao();
-        customerDao.insert(tempCustomer);
     }
 
     @FXML
@@ -40,12 +42,12 @@ public class RootLayoutController {
 
     @FXML
     private void handleNewCar() {
-        Customer tempCustomer = new Customer();
-        boolean okClicked = main.showCustomerEditDialog(tempCustomer);
+        Car tempCar = new Car();
+        boolean okClicked = main.showCarEditDialog(tempCar);
         if (okClicked) {
-            main.getCustomerData().add(tempCustomer);
+            main.getCarData().add(tempCar);
+            CarDao carDao = new CarDao();
+            carDao.insert(tempCar);
         }
-        CustomerDao customerDao = new CustomerDao();
-        customerDao.insert(tempCustomer);
     }
 }
