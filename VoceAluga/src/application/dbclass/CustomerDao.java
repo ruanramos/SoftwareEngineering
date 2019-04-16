@@ -1,7 +1,6 @@
 package application.dbclass;
 
-import application.dbclass.*;
-import application.model.*;
+import application.model.Customer;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;

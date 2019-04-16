@@ -3,7 +3,7 @@ package application.model;
 public class Car {
 	private int id;
 	private String model;
-	private char classification;
+	private String classification;
 	private int age;
 	private float mileage;
 	public int getId() {
@@ -18,10 +18,10 @@ public class Car {
 	public void setModel(String model) {
 		this.model = model;
 	}
-	public char getClassification() {
+	public String getClassification() {
 		return classification;
 	}
-	public void setClassification(char classification) {
+	public void setClassification(String classification) {
 		this.classification = classification;
 	}
 	public int getAge() {

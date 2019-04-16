@@ -17,7 +17,7 @@ create table Customer(
 create table Carro(
 	idCarro int not null auto_increment primary key,
 	Modelo varchar(40) not null default '',
-	Classe char not null default '',
+	Classe varchar(2) not null default '',
 	Idade int not null default 0,
 	Quilometragem float not null default 0
 );
