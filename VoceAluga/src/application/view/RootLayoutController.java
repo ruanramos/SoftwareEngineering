@@ -32,4 +32,20 @@ public class RootLayoutController {
         CustomerDao customerDao = new CustomerDao();
         customerDao.insert(tempCustomer);
     }
+
+    @FXML
+    private void handleSearchCar() {
+        main.showCarSearchDialog();
+    }
+
+    @FXML
+    private void handleNewCar() {
+        Customer tempCustomer = new Customer();
+        boolean okClicked = main.showCustomerEditDialog(tempCustomer);
+        if (okClicked) {
+            main.getCustomerData().add(tempCustomer);
+        }
+        CustomerDao customerDao = new CustomerDao();
+        customerDao.insert(tempCustomer);
+    }
 }

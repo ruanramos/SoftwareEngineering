@@ -1,39 +1,73 @@
 package application.model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.StringProperty;
+
 public class Car {
-	private int id;
-	private String model;
-	private String classification;
-	private int age;
-	private float mileage;
+	private IntegerProperty id;
+	private StringProperty model;
+	private StringProperty category;
+	private IntegerProperty age;
+	private DoubleProperty mileage;
+
 	public int getId() {
+		return id.get();
+	}
+
+	public IntegerProperty idProperty() {
 		return id;
 	}
+
 	public void setId(int id) {
-		this.id = id;
+		this.id.set(id);
 	}
+
 	public String getModel() {
+		return model.get();
+	}
+
+	public StringProperty modelProperty() {
 		return model;
 	}
+
 	public void setModel(String model) {
-		this.model = model;
+		this.model.set(model);
 	}
-	public String getClassification() {
-		return classification;
+
+	public String getCategory() {
+		return category.get();
 	}
-	public void setClassification(String classification) {
-		this.classification = classification;
+
+	public StringProperty categoryProperty() {
+		return category;
 	}
+
+	public void setCategory(String category) {
+		this.category.set(category);
+	}
+
 	public int getAge() {
+		return age.get();
+	}
+
+	public IntegerProperty ageProperty() {
 		return age;
 	}
+
 	public void setAge(int age) {
-		this.age = age;
+		this.age.set(age);
 	}
-	public float getMileage() {
+
+	public double getMileage() {
+		return mileage.get();
+	}
+
+	public DoubleProperty mileageProperty() {
 		return mileage;
 	}
-	public void setMileage(float mileage) {
-		this.mileage = mileage;
-	} 
+
+	public void setMileage(double mileage) {
+		this.mileage.set(mileage);
+	}
 }

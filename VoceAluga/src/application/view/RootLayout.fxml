@@ -20,6 +20,12 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleSearchUser" text="Buscar" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Veiculo">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleNewCar" text="Cadastrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSearchCar" text="Buscar" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />

@@ -17,9 +17,9 @@ public class CarDao extends DefaultDao<Car> {
 
     protected void fillInsertStatement(PreparedStatement statement, Car car) throws SQLException {
         statement.setString(1, car.getModel());
-        statement.setString(2, car.getClassification());	//converte char para int
+        statement.setString(2, car.getCategory());	//converte char para int
         statement.setInt(3, car.getAge());
-        statement.setFloat(4, car.getMileage());
+        statement.setDouble(4, car.getMileage());
     }
 
     protected void fillDeleteStatement(PreparedStatement statement, Car car) throws SQLException {
@@ -28,9 +28,9 @@ public class CarDao extends DefaultDao<Car> {
 
     protected void fillUpdateStatement(PreparedStatement statement, Car car) throws SQLException {
     	statement.setString(1, car.getModel());
-        statement.setString(2, car.getClassification());	//converte char para int
+        statement.setString(2, car.getCategory());	//converte char para int
         statement.setInt(3, car.getAge());
-        statement.setFloat(4, car.getMileage());
+        statement.setDouble(4, car.getMileage());
     }
 
     protected Car getObjectWithDbInformation(ResultSet set) throws SQLException{
@@ -38,9 +38,9 @@ public class CarDao extends DefaultDao<Car> {
 
         car.setId(set.getInt("idCarro"));
         car.setModel(set.getString("Modelo"));
-        car.setClassification(set.getString("Classe"));
+        car.setCategory(set.getString("Classe"));
         car.setAge(set.getInt("Idade"));
-        car.setMileage(set.getFloat("Quilometragem"));
+        car.setMileage(set.getDouble("Quilometragem"));
 
         return car;
     }
