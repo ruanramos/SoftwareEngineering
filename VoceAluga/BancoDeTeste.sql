@@ -14,6 +14,14 @@ create table Customer(
     Cellphone varchar(20)
 );
 
+create table Carro(
+	idCarro int not null auto_increment primary key,
+	Modelo varchar(40) not null default '',
+	Classe char not null default '',
+	Idade int not null default 0,
+	Quilometragem float not null default 0
+);
+
 INSERT INTO `Customer` VALUES
     (2,'22222222222','João','Mamão','5555555555','3216-03-03','22222222'),
     (3,'11111111111','Joaquim José','da Silva Xavier','0000000000','1950-01-05','11111111'),
