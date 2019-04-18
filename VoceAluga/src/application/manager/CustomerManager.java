@@ -47,7 +47,7 @@ public class CustomerManager {
 		form.fillObjectAttributes(customer);
 		
 		CustomerDao dao = new CustomerDao();
-		dao.insert(customer);
+		dao.update(customer);
 	}
 	
 	public static <L extends List<Customer>> void searchByCpf(L list, String cpf) {
@@ -130,7 +130,7 @@ public class CustomerManager {
     private static boolean isBirthdayValid(String birthday) {
         return (birthday != null && birthday.length() > 0 && DateUtil.validDate(birthday));
 
-	    }
+	}
 }
 
 

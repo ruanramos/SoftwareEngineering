@@ -4,8 +4,11 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.TreeMap;
+
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -75,6 +78,9 @@ public class Form<T extends Object> {
 		}
 		if(typeToConvert.equals(IntegerProperty.class)) {
 			return new SimpleIntegerProperty(Integer.parseInt(string));
+		}
+		if(typeToConvert.equals(DoubleProperty.class)) {
+			return new SimpleDoubleProperty(Double.parseDouble(string));
 		}
 		if(typeToConvert.equals(int.class)) {
 			return new SimpleIntegerProperty(Integer.parseInt(string));
