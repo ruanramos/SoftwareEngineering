@@ -1,8 +1,6 @@
 package application.view;
 
 import application.Main;
-import application.dbclass.CarDao;
-import application.model.Car;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -27,13 +27,8 @@ public class CarSearchDialogController {
     @FXML
     private TableColumn<Car, String> categoryColumn;
 
-    private Main main;
     private String filter = "";
     private String searchValue = "";
-
-    public void setMain(Main main) {
-        this.main = main;
-    }
 
     @FXML
     private void initialize() {

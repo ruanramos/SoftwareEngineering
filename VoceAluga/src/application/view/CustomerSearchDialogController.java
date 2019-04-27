@@ -32,10 +32,6 @@ public class CustomerSearchDialogController {
     private String filter = "";
     private String searchValue = "";
 
-//    public void setMain(Main main) {
-//        this.main = main;
-//    }
-
     @FXML
     private void initialize() {
         filterChoice.getItems().addAll("CPF", "Nome", "Sobrenome");

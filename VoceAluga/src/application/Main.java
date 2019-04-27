@@ -15,8 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
-// todo: apagar customer crud e seu controller
-
 public class Main extends Application {
 
 	public static void main(String[] args) {
