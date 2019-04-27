@@ -6,7 +6,12 @@ import application.model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class CustomerSearchDialogController {
 
@@ -27,9 +32,9 @@ public class CustomerSearchDialogController {
     private String filter = "";
     private String searchValue = "";
 
-    public void setMain(Main main) {
-        this.main = main;
-    }
+//    public void setMain(Main main) {
+//        this.main = main;
+//    }
 
     @FXML
     private void initialize() {
@@ -64,16 +69,22 @@ public class CustomerSearchDialogController {
      }
 
     @FXML
-    private void handleEditCustomer() {
-     Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+    private void handleEditCustomer() throws IOException {
+        Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
 
-     if (selectedCustomer != null) {
-         boolean okClicked = main.showCustomerEditDialog(selectedCustomer);
-         if (okClicked) {
-             CustomerDao customerDao = new CustomerDao();
-             customerDao.update(selectedCustomer);
-         }
-     }
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CustomerEditDialog.fxml"));
+
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Editar Cliente");
+//        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+
+        CustomerEditDialogController controller = loader.getController();
+        controller.setNewEntryFlag(false);
+        controller.setCustomer(selectedCustomer);
+
+        stage.showAndWait();
     }
 
     @FXML

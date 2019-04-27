@@ -98,7 +98,6 @@ public abstract class DefaultDao<T> {
 
 		try (Connection dbConnection = ConexaoBD.getConexaoBD()){
 			PreparedStatement sqlCommand = dbConnection.prepareStatement(sqlCommandFormat);
-			System.out.println(sqlCommandFormat);
 			ResultSet querySet = sqlCommand.executeQuery();
 
 			while(querySet.next()) {

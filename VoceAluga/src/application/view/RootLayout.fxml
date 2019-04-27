@@ -16,8 +16,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Cliente">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleNewUser" text="Cadastrar" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleSearchUser" text="Buscar" />
+              <MenuItem mnemonicParsing="false" onAction="#handleNewCustomer" text="Cadastrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSearchCustomer" text="Buscar" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Veiculo">

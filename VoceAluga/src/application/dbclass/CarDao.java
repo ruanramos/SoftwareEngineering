@@ -31,6 +31,7 @@ public class CarDao extends DefaultDao<Car> {
         statement.setString(2, car.getCategory());	//converte char para int
         statement.setInt(3, car.getAge());
         statement.setDouble(4, car.getMileage());
+        statement.setInt(5, car.getId());
     }
 
     protected Car getObjectWithDbInformation(ResultSet set) throws SQLException{

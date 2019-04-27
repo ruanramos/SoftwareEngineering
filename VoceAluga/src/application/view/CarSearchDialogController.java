@@ -6,7 +6,12 @@ import application.model.Car;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class CarSearchDialogController {
     @FXML
@@ -46,7 +51,7 @@ public class CarSearchDialogController {
     private void handleSearchCar() {
         // TODO: e se não escolher nada?
         if (filterChoice.getValue().equals("Código")) {
-            filter = "idCarro";
+            filter = "Id";
         } else if (filterChoice.getValue().equals("Modelo")) {
             filter = "Modelo";
         } else if (filterChoice.getValue().equals("Classe")) {
@@ -63,16 +68,21 @@ public class CarSearchDialogController {
     }
 
     @FXML
-    private void handleEditCar() {
+    private void handleEditCar() throws IOException {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
 
-        if (selectedCar != null) {
-            boolean okClicked = main.showCarEditDialog(selectedCar);
-            if (okClicked) {
-                CarDao carDao = new CarDao();
-                carDao.update(selectedCar);
-            }
-        }
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CarEditDialog.fxml"));
+
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Editar carro");
+        stage.setScene(scene);
+
+        CarEditDialogController controller = loader.getController();
+        controller.setNewEntryFlag(false);
+        controller.setCar(selectedCar);
+
+        stage.showAndWait();
     }
 
     @FXML

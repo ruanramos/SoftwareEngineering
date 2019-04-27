@@ -1,13 +1,16 @@
 package application.view;
 
+import application.dbclass.CarDao;
 import application.model.Car;
-import application.util.DateUtil;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CarEditDialogController {
 
+    @FXML
+    Node rootNode;
     @FXML
     TextField idField;
     @FXML
@@ -22,11 +25,17 @@ public class CarEditDialogController {
     private Stage dialogStage;
     private Car car;
     private boolean okClicked = false;
+    private boolean newEntryFlag;
 
     @FXML
-    private void initialize() {
+    public void initialize() {
         // bloqueia edição do id
         idField.setDisable(true);
+    }
+
+    public void setNewEntryFlag(boolean newEntryFlag) {
+        car = new Car();
+        this.newEntryFlag = newEntryFlag;
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -54,14 +63,24 @@ public class CarEditDialogController {
             car.setAge(Integer.parseInt(ageField.getText()));
             car.setMileage(Double.parseDouble(mileageField.getText()));
 
-            okClicked = true;
-            dialogStage.close();
+            CarDao carDao = new CarDao();
+            if (newEntryFlag) {
+                carDao.insert(car);
+            } else {
+                carDao.update(car);
+            }
+
+            this.getStage().close();
         }
     }
 
     @FXML
     private void handleCancel() {
-        dialogStage.close();
+        this.getStage().close();
+    }
+
+    private Stage getStage() {
+        return (Stage) rootNode.getScene().getWindow();
     }
 
     private boolean isInputValid() {

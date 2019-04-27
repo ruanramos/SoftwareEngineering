@@ -1,14 +1,18 @@
 package application.view;
 
+import application.dbclass.CustomerDao;
 import application.model.Customer;
 import application.util.DateUtil;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CustomerEditDialogController {
 
+    @FXML
+    private Node rootNode;
     @FXML
     private TextField firstNameField;
     @FXML
@@ -22,31 +26,27 @@ public class CustomerEditDialogController {
     @FXML
     private TextField cellphoneField;
 
-    private Stage dialogStage;
     private Customer customer;
-    private boolean okClicked = false;
+    private boolean newEntryFlag;
 
     @FXML
-    private void initialize() {
+    public void initialize() {
     }
 
-
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
+    public void setNewEntryFlag(boolean newEntryFlag) {
+        customer = new Customer();
+        this.newEntryFlag = newEntryFlag;
     }
 
-    public void setcustomer(Customer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
+
         firstNameField.setText(customer.getFirstName());
         lastNameField.setText(customer.getLastName());
         cpfField.setText(customer.getCpf());
         cnhField.setText(customer.getCnh());
         birthdayField.setText(DateUtil.format(customer.getBirthday()));
         cellphoneField.setText(customer.getCellphone());
-    }
-
-    public boolean isOkClicked() {
-        return okClicked;
     }
 
     @FXML
@@ -58,14 +58,25 @@ public class CustomerEditDialogController {
             customer.setCnh(cnhField.getText());
             customer.setBirthday(DateUtil.parse(birthdayField.getText()));
             customer.setCellphone(cellphoneField.getText());
-            okClicked = true;
-            dialogStage.close();
+
+            CustomerDao customerDao = new CustomerDao();
+            if (newEntryFlag) {
+                customerDao.insert(customer);
+            } else {
+                customerDao.update(customer);
+            }
+
+            this.getStage().close();
         }
     }
 
     @FXML
     private void handleCancel() {
-        dialogStage.close();
+        this.getStage().close();
+    }
+
+    private Stage getStage() {
+        return (Stage) rootNode.getScene().getWindow();
     }
 
     private boolean isInputValid() {
@@ -100,7 +111,7 @@ public class CustomerEditDialogController {
         } else {
             // Show the error message.
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
+            alert.initOwner(this.getStage());
             alert.setTitle("Campo inválido");
             alert.setHeaderText("Por favor corrija os campos inválidos.");
             alert.setContentText(errorMessage);
@@ -129,7 +140,6 @@ public class CustomerEditDialogController {
 //        return (address != null && address.length() > 0);
 //    }
 
-    // Celular é valido se tiver pelo menos 8 algarismos
     private boolean isCellphoneValid(String cellphone) {
         return (cellphone != null && cellphone.matches("\\d{8}\\d*"));
     }
