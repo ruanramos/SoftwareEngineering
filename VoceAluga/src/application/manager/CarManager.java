@@ -7,7 +7,13 @@ import application.dbclass.CarDao;
 import application.model.Car;
 
 public class CarManager {
-	public static void add(Map<String, String> mapOfFields) throws ManagerException {
+	private CarDao dao;
+	
+	public CarManager(CarDao dao) {
+		this.dao = dao;
+	}
+	
+	public void add(Map<String, String> mapOfFields) throws ManagerException {
 		try {
 			Form<Car> form = new Form<>(Car.class);
 			form.addInfo(mapOfFields);
@@ -16,13 +22,12 @@ public class CarManager {
 			Car car = new Car();
 			form.fillObjectAttributes(car);
 			
-			CarDao dao = new CarDao();
 			dao.insert(car);
 		}
 		catch(RuntimeException e) {
 			String lowerCasedMessage = e.getMessage().toLowerCase();
 			if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("cpf")) {
-				throw new ManagerException("Já existe um cliente com este CPF");
+				throw new ManagerException("Jï¿½ existe um cliente com este CPF");
 			}
 			else {
 				throw e;
@@ -30,25 +35,25 @@ public class CarManager {
 		}
 	}
 	
-	public static void remove(Car car) {
-		CarDao dao = new CarDao();
+	public void remove(Car car) throws ManagerException {
+		if (car.getId() == 0) {
+			throw new ManagerException("Car must have an ID to be deleted");
+		}
 		dao.delete(car);
 	}
 	
-	public static void edit(Map<String, String> mapOfFields) throws ManagerException {
+	public void edit(Map<String, String> mapOfFields) throws ManagerException {
 		Form<Car> form = new Form<>(Car.class);
 		form.addInfo(mapOfFields);
 		validateCarFields(form);
 		
 		Car car = new Car();
 		form.fillObjectAttributes(car);
-		
-		CarDao dao = new CarDao();
+
 		dao.insert(car);
 	}
 	
-	public static <L extends List<Car>> void searchByModel(L list, String modelo) {
-		CarDao dao = new CarDao();
+	public <L extends List<Car>> void searchByModel(L list, String modelo) {
 		dao.selectToList(list, String.format("Modelo=\"%s\"", modelo));
 	}
 	
@@ -56,16 +61,16 @@ public class CarManager {
 		String errorMessage = "";
 
 	    if (!isModelValid(form.getAttribute("model"))) {
-	    	errorMessage += "Modelo inválido.\n";
+	    	errorMessage += "Modelo invï¿½lido.\n";
 	    }
 	    if (!isCategoryValid(form.getAttribute("category"))) {
-	    	errorMessage += "Categoria inválida.\n";
+	    	errorMessage += "Categoria invï¿½lida.\n";
 	    }
 	    if (!isAgeValid(form.getAttribute("age"))) {
-	    	errorMessage += "Idade inválida.\n";
+	    	errorMessage += "Idade invï¿½lida.\n";
 	    }
 	    if (!isMileageValid(form.getAttribute("mileage"))) {
-	    	errorMessage += "Quilometragem inválida.\n";
+	    	errorMessage += "Quilometragem invï¿½lida.\n";
 	    }
 
 	    if (errorMessage.length() != 0) {

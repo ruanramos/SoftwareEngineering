@@ -9,8 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 public class CustomerManager {
+	private CustomerDao dao;
+	
+	public CustomerManager(CustomerDao dao) {
+		this.dao = dao;
+	}
 
-	public static void add(Map<String, String> mapOfFields) throws ManagerException {
+	public void add(Map<String, String> mapOfFields) throws ManagerException {
 		try {
 			Form<Customer> form = new Form<>(Customer.class);
 			form.addInfo(mapOfFields);
@@ -19,13 +24,12 @@ public class CustomerManager {
 			Customer customer = new Customer();
 			form.fillObjectAttributes(customer);
 			
-			CustomerDao dao = new CustomerDao();
 			dao.insert(customer);
 		}
 		catch(RuntimeException e) {
 			String lowerCasedMessage = e.getMessage().toLowerCase();
 			if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("cpf")) {
-				throw new ManagerException("Já existe um cliente com este CPF");
+				throw new ManagerException("Jï¿½ existe um cliente com este CPF");
 			}
 			else {
 				throw e;
@@ -33,12 +37,11 @@ public class CustomerManager {
 		}
 	}
 	
-	public static void remove(Customer customer) {
-		CustomerDao dao = new CustomerDao();
+	public void remove(Customer customer) {
 		dao.delete(customer);
 	}
 	
-	public static void edit(Map<String, String> mapOfFields) throws ManagerException {
+	public void edit(Map<String, String> mapOfFields) throws ManagerException {
 		Form<Customer> form = new Form<>(Customer.class);
 		form.addInfo(mapOfFields);
 		validateCustomerFields(form);
@@ -46,27 +49,22 @@ public class CustomerManager {
 		Customer customer = new Customer();
 		form.fillObjectAttributes(customer);
 		
-		CustomerDao dao = new CustomerDao();
 		dao.update(customer);
 	}
 	
-	public static <L extends List<Customer>> void searchByCpf(L list, String cpf) {
-		CustomerDao dao = new CustomerDao();
+	public <L extends List<Customer>> void searchByCpf(L list, String cpf) {
 		dao.selectToList(list, String.format("Cpf=\"%s\"", cpf));
 	}
 	
-	public static <L extends List<Customer>> void searchByFirstName(L list, String name) {
-		CustomerDao dao = new CustomerDao();
+	public <L extends List<Customer>> void searchByFirstName(L list, String name) {
 		dao.selectToList(list, String.format("FirstName=\"%s\"", name));
 	}
 	
-	public static <L extends List<Customer>> void searchByLastName(L list, String name) {
-		CustomerDao dao = new CustomerDao();
+	public <L extends List<Customer>> void searchByLastName(L list, String name) {
 		dao.selectToList(list, String.format("LastName=\"%s\"", name));
 	}
 	
-	public static <L extends List<Customer>> void searchAll(L list) {
-		CustomerDao dao = new CustomerDao();
+	public <L extends List<Customer>> void searchAll(L list) {
 		dao.selectToList(list);
 	}
 	
@@ -74,27 +72,27 @@ public class CustomerManager {
 		String errorMessage = "";
 
 	    if (!isNameValid(form.getAttribute("firstName"))) {
-	        errorMessage += "Nome inválido.\n";
+	        errorMessage += "Nome invï¿½lido.\n";
 	    }
 
 	    if (!isNameValid(form.getAttribute("lastName"))) {
-	        errorMessage += "Sobrenome inválido.\n";
+	        errorMessage += "Sobrenome invï¿½lido.\n";
 	    }
 
 	    if (!isCpfValid(form.getAttribute("cpf"))) {
-	        errorMessage += "CPF inválido.\n";
+	        errorMessage += "CPF invï¿½lido.\n";
 	    }
 
 	    if (!isCnhValid(form.getAttribute("cnh"))) {
-	        errorMessage += "CNH inválida.\n";
+	        errorMessage += "CNH invï¿½lida.\n";
 	    }
 
 	    if (!isBirthdayValid(form.getAttribute("birthday"))) {
-	        errorMessage += "Data de nascimento inválida!\n";
+	        errorMessage += "Data de nascimento invï¿½lida!\n";
 	    }
 
 	    if (!isCellphoneValid(form.getAttribute("cellphone"))) {
-	        errorMessage += "Número de celular inválido.\n";
+	        errorMessage += "Nï¿½mero de celular invï¿½lido.\n";
 	    }
 
 	    if (errorMessage.length() != 0) {
