@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import application.dbclass.CarDao;
+import application.dbclass.CustomerDao;
 import application.model.Car;
 
 public class CarManager {
@@ -11,6 +12,10 @@ public class CarManager {
 	
 	public CarManager(CarDao dao) {
 		this.dao = dao;
+	}
+	
+	public CarManager() {
+		this.dao = new CarDao();
 	}
 	
 	public void add(Map<String, String> mapOfFields) throws ManagerException {
@@ -54,7 +59,7 @@ public class CarManager {
 	}
 	
 	public <L extends List<Car>> void searchByModel(L list, String modelo) {
-		dao.selectToList(list, String.format("Modelo=\"%s\"", modelo));
+		dao.selectToList(list, String.format("where Modelo like \"%s\"", modelo));
 	}
 	
 	private static void validateCarFields(Form<Car> form) throws ManagerException {

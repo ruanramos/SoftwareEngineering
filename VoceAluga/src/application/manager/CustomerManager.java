@@ -14,6 +14,10 @@ public class CustomerManager {
 	public CustomerManager(CustomerDao dao) {
 		this.dao = dao;
 	}
+	
+	public CustomerManager() {
+		this.dao = new CustomerDao();
+	}
 
 	public void add(Map<String, String> mapOfFields) throws ManagerException {
 		try {
@@ -53,15 +57,15 @@ public class CustomerManager {
 	}
 	
 	public <L extends List<Customer>> void searchByCpf(L list, String cpf) {
-		dao.selectToList(list, String.format("Cpf=\"%s\"", cpf));
+		dao.selectToList(list, String.format("where Cpf like\"%s\"", cpf));
 	}
 	
 	public <L extends List<Customer>> void searchByFirstName(L list, String name) {
-		dao.selectToList(list, String.format("FirstName=\"%s\"", name));
+		dao.selectToList(list, String.format("where FirstName like \"%s\"", name));
 	}
 	
 	public <L extends List<Customer>> void searchByLastName(L list, String name) {
-		dao.selectToList(list, String.format("LastName=\"%s\"", name));
+		dao.selectToList(list, String.format("where LastName like \"%s\"", name));
 	}
 	
 	public <L extends List<Customer>> void searchAll(L list) {
