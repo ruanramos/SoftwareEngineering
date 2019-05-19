@@ -130,7 +130,7 @@ public class CustomerManager {
     }
 
     private static boolean isBirthdayValid(String birthday) {
-        return (birthday != null && birthday.length() > 0 && DateUtil.validDate(birthday));
+        return (birthday != null && DateUtil.validDate(birthday));
 
 	}
 }

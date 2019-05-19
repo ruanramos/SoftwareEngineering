@@ -1,6 +1,8 @@
 package application.manager;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
+import java.lang.reflect.ParameterizedType;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,6 +16,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import java.time.LocalDate;
+import application.util.DateUtil;
 
 /*
  * Classe usada para inserir um novo cliente/carro/etc com as informações do formulário.
@@ -49,9 +52,8 @@ public class Form<T extends Object> {
 			for(Map.Entry<String, String> entry : attributeMap.entrySet()) {
 				if( !entry.getValue().equals("") ) {
 					Field field = type.getDeclaredField(entry.getKey());
-					Class<?> fieldType = field.getType();
 					field.setAccessible(true);
-					field.set(object, convertString(entry.getValue(), fieldType));
+					field.set(object, convertString(entry.getValue(), field));
 				}
 			}
 		}
@@ -69,24 +71,29 @@ public class Form<T extends Object> {
 		}
 	}
 	
-	private Object convertString(String string, Class<?> typeToConvert) {
-		if(typeToConvert.equals(String.class)) {
+	private <T> Object convertString(String string, Field field) {
+		if(field.getType().equals(String.class)) {
 			return string;
 		}
-		if(typeToConvert.equals(StringProperty.class)) {
+		if(field.getType().equals(StringProperty.class)) {
 			return new SimpleStringProperty(string);
 		}
-		if(typeToConvert.equals(IntegerProperty.class)) {
+		if(field.getType().equals(IntegerProperty.class)) {
 			return new SimpleIntegerProperty(Integer.parseInt(string));
 		}
-		if(typeToConvert.equals(DoubleProperty.class)) {
+		if(field.getType().equals(DoubleProperty.class)) {
 			return new SimpleDoubleProperty(Double.parseDouble(string));
 		}
-		if(typeToConvert.equals(int.class)) {
+		if(field.getType().equals(int.class)) {
 			return new SimpleIntegerProperty(Integer.parseInt(string));
 		}
-		if(typeToConvert.equals(float.class)) {
+		if(field.getType().equals(float.class)) {
 			return Float.parseFloat(string);
+		}
+		if(field.getType().equals(ObjectProperty.class)) {
+			if(((ParameterizedType)field.getGenericType()).getActualTypeArguments()[0].equals(LocalDate.class)) {
+				return new SimpleObjectProperty<LocalDate>(DateUtil.parse(string));
+			}
 		}
 		
 		
