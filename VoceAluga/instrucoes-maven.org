@@ -1,0 +1,28 @@
+* Suporte a Maven no Eclipse
+** Importar projeto
+- File -> Import
+- Maven -> Existing Maven Projects
+- navegue até o diretório com o arquivo pom.xml (SoftwareEngineering/VoceAluga)
+- aperte o botão Finish
+
+** Rodar
+- Run -> Run as -> Maven Build...
+- onde está escrito goals, escreva ~clean javafx:run~ e aperte o botão Run
+
+A partir disso, quando quiser executar, use a opção Maven Build.
+
+* Suporte a Maven no Intellij Idea
+** Importar projeto
+- Import
+- selecione o arquivo pom.xml (SoftwareEngineering/VoceAluga/pom.xml)
+- "Next, Next, Finish"
+
+** Rodar
+- Run -> Edit Configurations
+- clica no + e seleciona Maven
+- no campo 'Command line:' digite ~clean javafx:run~ e aperte OK
+- Run -> Run
+
+* Rodar em linha de comando
+- navegue até o diretório contendo o pom.xml (SoftwareEngineering/VoceAluga)
+- ~$ mvn clean javafx:run~
