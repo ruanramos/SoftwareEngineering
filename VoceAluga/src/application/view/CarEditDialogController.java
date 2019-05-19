@@ -1,11 +1,16 @@
 package application.view;
 
 import application.dbclass.CarDao;
+import application.manager.CarManager;
+import application.manager.ManagerException;
 import application.model.Car;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CarEditDialogController {
 
@@ -22,9 +27,7 @@ public class CarEditDialogController {
     @FXML
     TextField mileageField;
 
-    private Stage dialogStage;
     private Car car;
-    private boolean okClicked = false;
     private boolean newEntryFlag;
 
     @FXML
@@ -38,10 +41,6 @@ public class CarEditDialogController {
         this.newEntryFlag = newEntryFlag;
     }
 
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
-
     public void setCar(Car car) {
         this.car = car;
         idField.setText(String.valueOf(car.getId()));
@@ -51,27 +50,27 @@ public class CarEditDialogController {
         mileageField.setText(String.valueOf(car.getMileage()));
     }
 
-    public boolean isOkClicked() {
-        return okClicked;
-    }
-
     @FXML
     private void handleOk() {
-        if (isInputValid()) {
-            car.setModel(modelField.getText());
-            car.setCategory(categoryField.getText());
-            car.setAge(Integer.parseInt(ageField.getText()));
-            car.setMileage(Double.parseDouble(mileageField.getText()));
+        Map<String, String> carFields = new HashMap<>();
+        carFields.put("model", modelField.getText());
+        carFields.put("category", categoryField.getText());
+        carFields.put("age", ageField.getText());
+        carFields.put("mileage", mileageField.getText());
 
-            CarDao carDao = new CarDao();
+        try {
+            CarManager carManager = new CarManager();
             if (newEntryFlag) {
-                carDao.insert(car);
+                carManager.add(carFields);
             } else {
-                carDao.update(car);
+                carFields.put("id", String.valueOf(car.getId()));
+                carManager.edit(carFields);
             }
-
-            this.getStage().close();
+        } catch (ManagerException e) {
+            e.printStackTrace();
         }
+
+        this.getStage().close();
     }
 
     @FXML
@@ -81,9 +80,5 @@ public class CarEditDialogController {
 
     private Stage getStage() {
         return (Stage) rootNode.getScene().getWindow();
-    }
-
-    private boolean isInputValid() {
-        return true;
     }
 }
