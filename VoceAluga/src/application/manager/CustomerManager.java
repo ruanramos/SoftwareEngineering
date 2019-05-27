@@ -57,7 +57,7 @@ public class CustomerManager {
 	}
 	
 	public <L extends List<Customer>> void searchByCpf(L list, String cpf) {
-		dao.selectToList(list, String.format("where Cpf like\"%s\"", cpf));
+		dao.selectToList(list, String.format("where Cpf like \"%s\"", cpf));
 	}
 	
 	public <L extends List<Customer>> void searchByFirstName(L list, String name) {
