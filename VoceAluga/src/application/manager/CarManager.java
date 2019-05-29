@@ -57,11 +57,15 @@ public class CarManager {
 
 		dao.insert(car);
 	}
-	
-	public <L extends List<Car>> void searchByModel(L list, String modelo) {
-		dao.selectToList(list, String.format("where Modelo like \"%s\"", modelo));
+
+	public <L extends List<Car>> void searchByModel(L list, String model) {
+		dao.selectToList(list, "where Modelo like '%" + model + "%'");
 	}
-	
+
+	public <L extends List<Car>> void searchByGroup(L list, String group) {
+		dao.selectToList(list, "where Classe like '%" + group + "%'");
+	}
+
 	private static void validateCarFields(Form<Car> form) throws ManagerException {
 		String errorMessage = "";
 

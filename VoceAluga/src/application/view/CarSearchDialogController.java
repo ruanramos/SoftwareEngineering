@@ -2,6 +2,7 @@ package application.view;
 
 import application.Main;
 import application.dbclass.CarDao;
+import application.manager.CarManager;
 import application.model.Car;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,8 +33,8 @@ public class CarSearchDialogController {
 
     @FXML
     private void initialize() {
-        filterChoice.getItems().addAll("Código", "Modelo", "Classe");
-        filterChoice.setValue("Classe");
+        filterChoice.getItems().addAll("Modelo", "Grupo");
+        filterChoice.setValue("Grupo");
 
         carTable.setPlaceholder(new Label("Nenhum veículo encontrado."));
 
@@ -44,20 +45,16 @@ public class CarSearchDialogController {
 
     @FXML
     private void handleSearchCar() {
-        // TODO: e se não escolher nada?
-        if (filterChoice.getValue().equals("Código")) {
-            filter = "Id";
-        } else if (filterChoice.getValue().equals("Modelo")) {
-            filter = "Modelo";
-        } else if (filterChoice.getValue().equals("Classe")) {
-            filter = "Classe";
-        }
-
-        searchValue = searchTextField.getText();
-
         ObservableList<Car> carResult = FXCollections.observableArrayList();
-        CarDao carDao = new CarDao();
-        carDao.selectToList(carResult, filter + " like '%" + searchValue + "%'");
+        searchValue = searchTextField.getText();
+        CarManager carManager = new CarManager();
+
+        // TODO: e se não escolher nada?
+        if (filterChoice.getValue().equals("Modelo")) {
+            carManager.searchByModel(carResult, searchValue);
+        } else if (filterChoice.getValue().equals("Grupo")) {
+            carManager.searchByGroup(carResult, searchValue);
+        }
 
         carTable.setItems(carResult);
     }

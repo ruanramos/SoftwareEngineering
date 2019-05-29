@@ -46,20 +46,18 @@ public class CustomerSearchDialogController {
 
     @FXML
     private void handleSearchCustomer() {
+        ObservableList<Customer> customerResult = FXCollections.observableArrayList();
+        searchValue = searchTextField.getText();
+        CustomerManager customerManager = new CustomerManager();
+
         // TODO: e se não escolher nada?
         if (filterChoice.getValue().equals("CPF")) {
-            filter = "Cpf";
+            customerManager.searchByCpf(customerResult, searchValue);
         } else if (filterChoice.getValue().equals("Nome")) {
-            filter = "FirstName";
+            customerManager.searchByFirstName(customerResult, searchValue);
         } else if (filterChoice.getValue().equals("Sobrenome")) {
-            filter = "LastName";
+            customerManager.searchByLastName(customerResult, searchValue);
         }
-
-        searchValue = searchTextField.getText();
-
-        ObservableList<Customer> customerResult = FXCollections.observableArrayList();
-        CustomerDao customerDao = new CustomerDao();
-        customerDao.selectToList(customerResult, filter + " like '%" + searchValue + "%'");
 
         customerTable.setItems(customerResult);
      }

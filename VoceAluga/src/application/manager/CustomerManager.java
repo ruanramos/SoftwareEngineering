@@ -55,17 +55,17 @@ public class CustomerManager {
 		
 		dao.update(customer);
 	}
-	
+
 	public <L extends List<Customer>> void searchByCpf(L list, String cpf) {
-		dao.selectToList(list, String.format("where Cpf like \"%s\"", cpf));
+		dao.selectToList(list, "where Cpf like '%" + cpf + "%'");
 	}
-	
+
 	public <L extends List<Customer>> void searchByFirstName(L list, String name) {
-		dao.selectToList(list, String.format("where FirstName like \"%s\"", name));
+		dao.selectToList(list, "where FirstName like '%" + name + "%'");
 	}
-	
+
 	public <L extends List<Customer>> void searchByLastName(L list, String name) {
-		dao.selectToList(list, String.format("where LastName like \"%s\"", name));
+		dao.selectToList(list, "where LastName like '%" + name + "%'");
 	}
 	
 	public <L extends List<Customer>> void searchAll(L list) {
