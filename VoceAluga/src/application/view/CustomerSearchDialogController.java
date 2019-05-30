@@ -2,6 +2,7 @@ package application.view;
 
 import application.Main;
 import application.dbclass.CustomerDao;
+import application.manager.CustomerManager;
 import application.model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
