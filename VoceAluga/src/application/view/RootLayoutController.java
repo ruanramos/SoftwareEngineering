@@ -3,6 +3,7 @@ package application.view;
 import application.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -10,13 +11,10 @@ import java.io.IOException;
 
 public class RootLayoutController {
 
-    private Main main;
+    @FXML
+    Node rootNode;
 
     private void initialize() {
-    }
-
-    public void setMain(Main main) {
-        this.main = main;
     }
 
     @FXML
@@ -71,5 +69,14 @@ public class RootLayoutController {
         controller.setNewEntryFlag(true);
 
         stage.showAndWait();
+    }
+
+    private Stage getStage() {
+        return (Stage) rootNode.getScene().getWindow();
+    }
+
+    @FXML
+    private void handleQuit() {
+        this.getStage().close();
     }
 }
