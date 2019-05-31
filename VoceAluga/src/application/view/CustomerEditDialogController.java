@@ -1,17 +1,18 @@
 package application.view;
 
-import application.dbclass.CustomerDao;
 import application.manager.CustomerManager;
 import application.manager.ManagerException;
 import application.model.Customer;
 import application.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,8 +31,6 @@ public class CustomerEditDialogController {
     @FXML
     private DatePicker birthdayPicker;
     @FXML
-    private TextField birthdayField;
-    @FXML
     private TextField cellphoneField;
 
     private Customer customer;
@@ -39,6 +38,17 @@ public class CustomerEditDialogController {
 
     @FXML
     public void initialize() {
+        birthdayPicker.setConverter(new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                return DateUtil.format(date);
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                return DateUtil.parse(string);
+            }
+        });
     }
 
     public void setNewEntryFlag(boolean newEntryFlag) {
