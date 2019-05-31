@@ -19,17 +19,10 @@ public class Customer {
 	private StringProperty cellphone;
 
 	public Customer() {
-        this(null, null);
-    }
-
-	public Customer(String firstName, String lastName) {
-		this.firstName = new SimpleStringProperty(firstName);
-        this.lastName = new SimpleStringProperty(lastName);
-
-        // daqui pra baixo sao valores padrao
-		// TODO: fazer construtor com todos os valores
-		this.id = new SimpleIntegerProperty();
-        this.cpf = new SimpleStringProperty("");
+		this.firstName = new SimpleStringProperty("");
+		this.lastName = new SimpleStringProperty("");
+		this.id = new SimpleIntegerProperty(0);
+		this.cpf = new SimpleStringProperty("");
 		this.cnh = new SimpleStringProperty("");
 		this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1970,1,1));
 		this.cellphone = new SimpleStringProperty("");
