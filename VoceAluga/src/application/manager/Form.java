@@ -19,34 +19,34 @@ import java.time.LocalDate;
 import application.util.DateUtil;
 
 /*
- * Classe usada para inserir um novo cliente/carro/etc com as informações do formulário.
+ * Classe usada para inserir um novo cliente/carro/etc com as informaï¿½ï¿½es do formulï¿½rio.
  * As chaves dos maps passados devem ser exatamente iguais aos nomes dos atributos da classe
  * que se deseja instanciar.
- * 
+ *
  * Exemplo de um map usado para a classe Customer, o map deve ser do tipo map<string,string>:
  * 		 {firstName = Osvaldo, cpf = 11111111111, }
  */
 public class Form<T extends Object> {
-	
+
 	private Map<String,String> attributeMap = new TreeMap<>();
 	private final Class<T> type;
-	
+
 	public Form(Class<T> type) {
-		
+
 		this.type = type;
-		
+
 		for(Field field : type.getDeclaredFields()) {
 			field.setAccessible(true);
 			attributeMap.put(field.getName(), "");
 		}
 	}
-	
+
 	public void addInfo(Map<String,String> map) {
 		for(Map.Entry<String, String> entry : map.entrySet()) {
 			attributeMap.replace(entry.getKey(), entry.getValue());
 		}
 	}
-	
+
 	public void fillObjectAttributes(T object) {
 		try {
 			for(Map.Entry<String, String> entry : attributeMap.entrySet()) {
@@ -70,7 +70,7 @@ public class Form<T extends Object> {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	private <T> Object convertString(String string, Field field) {
 		if(field.getType().equals(String.class)) {
 			return string;
@@ -92,19 +92,19 @@ public class Form<T extends Object> {
 		}
 		if(field.getType().equals(ObjectProperty.class)) {
 			if(((ParameterizedType)field.getGenericType()).getActualTypeArguments()[0].equals(LocalDate.class)) {
-				return new SimpleObjectProperty<LocalDate>(DateUtil.parse(string));
+				return new SimpleObjectProperty<LocalDate>(LocalDate.parse(string));
 			}
 		}
-		
-		
-		throw new RuntimeException("Tipo de parâmetro não definido");
+
+
+		throw new RuntimeException("Tipo de parï¿½metro nï¿½o definido");
 	}
-	
+
 	public String getAttribute(String attributeName) {
 		if(attributeMap.containsKey(attributeName)) {
 			return attributeMap.get(attributeName);
 		}
-		
+
 		throw new RuntimeException(new NoSuchFieldException());
 	}
 } 

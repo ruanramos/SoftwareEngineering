@@ -8,6 +8,7 @@ import application.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -26,6 +27,8 @@ public class CustomerEditDialogController {
     private TextField cpfField;
     @FXML
     private TextField cnhField;
+    @FXML
+    private DatePicker birthdayPicker;
     @FXML
     private TextField birthdayField;
     @FXML
@@ -49,7 +52,7 @@ public class CustomerEditDialogController {
         lastNameField.setText(customer.getLastName());
         cpfField.setText(customer.getCpf());
         cnhField.setText(customer.getCnh());
-        birthdayField.setText(DateUtil.format(customer.getBirthday()));
+        birthdayPicker.setValue(customer.getBirthday());
         cellphoneField.setText(customer.getCellphone());
     }
 
@@ -60,7 +63,7 @@ public class CustomerEditDialogController {
         customerFields.put("lastName", lastNameField.getText());
         customerFields.put("cpf", cpfField.getText());
         customerFields.put("cnh", cnhField.getText());
-        customerFields.put("birthday", birthdayField.getText());
+        customerFields.put("birthday", birthdayPicker.getValue().toString());
         customerFields.put("cellphone", cellphoneField.getText());
 
         try {
