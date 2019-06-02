@@ -70,6 +70,32 @@ public class RootLayoutController {
 
         stage.showAndWait();
     }
+    @FXML
+    private void handleSearchReservation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ReservationSearchDialog.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Buscar reserva");
+//        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    @FXML
+    private void handleNewReservation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ReservationEditDialog.fxml"));
+
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Criar Locação");
+//        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+
+        ReservationEditDialogController controller = loader.getController();
+        controller.setNewEntryFlag(true);
+
+        stage.showAndWait();
+    }
 
     private Stage getStage() {
         return (Stage) rootNode.getScene().getWindow();

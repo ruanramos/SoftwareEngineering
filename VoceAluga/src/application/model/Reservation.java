@@ -3,13 +3,14 @@ package application.model;
 import javafx.beans.property.*;
 
 
-public class Allocation {
+public class Reservation {
 	private IntegerProperty id;
 	private Customer customer;
 	private Car car;
 	private SimpleIntegerProperty carid;
 	private boolean finished;
-	public Allocation() {
+	
+	public Reservation() {
 		this.id = new SimpleIntegerProperty(0);
 		this.carid = new SimpleIntegerProperty(0); 
 		// chave que serah usada no bd, pois cada carro soh pode ser alocado de cada vez
