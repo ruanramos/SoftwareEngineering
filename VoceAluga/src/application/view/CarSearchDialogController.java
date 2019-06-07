@@ -1,8 +1,8 @@
 package application.view;
 
 import application.Main;
+import application.controller.CarController;
 import application.dbclass.CarDao;
-import application.manager.CarManager;
 import application.model.Car;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,7 +47,7 @@ public class CarSearchDialogController {
     private void handleSearchCar() {
         ObservableList<Car> carResult = FXCollections.observableArrayList();
         searchValue = searchTextField.getText();
-        CarManager carManager = new CarManager();
+        CarController carManager = new CarController();
 
         // TODO: e se não escolher nada?
         if (filterChoice.getValue().equals("Modelo")) {

@@ -1,7 +1,7 @@
 package application.view;
 
-import application.manager.CustomerManager;
-import application.manager.ManagerException;
+import application.controller.ControllerException;
+import application.controller.CustomerController;
 import application.model.Customer;
 import application.util.DateUtil;
 import javafx.fxml.FXML;
@@ -77,7 +77,7 @@ public class CustomerEditDialogController {
         customerFields.put("cellphone", cellphoneField.getText());
 
         try {
-            CustomerManager customerManager = new CustomerManager();
+            CustomerController customerManager = new CustomerController();
 
             if (newEntryFlag) {
                 customerManager.add(customerFields);
@@ -85,7 +85,7 @@ public class CustomerEditDialogController {
                 customerFields.put("id", String.valueOf(customer.getId()));
                 customerManager.edit(customerFields);
             }
-        } catch (ManagerException e) {
+        } catch (ControllerException e) {
             e.printStackTrace();
         }
 

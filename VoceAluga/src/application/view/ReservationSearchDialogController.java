@@ -1,8 +1,8 @@
 package application.view;
 
 import application.Main;
+import application.controller.ReservationController;
 import application.dbclass.ReservationDao;
-import application.manager.ReservationManager;
 import application.model.Reservation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,4 +1,4 @@
-package application.manager;
+package application.controller;
 
 import application.dbclass.CustomerDao;
 import application.model.Customer;
@@ -8,14 +8,14 @@ import javafx.scene.control.Alert;
 import java.util.List;
 import java.util.Map;
 
-public class CustomerManager {
+public class CustomerController {
 	private CustomerDao dao;
 
-	public CustomerManager() {
+	public CustomerController() {
 		this.dao = new CustomerDao();
 	}
 
-	public void add(Map<String, String> mapOfFields) throws ManagerException {
+	public void add(Map<String, String> mapOfFields) throws ControllerException {
 		try {
 			Form<Customer> form = new Form<>(Customer.class);
 			form.addInfo(mapOfFields);
@@ -29,7 +29,7 @@ public class CustomerManager {
 		catch(RuntimeException e) {
 			String lowerCasedMessage = e.getMessage().toLowerCase();
 			if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("cpf")) {
-				throw new ManagerException("J� existe um cliente com este CPF");
+				throw new ControllerException("J� existe um cliente com este CPF");
 			}
 			else {
 				throw e;
@@ -41,7 +41,7 @@ public class CustomerManager {
 		dao.delete(customer);
 	}
 
-	public void edit(Map<String, String> mapOfFields) throws ManagerException {
+	public void edit(Map<String, String> mapOfFields) throws ControllerException {
 		Form<Customer> form = new Form<>(Customer.class);
 		form.addInfo(mapOfFields);
 		validateCustomerFields(form);
@@ -68,7 +68,7 @@ public class CustomerManager {
 		dao.selectToList(list);
 	}
 
-	private static void validateCustomerFields(Form<Customer> form) throws ManagerException {
+	private static void validateCustomerFields(Form<Customer> form) throws ControllerException {
 		String errorMessage = "";
 
 		if (!isNameValid(form.getAttribute("firstName"))) {
@@ -96,7 +96,7 @@ public class CustomerManager {
 		}
 
 		if (errorMessage.length() != 0) {
-			throw new ManagerException(errorMessage);
+			throw new ControllerException(errorMessage);
 		}
 	}
 

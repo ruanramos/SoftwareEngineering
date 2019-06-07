@@ -1,8 +1,8 @@
 package application.view;
 
+import application.controller.CarController;
+import application.controller.ControllerException;
 import application.dbclass.CarDao;
-import application.manager.CarManager;
-import application.manager.ManagerException;
 import application.model.Car;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -59,14 +59,14 @@ public class CarEditDialogController {
         carFields.put("mileage", mileageField.getText());
 
         try {
-            CarManager carManager = new CarManager();
+            CarController carManager = new CarController();
             if (newEntryFlag) {
                 carManager.add(carFields);
             } else {
                 carFields.put("id", String.valueOf(car.getId()));
                 carManager.edit(carFields);
             }
-        } catch (ManagerException e) {
+        } catch (ControllerException e) {
             e.printStackTrace();
         }
 

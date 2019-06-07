@@ -1,8 +1,8 @@
 package application.view;
 
+import application.controller.ControllerException;
+import application.controller.ReservationController;
 import application.dbclass.ReservationDao;
-import application.manager.ManagerException;
-import application.manager.ReservationManager;
 import application.model.Reservation;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -52,14 +52,14 @@ public class ReservationEditDialogController {
        
 
         try {
-            ReservationManager reservationManager = new ReservationManager();
+            ReservationController reservationManager = new ReservationController();
             if (newEntryFlag) {
                 reservationManager.add(reservationFields);
             } else {
                 reservationFields.put("id", String.valueOf(reservation.getId()));
                 reservationManager.edit(reservationFields);
             }
-        } catch (ManagerException e) {
+        } catch (ControllerException e) {
             e.printStackTrace();
         }
 

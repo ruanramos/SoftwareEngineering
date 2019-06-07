@@ -1,4 +1,4 @@
-package application.manager;
+package application.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import application.model.Car;
 
 @RunWith(MockitoJUnitRunner.class)
 class CarManagerTest {
-	CarManager subject;
+	CarController subject;
 
 	@Mock
 	CarDao mockDao;
@@ -24,7 +24,7 @@ class CarManagerTest {
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		
-		subject = new CarManager(mockDao);
+		subject = new CarController(mockDao);
 	}
 
 	@Test
@@ -32,7 +32,7 @@ class CarManagerTest {
 	}
 
 	@Test
-	void remove_ShouldCallDeleteOnCarDao() throws ManagerException {
+	void remove_ShouldCallDeleteOnCarDao() throws ControllerException {
 		Car car = new Car();
 		car.setId(42);
 
@@ -44,13 +44,13 @@ class CarManagerTest {
 	}
 	
 	@Test
-	void remove_ShouldNotTryToDeleteCarWithNoId() throws ManagerException {
+	void remove_ShouldNotTryToDeleteCarWithNoId() throws ControllerException {
 		Car car = new Car();
 		
 		try {
 			subject.remove(car);
 			fail("Expected an exception to be thrown");
-		} catch (ManagerException expected) {
+		} catch (ControllerException expected) {
 			// I was expecting an exception.
 		}
 		

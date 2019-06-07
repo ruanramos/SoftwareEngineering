@@ -1,8 +1,8 @@
 package application.view;
 
 import application.Main;
+import application.controller.CustomerController;
 import application.dbclass.CustomerDao;
-import application.manager.CustomerManager;
 import application.model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,7 +49,7 @@ public class CustomerSearchDialogController {
     private void handleSearchCustomer() {
         ObservableList<Customer> customerResult = FXCollections.observableArrayList();
         searchValue = searchTextField.getText();
-        CustomerManager customerManager = new CustomerManager();
+        CustomerController customerManager = new CustomerController();
 
         // TODO: e se não escolher nada?
         if (filterChoice.getValue().equals("CPF")) {

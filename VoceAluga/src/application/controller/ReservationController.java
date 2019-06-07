@@ -1,38 +1,38 @@
-package application.manager;
+package application.controller;
 
 import java.util.List;
 import java.util.Map;
 
-import application.dbclass.CarDao;
+import application.dbclass.ReservationDao;
 import application.dbclass.CustomerDao;
-import application.model.Car;
+import application.model.Reservation;
 
-public class CarManager {
-	private CarDao dao;
+public class ReservationController {
+	private ReservationDao dao;
 	
-	public CarManager(CarDao dao) {
+	public ReservationController(ReservationDao dao) {
 		this.dao = dao;
 	}
 	
-	public CarManager() {
-		this.dao = new CarDao();
+	public ReservationController() {
+		this.dao = new ReservationDao();
 	}
 	
-	public void add(Map<String, String> mapOfFields) throws ManagerException {
+	public void add(Map<String, String> mapOfFields) throws ControllerException {
 		try {
-			Form<Car> form = new Form<>(Car.class);
+			Form<Reservation> form = new Form<>(Reservation.class);
 			form.addInfo(mapOfFields);
-			validateCarFields(form);
+			validateReservationFields(form);
 			
-			Car car = new Car();
-			form.fillObjectAttributes(car);
+			Reservation reservation = new Reservation();
+			form.fillObjectAttributes(reservation);
 			
-			dao.insert(car);
+			dao.insert(reservation);
 		}
 		catch(RuntimeException e) {
 			String lowerCasedMessage = e.getMessage().toLowerCase();
 			if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("cpf")) {
-				throw new ManagerException("J� existe um cliente com este CPF");
+				throw new ControllerException("J� existe um cliente com este CPF");
 			}
 			else {
 				throw e;
@@ -40,33 +40,33 @@ public class CarManager {
 		}
 	}
 	
-	public void remove(Car car) throws ManagerException {
-		if (car.getId() == 0) {
-			throw new ManagerException("Car must have an ID to be deleted");
+	public void remove(Reservation reservation) throws ControllerException {
+		if (reservation.getId() == 0) {
+			throw new ControllerException("Reservation must have an ID to be deleted");
 		}
-		dao.delete(car);
+		dao.delete(reservation);
 	}
 	
-	public void edit(Map<String, String> mapOfFields) throws ManagerException {
-		Form<Car> form = new Form<>(Car.class);
+	public void edit(Map<String, String> mapOfFields) throws ControllerException {
+		Form<Reservation> form = new Form<>(Reservation.class);
 		form.addInfo(mapOfFields);
-		validateCarFields(form);
+		validateReservationFields(form);
 		
-		Car car = new Car();
-		form.fillObjectAttributes(car);
+		Reservation reservation = new Reservation();
+		form.fillObjectAttributes(reservation);
 
-		dao.insert(car);
+		dao.insert(reservation);
 	}
 
-	public <L extends List<Car>> void searchByModel(L list, String model) {
+	public <L extends List<Reservation>> void searchByModel(L list, String model) {
 		dao.selectToList(list, "where Modelo like '%" + model + "%'");
 	}
 
-	public <L extends List<Car>> void searchByGroup(L list, String group) {
+	public <L extends List<Reservation>> void searchByGroup(L list, String group) {
 		dao.selectToList(list, "where Classe like '%" + group + "%'");
 	}
 
-	private static void validateCarFields(Form<Car> form) throws ManagerException {
+	private static void validateReservationFields(Form<Reservation> form) throws ControllerException {
 		String errorMessage = "";
 
 	    if (!isModelValid(form.getAttribute("model"))) {
@@ -83,7 +83,7 @@ public class CarManager {
 	    }
 
 	    if (errorMessage.length() != 0) {
-	    	throw new ManagerException(errorMessage);
+	    	throw new ControllerException(errorMessage);
 	    }
 	}
 	
