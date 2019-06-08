@@ -11,47 +11,41 @@ import java.time.LocalDate;
 public class CustomerDao extends DefaultDao<Customer> {
 
     public CustomerDao() {
-        tableName = "Customer";
-        columnNames = "Cpf,FirstName,LastName,Cnh,Birthday,Cellphone";
+        tableName = "clientes";
+        columnNames = "cpf,nome,endereco,telefone,nascimento,validadecnh";
         interrogationMarks = "?,?,?,?,?,?"; //mesmo número de interrogações que de colunas em 'columnNames'
         formatForModifyingColumnsWhenUpdatingTableEntries =
-                "Cpf=?,FirstName=?,LastName=?,Cnh=?,Birthday=?,Cellphone=?";
+                "cpf=?,nome=?,endereco=?,telefone=?,nascimento=?,validadecnh=?";
     }
 
     protected void fillInsertStatement(PreparedStatement statement, Customer customer) throws SQLException {
         statement.setString(1, customer.getCpf());
-        statement.setString(2, customer.getFirstName());
-        statement.setString(3, customer.getLastName());
-        statement.setString(4, customer.getCnh());
-        statement.setDate(5, Date.valueOf(customer.getBirthday()));
-        statement.setString(6, customer.getCellphone());
+        statement.setString(2, customer.getNome());
+        statement.setString(3, customer.getEndereco());
+        statement.setString(4, customer.getTelefone());
+        statement.setDate(5, Date.valueOf(customer.getNascimento()));
+        statement.setDate(6, Date.valueOf(customer.getValidadecnh()));
     }
 
     protected void fillDeleteStatement(PreparedStatement statement, Customer customer) throws SQLException {
-        statement.setInt(1, customer.getId());
+    	statement.setString(1, "cpf");
+    	statement.setString(2, customer.getCpf());
     }
 
     protected void fillUpdateStatement(PreparedStatement statement, Customer customer) throws SQLException {
-        statement.setString(1, customer.getCpf());
-        statement.setString(2, customer.getFirstName());
-        statement.setString(3, customer.getLastName());
-        statement.setString(4, customer.getCnh());
-        statement.setDate(5, Date.valueOf(customer.getBirthday()));
-        statement.setString(6, customer.getCellphone());
-        statement.setString(7, String.valueOf(customer.getId()));
+    	fillInsertStatement(statement, customer);
     }
 
     protected Customer getObjectWithDbInformation(ResultSet set) throws SQLException{
         Customer customer = new Customer();
 
-        customer.setId(set.getInt("Id"));
-        customer.setCpf(set.getString("Cpf"));
-        customer.setFirstName(set.getString("FirstName"));
-        customer.setLastName(set.getString("LastName"));
-        customer.setCnh(set.getString("Cnh"));
-        customer.setBirthday(set.getDate("Birthday").toLocalDate());
-        customer.setCellphone(set.getString("Cellphone"));
-
+        customer.setCpf(set.getString("cpf"));
+        customer.setNome(set.getString("nome"));
+        customer.setEndereco(set.getString("endereco"));
+        customer.setTelefone(set.getString("telefone"));
+        customer.setNascimento(set.getDate("nascimento").toLocalDate());
+        customer.setValidadecnh(set.getDate("validadecnh").toLocalDate());
+        
         return customer;
     }
 }

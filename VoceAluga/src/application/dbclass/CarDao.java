@@ -8,40 +8,38 @@ import java.sql.SQLException;
 
 public class CarDao extends DefaultDao<Car> {
 	public CarDao() {
-        tableName = "Carro";
-        columnNames = "Modelo,Classe,Idade,Quilometragem";
-        interrogationMarks = "?,?,?,?"; //mesmo número de interrogações que de colunas em 'columnNames'
+        tableName = "carros";
+        columnNames = "placa,quilometragem,grupo,ano,modelo";
+        interrogationMarks = "?,?,?,?,?"; //mesmo número de interrogações que de colunas em 'columnNames'
         formatForModifyingColumnsWhenUpdatingTableEntries =
-                "Modelo=?,Classe=?,Idade=?,Quilometragem=?";
+                "placa=?,quilometragem=?,grupo=?,ano=?,modelo=?";
     }
 
     protected void fillInsertStatement(PreparedStatement statement, Car car) throws SQLException {
-        statement.setString(1, car.getModel());
-        statement.setString(2, car.getCategory());	//converte char para int
-        statement.setInt(3, car.getAge());
-        statement.setDouble(4, car.getMileage());
+        statement.setString(1, car.getPlaca());
+        statement.setDouble(2, car.getQuilometragem());
+        statement.setString(3, car.getGrupo());
+        statement.setInt(4, car.getAno());
+        statement.setString(5, car.getModelo());
     }
 
     protected void fillDeleteStatement(PreparedStatement statement, Car car) throws SQLException {
-        statement.setInt(1, car.getId());
+    	statement.setString(1, "placa");
+        statement.setString(2, car.getPlaca());
     }
 
     protected void fillUpdateStatement(PreparedStatement statement, Car car) throws SQLException {
-    	statement.setString(1, car.getModel());
-        statement.setString(2, car.getCategory());	//converte char para int
-        statement.setInt(3, car.getAge());
-        statement.setDouble(4, car.getMileage());
-        statement.setInt(5, car.getId());
+    	fillInsertStatement(statement, car);
     }
 
     protected Car getObjectWithDbInformation(ResultSet set) throws SQLException{
         Car car = new Car();
 
-        car.setId(set.getInt("Id"));
-        car.setModel(set.getString("Modelo"));
-        car.setCategory(set.getString("Classe"));
-        car.setAge(set.getInt("Idade"));
-        car.setMileage(set.getDouble("Quilometragem"));
+        car.setPlaca(set.getString("placa"));
+        car.setQuilometragem(set.getDouble("quilometragem"));
+        car.setGrupo(set.getString("grupo"));
+        car.setAno(set.getInt("ano"));
+        car.setModelo(set.getString("modelo"));
 
         return car;
     }

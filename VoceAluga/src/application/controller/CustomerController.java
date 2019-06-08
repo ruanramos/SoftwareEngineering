@@ -3,7 +3,6 @@ package application.controller;
 import application.dbclass.CustomerDao;
 import application.model.Customer;
 import application.util.DateUtil;
-import javafx.scene.control.Alert;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class CustomerController {
 		catch(RuntimeException e) {
 			String lowerCasedMessage = e.getMessage().toLowerCase();
 			if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("cpf")) {
-				throw new ControllerException("J� existe um cliente com este CPF");
+				throw new ControllerException("Ja existe um cliente com este cpf");
 			}
 			else {
 				throw e;
@@ -53,15 +52,11 @@ public class CustomerController {
 	}
 
 	public <L extends List<Customer>> void searchByCpf(L list, String cpf) {
-		dao.selectToList(list, "where Cpf like '%" + cpf + "%'");
+		dao.selectToList(list, "where cpf like '%" + cpf + "%'");
 	}
 
-	public <L extends List<Customer>> void searchByFirstName(L list, String name) {
-		dao.selectToList(list, "where FirstName like '%" + name + "%'");
-	}
-
-	public <L extends List<Customer>> void searchByLastName(L list, String name) {
-		dao.selectToList(list, "where LastName like '%" + name + "%'");
+	public <L extends List<Customer>> void searchByNome(L list, String name) {
+		dao.selectToList(list, "where nome like '%" + name + "%'");
 	}
 
 	public <L extends List<Customer>> void searchAll(L list) {
@@ -71,30 +66,32 @@ public class CustomerController {
 	private static void validateCustomerFields(Form<Customer> form) throws ControllerException {
 		String errorMessage = "";
 
-		if (!isNameValid(form.getAttribute("firstName"))) {
-			errorMessage += "Nome inv�lido.\n";
-		}
-
-		if (!isNameValid(form.getAttribute("lastName"))) {
-			errorMessage += "Sobrenome inv�lido.\n";
-		}
-
 		if (!isCpfValid(form.getAttribute("cpf"))) {
 			errorMessage += "CPF inv�lido.\n";
 		}
-
-		if (!isCnhValid(form.getAttribute("cnh"))) {
-			errorMessage += "CNH inv�lida.\n";
+		
+		if (!isNameValid(form.getAttribute("nome"))) {
+			errorMessage += "Nome inv�lido.\n";
 		}
-
-		if (!isBirthdayValid(form.getAttribute("birthday"))) {
+		
+		if (!isAddressValid(form.getAttribute("endereco"))) {
+			errorMessage += "Endereco invalido.\n";
+		}
+		
+		if (!isCellphoneValid(form.getAttribute("telefone"))) {
+			errorMessage += "Numero de telefone invalido.\n";
+		}
+		
+		if (!isBirthdayValid(form.getAttribute("nascimento"))) {
 			errorMessage += "Data de nascimento inv�lida!\n";
 		}
-
-		if (!isCellphoneValid(form.getAttribute("cellphone"))) {
-			errorMessage += "N�mero de celular inv�lido.\n";
+		
+		if (!isCnhExpiration(form.getAttribute("validadecnh"))) {
+			errorMessage += "Validade da CNH inv�lida!\n";
 		}
-
+		
+		
+		
 		if (errorMessage.length() != 0) {
 			throw new ControllerException(errorMessage);
 		}
@@ -108,17 +105,10 @@ public class CustomerController {
 		return (cpf != null && cpf.matches("\\d{11}"));
 	}
 
-	//private static boolean isRgValid(String rg) {
-//	        return (rg != null && rg.matches("\\d{9}"));
-	//}
 
-	private static boolean isCnhValid(String cnh) {
-		return (cnh != null && cnh.matches("\\d{10}"));
+	private static boolean isAddressValid(String address) {
+		return (address != null && address.length() > 0);
 	}
-
-	//private static boolean isAddressValid(String address) {
-//	        return (address != null && address.length() > 0);
-	//}
 
 	// Celular é valido se tiver pelo menos 8 algarismos
 	private static boolean isCellphoneValid(String cellphone) {
@@ -127,5 +117,9 @@ public class CustomerController {
 
 	private static boolean isBirthdayValid(String birthday) {
 		return (birthday != null);
+	}
+	
+	private static boolean isCnhExpiration(String cnh) {
+		return (cnh != null);
 	}
 }

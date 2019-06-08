@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import application.dbclass.CarDao;
-import application.dbclass.CustomerDao;
 import application.model.Car;
 
 public class CarController {
@@ -31,8 +30,8 @@ public class CarController {
 		}
 		catch(RuntimeException e) {
 			String lowerCasedMessage = e.getMessage().toLowerCase();
-			if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("cpf")) {
-				throw new ControllerException("J� existe um cliente com este CPF");
+			if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("placa")) {
+				throw new ControllerException("Ja existe um carro com esta placa");
 			}
 			else {
 				throw e;
@@ -41,8 +40,8 @@ public class CarController {
 	}
 	
 	public void remove(Car car) throws ControllerException {
-		if (car.getId() == 0) {
-			throw new ControllerException("Car must have an ID to be deleted");
+		if (car.getPlaca() == "") {
+			throw new ControllerException("Carro precisa de placa para ser deletado");
 		}
 		dao.delete(car);
 	}
@@ -58,43 +57,54 @@ public class CarController {
 		dao.insert(car);
 	}
 
-	public <L extends List<Car>> void searchByModel(L list, String model) {
-		dao.selectToList(list, "where Modelo like '%" + model + "%'");
+	public <L extends List<Car>> void searchByModelo(L list, String modelo) {
+		dao.selectToList(list, "where modelo like '%" + modelo + "%'");
 	}
 
-	public <L extends List<Car>> void searchByGroup(L list, String group) {
-		dao.selectToList(list, "where Classe like '%" + group + "%'");
+	public <L extends List<Car>> void searchByGrupo(L list, String grupo) {
+		dao.selectToList(list, "where grupo like '%" + grupo + "%'");
+	}
+	
+	public <L extends List<Car>> void searchByPlaca(L list, String placa) {
+		dao.selectToList(list, "where placa like '%" + placa + "%'");
 	}
 
 	private static void validateCarFields(Form<Car> form) throws ControllerException {
 		String errorMessage = "";
-
-	    if (!isModelValid(form.getAttribute("model"))) {
-	    	errorMessage += "Modelo inv�lido.\n";
+		
+		if (!isPlateValid(form.getAttribute("placa"))) {
+	    	errorMessage += "Placa inv�lida.\n";
 	    }
-	    if (!isCategoryValid(form.getAttribute("category"))) {
-	    	errorMessage += "Categoria inv�lida.\n";
-	    }
-	    if (!isAgeValid(form.getAttribute("age"))) {
-	    	errorMessage += "Idade inv�lida.\n";
-	    }
-	    if (!isMileageValid(form.getAttribute("mileage"))) {
+		if (!isMileageValid(form.getAttribute("quilometragem"))) {
 	    	errorMessage += "Quilometragem inv�lida.\n";
 	    }
-
+		if (!isGroupValid(form.getAttribute("grupo"))) {
+	    	errorMessage += "Grupo inv�lido.\n";
+	    }
+		if (!isYearValid(form.getAttribute("ano"))) {
+	    	errorMessage += "Ano inv�lida.\n";
+	    }
+	    if (!isModelValid(form.getAttribute("modelo"))) {
+	    	errorMessage += "Modelo inv�lido.\n";
+	    }
+	    
 	    if (errorMessage.length() != 0) {
 	    	throw new ControllerException(errorMessage);
 	    }
+	}
+	
+	private static boolean isPlateValid(String plate) {
+		return (plate != null && plate.matches("[A-Z]{3}\\d{4}|[A-Z]{3}\\d[A-Z]\\d{2}"));
 	}
 	
 	private static boolean isModelValid(String model) {
 		return (model != null && model.length() > 0);
 	}
 	
-	private static boolean isCategoryValid(String category) {
-		return (category != null && category.length() > 0);
+	private static boolean isGroupValid(String group) {
+		return (group != null && group.length() > 0);
 	}
-	private static boolean isAgeValid(String age) {
+	private static boolean isYearValid(String age) {
 		return (age != null && age.matches("\\d+"));
 	}
 	private static boolean isMileageValid(String mileage) {

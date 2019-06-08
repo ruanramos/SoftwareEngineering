@@ -10,59 +10,22 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Customer {
-	private IntegerProperty id;
-	private StringProperty firstName;
-	private StringProperty lastName;
 	private StringProperty cpf;
-	private StringProperty cnh;
-	private ObjectProperty<LocalDate> birthday;
-	private StringProperty cellphone;
+	private StringProperty nome;
+	private StringProperty endereco;
+	private StringProperty telefone;
+	private ObjectProperty<LocalDate> nascimento;
+	private ObjectProperty<LocalDate> validadecnh;
 
 	public Customer() {
-		this.firstName = new SimpleStringProperty("");
-		this.lastName = new SimpleStringProperty("");
-		this.id = new SimpleIntegerProperty(0);
 		this.cpf = new SimpleStringProperty("");
-		this.cnh = new SimpleStringProperty("");
-		this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1970,1,1));
-		this.cellphone = new SimpleStringProperty("");
+		this.nome = new SimpleStringProperty("");
+		this.endereco = new SimpleStringProperty("");
+		this.telefone = new SimpleStringProperty("");
+		this.nascimento = new SimpleObjectProperty<LocalDate>(LocalDate.of(1970,1,1));
+		this.validadecnh = new SimpleObjectProperty<LocalDate>(LocalDate.of(1970,1,1));
 	}
 
-	public int getId() {
-		return id.get();
-	}
-
-	public IntegerProperty idProperty() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id.set(id);
-	}
-
-	public String getFirstName() {
-		return firstName.get();
-	}
-
-	public StringProperty firstNameProperty() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName.set(firstName);
-	}
-
-	public String getLastName() {
-		return lastName.get();
-	}
-
-	public StringProperty lastNameProperty() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName.set(lastName);
-	}
 
 	public String getCpf() {
 		return cpf.get();
@@ -75,40 +38,64 @@ public class Customer {
 	public void setCpf(String cpf) {
 		this.cpf.set(cpf);
 	}
-
-	public String getCnh() {
-		return cnh.get();
+	
+	public String getNome() {
+		return nome.get();
 	}
 
-	public StringProperty cnhProperty() {
-		return cnh;
+	public StringProperty nomeProperty() {
+		return nome;
 	}
 
-	public void setCnh(String cnh) {
-		this.cnh.set(cnh);
+	public void setNome(String nome) {
+		this.nome.set(nome);
 	}
 
-	public LocalDate getBirthday() {
-		return birthday.get();
+	public String getEndereco() {
+		return endereco.get();
 	}
 
-	public ObjectProperty<LocalDate> birthdayProperty() {
-		return birthday;
+	public StringProperty enderecoProperty() {
+		return endereco;
+	}
+	
+	public void setEndereco(String endereco) {
+		this.endereco.set(endereco);
 	}
 
-	public void setBirthday(LocalDate birthday) {
-		this.birthday.set(birthday);
+	public String getTelefone() {
+		return telefone.get();
 	}
 
-	public String getCellphone() {
-		return cellphone.get();
+	public StringProperty telefoneProperty() {
+		return telefone;
 	}
 
-	public StringProperty cellphoneProperty() {
-		return cellphone;
+	public void setTelefone(String telefone) {
+		this.telefone.set(telefone);
+	}
+	
+	public LocalDate getNascimento() {
+		return nascimento.get();
 	}
 
-	public void setCellphone(String cellphone) {
-		this.cellphone.set(cellphone);
+	public ObjectProperty<LocalDate> nascimentoProperty() {
+		return nascimento;
+	}
+
+	public void setNascimento(LocalDate nascimento) {
+		this.nascimento.set(nascimento);
+	}
+	
+	public LocalDate getValidadecnh() {
+		return validadecnh.get();
+	}
+
+	public ObjectProperty<LocalDate> validadecnhProperty() {
+		return validadecnh;
+	}
+
+	public void setValidadecnh(LocalDate validadecnh) {
+		this.validadecnh.set(validadecnh);
 	}
 }

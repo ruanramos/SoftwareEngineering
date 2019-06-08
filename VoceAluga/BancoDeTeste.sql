@@ -41,7 +41,7 @@ idcliente varchar(11) not null,
 data date,
 grupo varchar(1),
 modelo varchar(20),
-duracao int,
+duracaodias int,
 primary key(id),
 foreign key(idcliente) references clientes(cpf)
 )default charset utf8;

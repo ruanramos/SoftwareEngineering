@@ -33,7 +33,7 @@ public abstract class DefaultDao<T> {
 	//remove pelo id
 	public void delete(T object) {
 		
-		String sqlCommandFormat = String.format("delete from %s where %s.Id=?", tableName, tableName);
+		String sqlCommandFormat = String.format("delete from %s where %s.?=?", tableName, tableName);
 		
 		try (Connection dbConnection = ConexaoBD.getConexaoBD()){
 			

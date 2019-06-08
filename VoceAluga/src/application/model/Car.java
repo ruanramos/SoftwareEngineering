@@ -3,77 +3,78 @@ package application.model;
 import javafx.beans.property.*;
 
 public class Car {
-	private IntegerProperty id;
-	private StringProperty model;
-	private StringProperty category;
-	private IntegerProperty age;
-	private DoubleProperty mileage;
+	private StringProperty placa;
+	private DoubleProperty quilometragem;
+	private StringProperty grupo;
+	private IntegerProperty ano;
+	private StringProperty modelo;
 
 	public Car() {
-		this.id = new SimpleIntegerProperty();
-		this.model = new SimpleStringProperty("");
-		this.category = new SimpleStringProperty("");
-		this.age = new SimpleIntegerProperty(0);
-		this.mileage = new SimpleDoubleProperty(0.0);
+		this.placa = new SimpleStringProperty("");
+		this.quilometragem = new SimpleDoubleProperty(0.0);
+		this.grupo = new SimpleStringProperty("");
+		this.ano = new SimpleIntegerProperty(0);
+		this.modelo = new SimpleStringProperty("");
 	}
 
-	public int getId() {
-		return id.get();
+	public String getPlaca() {
+		return placa.get();
 	}
 
-	public IntegerProperty idProperty() {
-		return id;
+	public StringProperty placaProperty() {
+		return placa;
 	}
 
-	public void setId(int id) {
-		this.id.set(id);
+	public void setPlaca(String placa) {
+		this.placa.set(placa);
+	}
+	
+	public double getQuilometragem() {
+		return quilometragem.get();
 	}
 
-	public String getModel() {
-		return model.get();
+	public DoubleProperty quilometragemProperty() {
+		return quilometragem;
 	}
 
-	public StringProperty modelProperty() {
-		return model;
+	public void setQuilometragem(double quilometragem) {
+		this.quilometragem.set(quilometragem);
+	}
+	
+	public String getGrupo() {
+		return grupo.get();
 	}
 
-	public void setModel(String model) {
-		this.model.set(model);
+	public StringProperty grupoProperty() {
+		return grupo;
 	}
 
-	public String getCategory() {
-		return category.get();
+	public void setGrupo(String grupo) {
+		this.grupo.set(grupo);
+	}
+	
+	public int getAno() {
+		return ano.get();
 	}
 
-	public StringProperty categoryProperty() {
-		return category;
+	public IntegerProperty anoProperty() {
+		return ano;
 	}
 
-	public void setCategory(String category) {
-		this.category.set(category);
+	public void setAno(int ano) {
+		this.ano.set(ano);
+	}
+	
+	public String getModelo() {
+		return modelo.get();
 	}
 
-	public int getAge() {
-		return age.get();
+	public StringProperty modeloProperty() {
+		return modelo;
 	}
 
-	public IntegerProperty ageProperty() {
-		return age;
+	public void setModelo(String modelo) {
+		this.modelo.set(modelo);
 	}
 
-	public void setAge(int age) {
-		this.age.set(age);
-	}
-
-	public double getMileage() {
-		return mileage.get();
-	}
-
-	public DoubleProperty mileageProperty() {
-		return mileage;
-	}
-
-	public void setMileage(double mileage) {
-		this.mileage.set(mileage);
-	}
 }
