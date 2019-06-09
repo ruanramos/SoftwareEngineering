@@ -25,9 +25,9 @@ public class CustomerSearchDialogController {
     @FXML
     private TableColumn<Customer, String> cpfColumn;
     @FXML
-    private TableColumn<Customer, String> firstNameColumn;
+    private TableColumn<Customer, String> nomeColumn;
     @FXML
-    private TableColumn<Customer, String> lastNameColumn;
+    private TableColumn<Customer, String> telefoneColumn;
 
     private Main main;
     private String filter = "";
@@ -35,14 +35,14 @@ public class CustomerSearchDialogController {
 
     @FXML
     private void initialize() {
-        filterChoice.getItems().addAll("CPF", "Nome", "Sobrenome");
+        filterChoice.getItems().addAll("CPF", "Nome", "Telefone");
         filterChoice.setValue("CPF");
 
         customerTable.setPlaceholder(new Label("Nenhum cliente encontrado."));
 
         cpfColumn.setCellValueFactory(cellData -> cellData.getValue().cpfProperty());
-        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        nomeColumn.setCellValueFactory(cellData -> cellData.getValue().nomeProperty());
+        telefoneColumn.setCellValueFactory(cellData -> cellData.getValue().telefoneProperty());
     }
 
     @FXML
@@ -55,9 +55,9 @@ public class CustomerSearchDialogController {
         if (filterChoice.getValue().equals("CPF")) {
             customerManager.searchByCpf(customerResult, searchValue);
         } else if (filterChoice.getValue().equals("Nome")) {
-            customerManager.searchByFirstName(customerResult, searchValue);
-        } else if (filterChoice.getValue().equals("Sobrenome")) {
-            customerManager.searchByLastName(customerResult, searchValue);
+            customerManager.searchByNome(customerResult, searchValue);
+        } else if (filterChoice.getValue().equals("Telefone")) {
+//            customerManager.searchByLastName(customerResult, searchValue);
         }
 
         customerTable.setItems(customerResult);

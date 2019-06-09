@@ -22,11 +22,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
-<children><Label text="Codigo" /><TextField fx:id="idField" GridPane.columnIndex="1" /><Label text="Modelo" GridPane.rowIndex="1" /><Label text="Categoria" GridPane.rowIndex="2" /><TextField fx:id="modelField" GridPane.columnIndex="1" GridPane.rowIndex="1" /><TextField fx:id="categoryField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Idade" GridPane.rowIndex="3" />
+<children><Label text="Placa" /><TextField fx:id="placaField" GridPane.columnIndex="1" /><Label text="Modelo" GridPane.rowIndex="1" /><Label text="Grupo" GridPane.rowIndex="2" /><TextField fx:id="modeloField" GridPane.columnIndex="1" GridPane.rowIndex="1" /><TextField fx:id="grupoField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Ano" GridPane.rowIndex="3" />
             <Label text="Quilometragem" GridPane.rowIndex="4" />
-            <TextField fx:id="ageField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="mileageField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="anoField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="quilometragemField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 </children>
 </GridPane>
 <HBox layoutX="197.1875" layoutY="241.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">

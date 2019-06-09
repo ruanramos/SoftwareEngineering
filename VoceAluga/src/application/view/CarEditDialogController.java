@@ -2,7 +2,6 @@ package application.view;
 
 import application.controller.CarController;
 import application.controller.ControllerException;
-import application.dbclass.CarDao;
 import application.model.Car;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -17,23 +16,23 @@ public class CarEditDialogController {
     @FXML
     Node rootNode;
     @FXML
-    TextField idField;
+    TextField placaField;
     @FXML
-    TextField modelField;
+    TextField modeloField;
     @FXML
-    TextField categoryField;
+    TextField grupoField;
+    // TODO: transformar no em um drop down
     @FXML
-    TextField ageField;
+    TextField anoField;
     @FXML
-    TextField mileageField;
+    TextField quilometragemField;
 
     private Car car;
     private boolean newEntryFlag;
 
     @FXML
     public void initialize() {
-        // bloqueia edição do id
-        idField.setDisable(true);
+
     }
 
     public void setNewEntryFlag(boolean newEntryFlag) {
@@ -43,28 +42,29 @@ public class CarEditDialogController {
 
     public void setCar(Car car) {
         this.car = car;
-        idField.setText(String.valueOf(car.getId()));
-        modelField.setText(car.getModel());
-        categoryField.setText(car.getCategory());
-        ageField.setText(String.valueOf(car.getAge()));
-        mileageField.setText(String.valueOf(car.getMileage()));
+        placaField.setText(String.valueOf(car.getPlaca()));
+        modeloField.setText(car.getModelo());
+        grupoField.setText(car.getGrupo());
+        anoField.setText(String.valueOf(car.getAno()));
+        quilometragemField.setText(String.valueOf(car.getQuilometragem()));
     }
 
     @FXML
     private void handleOk() {
         Map<String, String> carFields = new HashMap<>();
-        carFields.put("model", modelField.getText());
-        carFields.put("category", categoryField.getText());
-        carFields.put("age", ageField.getText());
-        carFields.put("mileage", mileageField.getText());
+        carFields.put("placa", placaField.getText());
+        carFields.put("modelo", modeloField.getText());
+        carFields.put("grupo", grupoField.getText());
+        carFields.put("ano", anoField.getText());
+        carFields.put("quilometragem", quilometragemField.getText());
 
         try {
             CarController carManager = new CarController();
             if (newEntryFlag) {
                 carManager.add(carFields);
             } else {
-                carFields.put("id", String.valueOf(car.getId()));
-                carManager.edit(carFields);
+//                carFields.put("id", String.valueOf(car.getId()));
+//                carManager.edit(carFields);
             }
         } catch (ControllerException e) {
             e.printStackTrace();

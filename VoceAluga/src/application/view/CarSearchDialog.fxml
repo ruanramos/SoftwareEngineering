@@ -24,9 +24,9 @@
                <children>
                   <TableView fx:id="carTable" layoutX="199.0" layoutY="41.0" prefHeight="314.0" prefWidth="598.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="Codigo" />
-                      <TableColumn fx:id="modelColumn" prefWidth="75.0" text="Modelo" />
-                        <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Categoria" />
+                      <TableColumn fx:id="placaColumn" prefWidth="75.0" text="Codigo" />
+                      <TableColumn fx:id="modeloColumn" prefWidth="75.0" text="Modelo" />
+                        <TableColumn fx:id="grupoColumn" prefWidth="75.0" text="Categoria" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

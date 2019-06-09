@@ -22,25 +22,25 @@ public class CarSearchDialogController {
     @FXML
     private TableView<Car> carTable;
     @FXML
-    private TableColumn<Car, Number> idColumn;
+    private TableColumn<Car, String> placaColumn;
     @FXML
-    private TableColumn<Car, String> modelColumn;
+    private TableColumn<Car, String> modeloColumn;
     @FXML
-    private TableColumn<Car, String> categoryColumn;
+    private TableColumn<Car, String> grupoColumn;
 
     private String filter = "";
     private String searchValue = "";
 
     @FXML
     private void initialize() {
-        filterChoice.getItems().addAll("Modelo", "Grupo");
+        filterChoice.getItems().addAll("Placa", "Modelo", "Grupo");
         filterChoice.setValue("Grupo");
 
         carTable.setPlaceholder(new Label("Nenhum veículo encontrado."));
 
-        idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-        modelColumn.setCellValueFactory(cellData -> cellData.getValue().modelProperty());
-        categoryColumn.setCellValueFactory(cellData -> cellData.getValue().categoryProperty());
+        placaColumn.setCellValueFactory(cellData -> cellData.getValue().placaProperty());
+        modeloColumn.setCellValueFactory(cellData -> cellData.getValue().modeloProperty());
+        grupoColumn.setCellValueFactory(cellData -> cellData.getValue().grupoProperty());
     }
 
     @FXML
@@ -50,10 +50,12 @@ public class CarSearchDialogController {
         CarController carManager = new CarController();
 
         // TODO: e se não escolher nada?
-        if (filterChoice.getValue().equals("Modelo")) {
-            carManager.searchByModel(carResult, searchValue);
+        if (filterChoice.getValue().equals("Placa")) {
+            carManager.searchByPlaca(carResult, searchValue);
+        } else if (filterChoice.getValue().equals("Modelo")) {
+            carManager.searchByModelo(carResult, searchValue);
         } else if (filterChoice.getValue().equals("Grupo")) {
-            carManager.searchByGroup(carResult, searchValue);
+            carManager.searchByGrupo(carResult, searchValue);
         }
 
         carTable.setItems(carResult);

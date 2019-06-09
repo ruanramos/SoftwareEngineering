@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,24 +20,36 @@ public class CustomerEditDialogController {
     @FXML
     private Node rootNode;
     @FXML
-    private TextField firstNameField;
+    private TextField nomeField;
     @FXML
-    private TextField lastNameField;
+    private TextField enderecoField;
+    @FXML
+    private TextField telefoneField;
     @FXML
     private TextField cpfField;
     @FXML
-    private TextField cnhField;
+    private DatePicker nascimentoPicker;
     @FXML
-    private DatePicker birthdayPicker;
-    @FXML
-    private TextField cellphoneField;
+    private DatePicker cnhPicker;
 
     private Customer customer;
     private boolean newEntryFlag;
 
     @FXML
     public void initialize() {
-        birthdayPicker.setConverter(new StringConverter<LocalDate>() {
+        nascimentoPicker.setConverter(new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                return DateUtil.format(date);
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                return DateUtil.parse(string);
+            }
+        });
+
+        cnhPicker.setConverter(new StringConverter<LocalDate>() {
             @Override
             public String toString(LocalDate date) {
                 return DateUtil.format(date);
@@ -58,23 +69,19 @@ public class CustomerEditDialogController {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-        firstNameField.setText(customer.getFirstName());
-        lastNameField.setText(customer.getLastName());
-        cpfField.setText(customer.getCpf());
-        cnhField.setText(customer.getCnh());
-        birthdayPicker.setValue(customer.getBirthday());
-        cellphoneField.setText(customer.getCellphone());
+
     }
 
     @FXML
     private void handleOk() {
         Map<String,String> customerFields = new HashMap<>();
-        customerFields.put("firstName", firstNameField.getText());
-        customerFields.put("lastName", lastNameField.getText());
         customerFields.put("cpf", cpfField.getText());
-        customerFields.put("cnh", cnhField.getText());
-        customerFields.put("birthday", birthdayPicker.getValue().toString());
-        customerFields.put("cellphone", cellphoneField.getText());
+        customerFields.put("nome", nomeField.getText());
+        customerFields.put("endereco", enderecoField.getText());
+        customerFields.put("telefone", telefoneField.getText());
+        customerFields.put("cnh", cnhPicker.getValue().toString());
+        customerFields.put("nascimento", nascimentoPicker.getValue().toString());
+
 
         try {
             CustomerController customerManager = new CustomerController();
@@ -82,8 +89,8 @@ public class CustomerEditDialogController {
             if (newEntryFlag) {
                 customerManager.add(customerFields);
             } else {
-                customerFields.put("id", String.valueOf(customer.getId()));
-                customerManager.edit(customerFields);
+//                customerFields.put("id", String.valueOf(customer.getId()));
+//                customerManager.edit(customerFields);
             }
         } catch (ControllerException e) {
             e.printStackTrace();
