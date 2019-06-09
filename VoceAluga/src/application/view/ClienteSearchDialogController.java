@@ -1,9 +1,9 @@
 package application.view;
 
 import application.Main;
-import application.controller.CustomerController;
-import application.dbclass.CustomerDao;
-import application.model.Customer;
+import application.controller.ClienteController;
+import application.dbclass.ClienteDao;
+import application.model.Cliente;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,20 +14,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CustomerSearchDialogController {
+public class ClienteSearchDialogController {
 
     @FXML
     private ChoiceBox<String> filterChoice;
     @FXML
     private TextField searchTextField;
     @FXML
-    private TableView<Customer> customerTable;
+    private TableView<Cliente> clienteTable;
     @FXML
-    private TableColumn<Customer, String> cpfColumn;
+    private TableColumn<Cliente, String> cpfColumn;
     @FXML
-    private TableColumn<Customer, String> nomeColumn;
+    private TableColumn<Cliente, String> nomeColumn;
     @FXML
-    private TableColumn<Customer, String> telefoneColumn;
+    private TableColumn<Cliente, String> telefoneColumn;
 
     private Main main;
     private String filter = "";
@@ -38,7 +38,7 @@ public class CustomerSearchDialogController {
         filterChoice.getItems().addAll("CPF", "Nome", "Telefone");
         filterChoice.setValue("CPF");
 
-        customerTable.setPlaceholder(new Label("Nenhum cliente encontrado."));
+        clienteTable.setPlaceholder(new Label("Nenhum cliente encontrado."));
 
         cpfColumn.setCellValueFactory(cellData -> cellData.getValue().cpfProperty());
         nomeColumn.setCellValueFactory(cellData -> cellData.getValue().nomeProperty());
@@ -47,27 +47,27 @@ public class CustomerSearchDialogController {
 
     @FXML
     private void handleSearchCustomer() {
-        ObservableList<Customer> customerResult = FXCollections.observableArrayList();
+        ObservableList<Cliente> clienteResult = FXCollections.observableArrayList();
         searchValue = searchTextField.getText();
-        CustomerController customerManager = new CustomerController();
+        ClienteController clienteController = new ClienteController();
 
         // TODO: e se não escolher nada?
         if (filterChoice.getValue().equals("CPF")) {
-            customerManager.searchByCpf(customerResult, searchValue);
+            clienteController.searchByCpf(clienteResult, searchValue);
         } else if (filterChoice.getValue().equals("Nome")) {
-            customerManager.searchByNome(customerResult, searchValue);
+            clienteController.searchByNome(clienteResult, searchValue);
         } else if (filterChoice.getValue().equals("Telefone")) {
-//            customerManager.searchByLastName(customerResult, searchValue);
+//            clienteController.searchByLastName(clienteResult, searchValue);
         }
 
-        customerTable.setItems(customerResult);
+        clienteTable.setItems(clienteResult);
      }
 
     @FXML
     private void handleEditCustomer() throws IOException {
-        Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+        Cliente selectedCliente = clienteTable.getSelectionModel().getSelectedItem();
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CustomerEditDialog.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ClienteEditDialog.fxml"));
 
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
@@ -75,22 +75,23 @@ public class CustomerSearchDialogController {
 //        stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
 
-        CustomerEditDialogController controller = loader.getController();
+        ClienteEditDialogController controller = loader.getController();
         controller.setNewEntryFlag(false);
-        controller.setCustomer(selectedCustomer);
+        controller.setCliente(selectedCliente);
 
         stage.showAndWait();
     }
 
     @FXML
     private void handleDeleteCustomer() {
-        int selectedIndex = customerTable.getSelectionModel().getSelectedIndex();
+        int selectedIndex = clienteTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            Customer selectedCustomer = customerTable.getItems().get(selectedIndex);
-            customerTable.getItems().remove(selectedIndex);
+            Cliente selectedCliente = clienteTable.getItems().get(selectedIndex);
+            clienteTable.getItems().remove(selectedIndex);
 
-            CustomerDao customerDao = new CustomerDao();
-            customerDao.delete(selectedCustomer);
+            // TODO: não usar o DAO diretamente
+            ClienteDao clienteDao = new ClienteDao();
+            clienteDao.delete(selectedCliente);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Nenhuma seleção");

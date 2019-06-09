@@ -1,9 +1,9 @@
 package application.view;
 
 import application.Main;
-import application.controller.CarController;
-import application.dbclass.CarDao;
-import application.model.Car;
+import application.controller.CarroController;
+import application.dbclass.CarroDao;
+import application.model.Carro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,19 +14,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CarSearchDialogController {
+public class CarroSearchDialogController {
     @FXML
     private ChoiceBox<String> filterChoice;
     @FXML
     private TextField searchTextField;
     @FXML
-    private TableView<Car> carTable;
+    private TableView<Carro> carroTable;
     @FXML
-    private TableColumn<Car, String> placaColumn;
+    private TableColumn<Carro, String> placaColumn;
     @FXML
-    private TableColumn<Car, String> modeloColumn;
+    private TableColumn<Carro, String> modeloColumn;
     @FXML
-    private TableColumn<Car, String> grupoColumn;
+    private TableColumn<Carro, String> grupoColumn;
 
     private String filter = "";
     private String searchValue = "";
@@ -36,7 +36,7 @@ public class CarSearchDialogController {
         filterChoice.getItems().addAll("Placa", "Modelo", "Grupo");
         filterChoice.setValue("Grupo");
 
-        carTable.setPlaceholder(new Label("Nenhum veículo encontrado."));
+        carroTable.setPlaceholder(new Label("Nenhum veículo encontrado."));
 
         placaColumn.setCellValueFactory(cellData -> cellData.getValue().placaProperty());
         modeloColumn.setCellValueFactory(cellData -> cellData.getValue().modeloProperty());
@@ -45,49 +45,50 @@ public class CarSearchDialogController {
 
     @FXML
     private void handleSearchCar() {
-        ObservableList<Car> carResult = FXCollections.observableArrayList();
+        ObservableList<Carro> carroResult = FXCollections.observableArrayList();
         searchValue = searchTextField.getText();
-        CarController carManager = new CarController();
+        CarroController carroController = new CarroController();
 
         // TODO: e se não escolher nada?
         if (filterChoice.getValue().equals("Placa")) {
-            carManager.searchByPlaca(carResult, searchValue);
+            carroController.searchByPlaca(carroResult, searchValue);
         } else if (filterChoice.getValue().equals("Modelo")) {
-            carManager.searchByModelo(carResult, searchValue);
+            carroController.searchByModelo(carroResult, searchValue);
         } else if (filterChoice.getValue().equals("Grupo")) {
-            carManager.searchByGrupo(carResult, searchValue);
+            carroController.searchByGrupo(carroResult, searchValue);
         }
 
-        carTable.setItems(carResult);
+        carroTable.setItems(carroResult);
     }
 
     @FXML
     private void handleEditCar() throws IOException {
-        Car selectedCar = carTable.getSelectionModel().getSelectedItem();
+        Carro selectedCarro = carroTable.getSelectionModel().getSelectedItem();
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CarEditDialog.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CarroEditDialog.fxml"));
 
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
         stage.setTitle("Editar carro");
         stage.setScene(scene);
 
-        CarEditDialogController controller = loader.getController();
+        CarroEditDialogController controller = loader.getController();
         controller.setNewEntryFlag(false);
-        controller.setCar(selectedCar);
+        controller.setCarro(selectedCarro);
 
         stage.showAndWait();
     }
 
     @FXML
     private void handleDeleteCar() {
-        int selectedIndex = carTable.getSelectionModel().getSelectedIndex();
+        int selectedIndex = carroTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            Car selectedCar = carTable.getItems().get(selectedIndex);
-            carTable.getItems().remove(selectedIndex);
+            Carro selectedCarro = carroTable.getItems().get(selectedIndex);
+            carroTable.getItems().remove(selectedIndex);
 
-            CarDao carDao = new CarDao();
-            carDao.delete(selectedCar);
+            // TODO: não usar o DAO diretamente
+            CarroDao carroDao = new CarroDao();
+            carroDao.delete(selectedCarro);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Nenhuma seleção");

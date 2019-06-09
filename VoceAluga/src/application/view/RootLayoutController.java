@@ -18,8 +18,8 @@ public class RootLayoutController {
     }
 
     @FXML
-    private void handleSearchCustomer() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CustomerSearchDialog.fxml"));
+    private void handleSearchCliente() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ClienteSearchDialog.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
         stage.setTitle("Buscar cliente");
@@ -29,8 +29,8 @@ public class RootLayoutController {
     }
 
     @FXML
-    private void handleNewCustomer() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CustomerEditDialog.fxml"));
+    private void handleNewCliente() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ClienteEditDialog.fxml"));
 
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
@@ -38,15 +38,15 @@ public class RootLayoutController {
 //        stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
 
-        CustomerEditDialogController controller = loader.getController();
+        ClienteEditDialogController controller = loader.getController();
         controller.setNewEntryFlag(true);
 
         stage.showAndWait();
     }
 
     @FXML
-    private void handleSearchCar() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CarSearchDialog.fxml"));
+    private void handleSearchCarro() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CarroSearchDialog.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
         stage.setTitle("Buscar carro");
@@ -56,8 +56,8 @@ public class RootLayoutController {
     }
 
     @FXML
-    private void handleNewCar() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CarEditDialog.fxml"));
+    private void handleNewCarro() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CarroEditDialog.fxml"));
 
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
@@ -65,14 +65,14 @@ public class RootLayoutController {
 //        stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
 
-        CarEditDialogController controller = loader.getController();
+        CarroEditDialogController controller = loader.getController();
         controller.setNewEntryFlag(true);
 
         stage.showAndWait();
     }
     @FXML
     private void handleSearchReservation() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ReservationSearchDialog.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ReservaSearchDialog.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
         stage.setTitle("Buscar reserva");
@@ -83,15 +83,15 @@ public class RootLayoutController {
 
     @FXML
     private void handleNewReservation() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ReservationEditDialog.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ReservaEditDialog.fxml"));
 
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-        stage.setTitle("Criar Locação");
+        stage.setTitle("Criar Locaï¿½ï¿½o");
 //        stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
 
-        ReservationEditDialogController controller = loader.getController();
+        ReservaEditDialogController controller = loader.getController();
         controller.setNewEntryFlag(true);
 
         stage.showAndWait();

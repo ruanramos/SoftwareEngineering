@@ -1,15 +1,13 @@
 package application.model;
 
-import java.time.LocalDate;
-
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Customer {
+import java.time.LocalDate;
+
+public class Cliente {
 	private StringProperty cpf;
 	private StringProperty nome;
 	private StringProperty endereco;
@@ -17,13 +15,13 @@ public class Customer {
 	private ObjectProperty<LocalDate> nascimento;
 	private ObjectProperty<LocalDate> validadecnh;
 
-	public Customer() {
+	public Cliente() {
 		this.cpf = new SimpleStringProperty("");
 		this.nome = new SimpleStringProperty("");
 		this.endereco = new SimpleStringProperty("");
 		this.telefone = new SimpleStringProperty("");
-		this.nascimento = new SimpleObjectProperty<LocalDate>(LocalDate.of(1970,1,1));
-		this.validadecnh = new SimpleObjectProperty<LocalDate>(LocalDate.of(1970,1,1));
+		this.nascimento = new SimpleObjectProperty<LocalDate>(LocalDate.of(1900,1,1));
+		this.validadecnh = new SimpleObjectProperty<LocalDate>(LocalDate.of(1900,1,1));
 	}
 
 

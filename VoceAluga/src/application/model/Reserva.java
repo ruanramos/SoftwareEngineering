@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import javafx.beans.property.*;
 
 
-public class Reservation {
+public class Reserva {
 	private IntegerProperty id;
 	private StringProperty idcliente;
 	private ObjectProperty<LocalDate> data;
@@ -13,7 +13,7 @@ public class Reservation {
 	private StringProperty modelo;
 	private IntegerProperty duracaodias;
 	
-	public Reservation() {
+	public Reserva() {
 		this.id = new SimpleIntegerProperty(0);
 		this.idcliente = new SimpleStringProperty("");
 		this.data = new SimpleObjectProperty<LocalDate>(LocalDate.of(1970,1,1));

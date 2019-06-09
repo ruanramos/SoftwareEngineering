@@ -3,30 +3,26 @@ package application.controller;
 import java.util.List;
 import java.util.Map;
 
-import application.dbclass.CarDao;
-import application.model.Car;
+import application.dbclass.CarroDao;
+import application.model.Carro;
 
-public class CarController {
-	private CarDao dao;
-	
-	public CarController(CarDao dao) {
-		this.dao = dao;
-	}
-	
-	public CarController() {
-		this.dao = new CarDao();
+public class CarroController {
+	private CarroDao dao;
+
+	public CarroController() {
+		this.dao = new CarroDao();
 	}
 	
 	public void add(Map<String, String> mapOfFields) throws ControllerException {
 		try {
-			Form<Car> form = new Form<>(Car.class);
+			Form<Carro> form = new Form<>(Carro.class);
 			form.addInfo(mapOfFields);
 			validateCarFields(form);
 			
-			Car car = new Car();
-			form.fillObjectAttributes(car);
+			Carro carro = new Carro();
+			form.fillObjectAttributes(carro);
 			
-			dao.insert(car);
+			dao.insert(carro);
 		}
 		catch(RuntimeException e) {
 			String lowerCasedMessage = e.getMessage().toLowerCase();
@@ -39,37 +35,37 @@ public class CarController {
 		}
 	}
 	
-	public void remove(Car car) throws ControllerException {
-		if (car.getPlaca() == "") {
+	public void remove(Carro carro) throws ControllerException {
+		if (carro.getPlaca() == "") {
 			throw new ControllerException("Carro precisa de placa para ser deletado");
 		}
-		dao.delete(car);
+		dao.delete(carro);
 	}
 	
 	public void edit(Map<String, String> mapOfFields) throws ControllerException {
-		Form<Car> form = new Form<>(Car.class);
+		Form<Carro> form = new Form<>(Carro.class);
 		form.addInfo(mapOfFields);
 		validateCarFields(form);
 		
-		Car car = new Car();
-		form.fillObjectAttributes(car);
+		Carro carro = new Carro();
+		form.fillObjectAttributes(carro);
 
-		dao.insert(car);
+		dao.insert(carro);
 	}
 
-	public <L extends List<Car>> void searchByModelo(L list, String modelo) {
+	public <L extends List<Carro>> void searchByModelo(L list, String modelo) {
 		dao.selectToList(list, "where modelo like '%" + modelo + "%'");
 	}
 
-	public <L extends List<Car>> void searchByGrupo(L list, String grupo) {
+	public <L extends List<Carro>> void searchByGrupo(L list, String grupo) {
 		dao.selectToList(list, "where grupo like '%" + grupo + "%'");
 	}
 	
-	public <L extends List<Car>> void searchByPlaca(L list, String placa) {
+	public <L extends List<Carro>> void searchByPlaca(L list, String placa) {
 		dao.selectToList(list, "where placa like '%" + placa + "%'");
 	}
 
-	private static void validateCarFields(Form<Car> form) throws ControllerException {
+	private static void validateCarFields(Form<Carro> form) throws ControllerException {
 		String errorMessage = "";
 		
 		if (!isPlateValid(form.getAttribute("placa"))) {

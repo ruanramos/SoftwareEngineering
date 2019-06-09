@@ -1,29 +1,28 @@
 package application.controller;
 
-import application.dbclass.CustomerDao;
-import application.model.Customer;
-import application.util.DateUtil;
+import application.dbclass.ClienteDao;
+import application.model.Cliente;
 
 import java.util.List;
 import java.util.Map;
 
-public class CustomerController {
-	private CustomerDao dao;
+public class ClienteController {
+	private ClienteDao dao;
 
-	public CustomerController() {
-		this.dao = new CustomerDao();
+	public ClienteController() {
+		this.dao = new ClienteDao();
 	}
 
 	public void add(Map<String, String> mapOfFields) throws ControllerException {
 		try {
-			Form<Customer> form = new Form<>(Customer.class);
+			Form<Cliente> form = new Form<>(Cliente.class);
 			form.addInfo(mapOfFields);
-			validateCustomerFields(form);
+			validateClienteFields(form);
 
-			Customer customer = new Customer();
-			form.fillObjectAttributes(customer);
+			Cliente cliente = new Cliente();
+			form.fillObjectAttributes(cliente);
 
-			dao.insert(customer);
+			dao.insert(cliente);
 		}
 		catch(RuntimeException e) {
 			String lowerCasedMessage = e.getMessage().toLowerCase();
@@ -36,34 +35,34 @@ public class CustomerController {
 		}
 	}
 
-	public void remove(Customer customer) {
-		dao.delete(customer);
+	public void remove(Cliente cliente) {
+		dao.delete(cliente);
 	}
 
 	public void edit(Map<String, String> mapOfFields) throws ControllerException {
-		Form<Customer> form = new Form<>(Customer.class);
+		Form<Cliente> form = new Form<>(Cliente.class);
 		form.addInfo(mapOfFields);
-		validateCustomerFields(form);
+		validateClienteFields(form);
 
-		Customer customer = new Customer();
-		form.fillObjectAttributes(customer);
+		Cliente cliente = new Cliente();
+		form.fillObjectAttributes(cliente);
 
-		dao.update(customer);
+		dao.update(cliente);
 	}
 
-	public <L extends List<Customer>> void searchByCpf(L list, String cpf) {
+	public <L extends List<Cliente>> void searchByCpf(L list, String cpf) {
 		dao.selectToList(list, "where cpf like '%" + cpf + "%'");
 	}
 
-	public <L extends List<Customer>> void searchByNome(L list, String name) {
+	public <L extends List<Cliente>> void searchByNome(L list, String name) {
 		dao.selectToList(list, "where nome like '%" + name + "%'");
 	}
 
-	public <L extends List<Customer>> void searchAll(L list) {
+	public <L extends List<Cliente>> void searchAll(L list) {
 		dao.selectToList(list);
 	}
 
-	private static void validateCustomerFields(Form<Customer> form) throws ControllerException {
+	private static void validateClienteFields(Form<Cliente> form) throws ControllerException {
 		String errorMessage = "";
 
 		if (!isCpfValid(form.getAttribute("cpf"))) {
@@ -89,9 +88,7 @@ public class CustomerController {
 		if (!isCnhExpiration(form.getAttribute("validadecnh"))) {
 			errorMessage += "Validade da CNH inv�lida!\n";
 		}
-		
-		
-		
+
 		if (errorMessage.length() != 0) {
 			throw new ControllerException(errorMessage);
 		}

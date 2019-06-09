@@ -23,7 +23,7 @@ import application.util.DateUtil;
  * As chaves dos maps passados devem ser exatamente iguais aos nomes dos atributos da classe
  * que se deseja instanciar.
  *
- * Exemplo de um map usado para a classe Customer, o map deve ser do tipo map<string,string>:
+ * Exemplo de um map usado para a classe Cliente, o map deve ser do tipo map<string,string>:
  * 		 {firstName = Osvaldo, cpf = 11111111111, }
  */
 public class Form<T extends Object> {

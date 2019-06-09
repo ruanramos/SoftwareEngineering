@@ -1,8 +1,8 @@
 package application.view;
 
 import application.controller.ControllerException;
-import application.controller.CustomerController;
-import application.model.Customer;
+import application.controller.ClienteController;
+import application.model.Cliente;
 import application.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomerEditDialogController {
+public class ClienteEditDialogController {
 
     @FXML
     private Node rootNode;
@@ -32,7 +32,7 @@ public class CustomerEditDialogController {
     @FXML
     private DatePicker cnhPicker;
 
-    private Customer customer;
+    private Cliente cliente;
     private boolean newEntryFlag;
 
     @FXML
@@ -63,34 +63,34 @@ public class CustomerEditDialogController {
     }
 
     public void setNewEntryFlag(boolean newEntryFlag) {
-        customer = new Customer();
+        cliente = new Cliente();
         this.newEntryFlag = newEntryFlag;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
 
     }
 
     @FXML
     private void handleOk() {
-        Map<String,String> customerFields = new HashMap<>();
-        customerFields.put("cpf", cpfField.getText());
-        customerFields.put("nome", nomeField.getText());
-        customerFields.put("endereco", enderecoField.getText());
-        customerFields.put("telefone", telefoneField.getText());
-        customerFields.put("cnh", cnhPicker.getValue().toString());
-        customerFields.put("nascimento", nascimentoPicker.getValue().toString());
+        Map<String,String> clienteFields = new HashMap<>();
+        clienteFields.put("cpf", cpfField.getText());
+        clienteFields.put("nome", nomeField.getText());
+        clienteFields.put("endereco", enderecoField.getText());
+        clienteFields.put("telefone", telefoneField.getText());
+        clienteFields.put("cnh", cnhPicker.getValue().toString());
+        clienteFields.put("nascimento", nascimentoPicker.getValue().toString());
 
 
         try {
-            CustomerController customerManager = new CustomerController();
+            ClienteController clienteController = new ClienteController();
 
             if (newEntryFlag) {
-                customerManager.add(customerFields);
+                clienteController.add(clienteFields);
             } else {
-//                customerFields.put("id", String.valueOf(customer.getId()));
-//                customerManager.edit(customerFields);
+//                clienteFields.put("id", String.valueOf(cliente.getId()));
+//                clienteController.edit(clienteFields);
             }
         } catch (ControllerException e) {
             e.printStackTrace();

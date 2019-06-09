@@ -1,9 +1,8 @@
 package application.view;
 
 import application.controller.ControllerException;
-import application.controller.ReservationController;
-import application.dbclass.ReservationDao;
-import application.model.Reservation;
+import application.controller.ReservaController;
+import application.model.Reserva;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -12,7 +11,7 @@ import javafx.stage.Stage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReservationEditDialogController {
+public class ReservaEditDialogController {
 
     @FXML
     Node rootNode;
@@ -27,7 +26,7 @@ public class ReservationEditDialogController {
     @FXML
     TextField mileageField;
 
-    private Reservation reservation;
+    private Reserva reserva;
     private boolean newEntryFlag;
 
     @FXML
@@ -37,12 +36,12 @@ public class ReservationEditDialogController {
     }
 
     public void setNewEntryFlag(boolean newEntryFlag) {
-        reservation = new Reservation();
+        reserva = new Reserva();
         this.newEntryFlag = newEntryFlag;
     }
 
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
         
     }
 
@@ -52,11 +51,11 @@ public class ReservationEditDialogController {
        
 
         try {
-            ReservationController reservationManager = new ReservationController();
+            ReservaController reservationManager = new ReservaController();
             if (newEntryFlag) {
                 reservationManager.add(reservationFields);
             } else {
-                reservationFields.put("id", String.valueOf(reservation.getId()));
+                reservationFields.put("id", String.valueOf(reserva.getId()));
                 reservationManager.edit(reservationFields);
             }
         } catch (ControllerException e) {

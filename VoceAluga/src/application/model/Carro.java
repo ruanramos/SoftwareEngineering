@@ -2,14 +2,14 @@ package application.model;
 
 import javafx.beans.property.*;
 
-public class Car {
+public class Carro {
 	private StringProperty placa;
 	private DoubleProperty quilometragem;
 	private StringProperty grupo;
 	private IntegerProperty ano;
 	private StringProperty modelo;
 
-	public Car() {
+	public Carro() {
 		this.placa = new SimpleStringProperty("");
 		this.quilometragem = new SimpleDoubleProperty(0.0);
 		this.grupo = new SimpleStringProperty("");

@@ -1,26 +1,19 @@
 package application.view;
 
-import application.Main;
-import application.controller.ReservationController;
-import application.dbclass.ReservationDao;
-import application.model.Reservation;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import application.dbclass.ReservaDao;
+import application.model.Reserva;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ReservationSearchDialogController {
+public class ReservaSearchDialogController {
     @FXML
     private ChoiceBox<String> filterChoice;
     @FXML
     private TextField searchTextField;
     @FXML
-    private TableView<Reservation> reservationTable;
+    private TableView<Reserva> reservationTable;
 
     private String filter = "";
     private String searchValue = "";
@@ -44,11 +37,11 @@ public class ReservationSearchDialogController {
     private void handleDeleteReservation() {
         int selectedIndex = reservationTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            Reservation selectedReservation = reservationTable.getItems().get(selectedIndex);
+            Reserva selectedReserva = reservationTable.getItems().get(selectedIndex);
             reservationTable.getItems().remove(selectedIndex);
 
-            ReservationDao reservationDao = new ReservationDao();
-            reservationDao.delete(selectedReservation);
+            ReservaDao reservaDao = new ReservaDao();
+            reservaDao.delete(selectedReserva);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Nenhuma seleção");

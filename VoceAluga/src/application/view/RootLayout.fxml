@@ -16,14 +16,14 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Cliente">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#handleNewCustomer" text="Cadastrar" />
-            <MenuItem mnemonicParsing="false" onAction="#handleSearchCustomer" text="Buscar" />
+            <MenuItem mnemonicParsing="false" onAction="#handleNewCliente" text="Cadastrar" />
+            <MenuItem mnemonicParsing="false" onAction="#handleSearchCliente" text="Buscar" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Veiculo">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#handleNewCar" text="Cadastrar" />
-            <MenuItem mnemonicParsing="false" onAction="#handleSearchCar" text="Buscar" />
+            <MenuItem mnemonicParsing="false" onAction="#handleNewCarro" text="Cadastrar" />
+            <MenuItem mnemonicParsing="false" onAction="#handleSearchCarro" text="Buscar" />
           </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Reserva">

@@ -3,64 +3,64 @@ package application.controller;
 import java.util.List;
 import java.util.Map;
 
-import application.dbclass.ReservationDao;
-import application.model.Reservation;
+import application.dbclass.ReservaDao;
+import application.model.Reserva;
 
-public class ReservationController {
-private ReservationDao dao;
+public class ReservaController {
+private ReservaDao dao;
 	
-	public ReservationController(ReservationDao dao) {
+	public ReservaController(ReservaDao dao) {
 		this.dao = dao;
 	}
 	
-	public ReservationController() {
-		this.dao = new ReservationDao();
+	public ReservaController() {
+		this.dao = new ReservaDao();
 	}
 	
 	public void add(Map<String, String> mapOfFields) throws ControllerException {
 		try {
-			Form<Reservation> form = new Form<>(Reservation.class);
+			Form<Reserva> form = new Form<>(Reserva.class);
 			form.addInfo(mapOfFields);
 			validateReservationFields(form);
 			
-			Reservation reservation = new Reservation();
-			form.fillObjectAttributes(reservation);
+			Reserva reserva = new Reserva();
+			form.fillObjectAttributes(reserva);
 			
-			dao.insert(reservation);
+			dao.insert(reserva);
 		}
 		catch(RuntimeException e) {
 			throw e;
 		}
 	}
 	
-	public void remove(Reservation reservation) throws ControllerException {
-		dao.delete(reservation);
+	public void remove(Reserva reserva) throws ControllerException {
+		dao.delete(reserva);
 	}
 	
 	public void edit(Map<String, String> mapOfFields) throws ControllerException {
-		Form<Reservation> form = new Form<>(Reservation.class);
+		Form<Reserva> form = new Form<>(Reserva.class);
 		form.addInfo(mapOfFields);
 		validateReservationFields(form);
 		
-		Reservation reservation = new Reservation();
-		form.fillObjectAttributes(reservation);
+		Reserva reserva = new Reserva();
+		form.fillObjectAttributes(reserva);
 
-		dao.insert(reservation);
+		dao.insert(reserva);
 	}
 
-	public <L extends List<Reservation>> void searchByModelo(L list, String modelo) {
+	public <L extends List<Reserva>> void searchByModelo(L list, String modelo) {
 		dao.selectToList(list, "where modelo like '%" + modelo + "%'");
 	}
 
-	public <L extends List<Reservation>> void searchByGrupo(L list, String grupo) {
+	public <L extends List<Reserva>> void searchByGrupo(L list, String grupo) {
 		dao.selectToList(list, "where grupo like '%" + grupo + "%'");
 	}
 	
-	public <L extends List<Reservation>> void searchByPlaca(L list, String placa) {
+	public <L extends List<Reserva>> void searchByPlaca(L list, String placa) {
 		dao.selectToList(list, "where placa like '%" + placa + "%'");
 	}
 
-	private static void validateReservationFields(Form<Reservation> form) throws ControllerException {
+	private static void validateReservationFields(Form<Reserva> form) throws ControllerException {
 		String errorMessage = "";
 		
 		if (!isPlateValid(form.getAttribute("placa"))) {
