@@ -89,9 +89,11 @@ public class ClienteSearchDialogController {
             Cliente selectedCliente = clienteTable.getItems().get(selectedIndex);
             clienteTable.getItems().remove(selectedIndex);
 
-            // TODO: não usar o DAO diretamente
-            ClienteDao clienteDao = new ClienteDao();
-            clienteDao.delete(selectedCliente);
+            ClienteController clienteController = new ClienteController();
+            clienteController.remove(selectedCliente);
+//            // TODO: não usar o DAO diretamente
+//            ClienteDao clienteDao = new ClienteDao();
+//            clienteDao.delete(selectedCliente);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Nenhuma seleção");

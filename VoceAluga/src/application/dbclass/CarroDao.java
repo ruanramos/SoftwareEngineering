@@ -12,7 +12,8 @@ public class CarroDao extends DefaultDao<Carro> {
         columnNames = "placa,quilometragem,grupo,ano,modelo";
         interrogationMarks = "?,?,?,?,?"; //mesmo número de interrogações que de colunas em 'columnNames'
         formatForModifyingColumnsWhenUpdatingTableEntries =
-                "placa=?,quilometragem=?,grupo=?,ano=?,modelo=?";
+                "quilometragem=?,grupo=?,ano=?,modelo=?"; //sem primaryKey
+        primaryKey = "placa";
     }
 
     protected void fillInsertStatement(PreparedStatement statement, Carro carro) throws SQLException {

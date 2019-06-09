@@ -104,6 +104,6 @@ public class CarroController {
 		return (age != null && age.matches("\\d+"));
 	}
 	private static boolean isMileageValid(String mileage) {
-		return (mileage != null && mileage.matches("\\d+\\.\\d"));
+		return (mileage != null && mileage.matches("\\d+"));
 	}
 }

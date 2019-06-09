@@ -11,6 +11,7 @@ public abstract class DefaultDao<T> {
 	protected String columnNames;
 	protected String interrogationMarks;
 	protected String formatForModifyingColumnsWhenUpdatingTableEntries;
+	protected String primaryKey;
 	
 	public void insert(T object) {
 		
@@ -33,13 +34,13 @@ public abstract class DefaultDao<T> {
 	//remove pelo id
 	public void delete(T object) {
 		
-		String sqlCommandFormat = String.format("delete from %s where %s.?=?", tableName, tableName);
+		String sqlCommandFormat = String.format("delete from %s where %s=?", tableName, primaryKey);
 		
 		try (Connection dbConnection = ConexaoBD.getConexaoBD()){
 			
 			PreparedStatement sqlCommand = dbConnection.prepareStatement(sqlCommandFormat);
 			fillDeleteStatement(sqlCommand, object);
-			
+
 			sqlCommand.execute();
 			sqlCommand.close();
 		}
@@ -53,9 +54,8 @@ public abstract class DefaultDao<T> {
 	//modifica a entrada da tabela usando o id da entrada
 	public void update( T object) {
 		
-		String sqlCommandFormat = String.format("update %s set %s where %s.Id=?",
-				tableName, formatForModifyingColumnsWhenUpdatingTableEntries, tableName);
-
+		String sqlCommandFormat = String.format("update %s set %s where %s=?",
+				tableName, formatForModifyingColumnsWhenUpdatingTableEntries, primaryKey);
 		try (Connection dbConnection = ConexaoBD.getConexaoBD()){
 			
 			PreparedStatement sqlCommand = dbConnection.prepareStatement(sqlCommandFormat);

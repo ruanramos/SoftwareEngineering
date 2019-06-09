@@ -14,7 +14,8 @@ public class ClienteDao extends DefaultDao<Cliente> {
         columnNames = "cpf,nome,endereco,telefone,nascimento,validadecnh";
         interrogationMarks = "?,?,?,?,?,?"; //mesmo número de interrogações que de colunas em 'columnNames'
         formatForModifyingColumnsWhenUpdatingTableEntries =
-                "cpf=?,nome=?,endereco=?,telefone=?,nascimento=?,validadecnh=?";
+                "nome=?,endereco=?,telefone=?,nascimento=?,validadecnh=?"; // sem a primaryKey
+        primaryKey = "cpf";
     }
 
     protected void fillInsertStatement(PreparedStatement statement, Cliente cliente) throws SQLException {
@@ -23,16 +24,20 @@ public class ClienteDao extends DefaultDao<Cliente> {
         statement.setString(3, cliente.getEndereco());
         statement.setString(4, cliente.getTelefone());
         statement.setDate(5, Date.valueOf(cliente.getNascimento()));
-        statement.setDate(6, Date.valueOf(cliente.getValidadecnh()));
+        statement.setDate(6, Date.valueOf(cliente.getValidadeCnh()));
     }
 
     protected void fillDeleteStatement(PreparedStatement statement, Cliente cliente) throws SQLException {
-    	statement.setString(1, "cpf");
-    	statement.setString(2, cliente.getCpf());
+    	statement.setString(1, cliente.getCpf());
     }
 
     protected void fillUpdateStatement(PreparedStatement statement, Cliente cliente) throws SQLException {
-    	fillInsertStatement(statement, cliente);
+        statement.setString(1, cliente.getNome());
+        statement.setString(2, cliente.getEndereco());
+        statement.setString(3, cliente.getTelefone());
+        statement.setDate(4, Date.valueOf(cliente.getNascimento()));
+        statement.setDate(5, Date.valueOf(cliente.getValidadeCnh()));
+        statement.setString(6, cliente.getCpf());
     }
 
     protected Cliente getObjectWithDbInformation(ResultSet set) throws SQLException{
@@ -43,7 +48,7 @@ public class ClienteDao extends DefaultDao<Cliente> {
         cliente.setEndereco(set.getString("endereco"));
         cliente.setTelefone(set.getString("telefone"));
         cliente.setNascimento(set.getDate("nascimento").toLocalDate());
-        cliente.setValidadecnh(set.getDate("validadecnh").toLocalDate());
+        cliente.setValidadeCnh(set.getDate("validadecnh").toLocalDate());
         
         return cliente;
     }

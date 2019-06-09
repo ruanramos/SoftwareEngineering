@@ -85,7 +85,7 @@ public class ClienteController {
 			errorMessage += "Data de nascimento inv�lida!\n";
 		}
 		
-		if (!isCnhExpiration(form.getAttribute("validadecnh"))) {
+		if (!isCnhExpiration(form.getAttribute("validadeCnh"))) {
 			errorMessage += "Validade da CNH inv�lida!\n";
 		}
 

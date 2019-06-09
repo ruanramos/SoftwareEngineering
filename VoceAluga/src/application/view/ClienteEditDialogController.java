@@ -66,10 +66,15 @@ public class ClienteEditDialogController {
         cliente = new Cliente();
         this.newEntryFlag = newEntryFlag;
     }
-
+    // pode fazer a flag default true e fazê-la falsa aqui
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-
+        cpfField.setText(cliente.getCpf());
+        nomeField.setText(cliente.getNome());
+        enderecoField.setText(cliente.getEndereco());
+        telefoneField.setText(cliente.getTelefone());
+        nascimentoPicker.setValue(cliente.getNascimento());
+        cnhPicker.setValue(cliente.getValidadeCnh());
     }
 
     @FXML
@@ -82,15 +87,13 @@ public class ClienteEditDialogController {
         clienteFields.put("cnh", cnhPicker.getValue().toString());
         clienteFields.put("nascimento", nascimentoPicker.getValue().toString());
 
-
         try {
             ClienteController clienteController = new ClienteController();
 
             if (newEntryFlag) {
                 clienteController.add(clienteFields);
             } else {
-//                clienteFields.put("id", String.valueOf(cliente.getId()));
-//                clienteController.edit(clienteFields);
+                clienteController.edit(clienteFields);
             }
         } catch (ControllerException e) {
             e.printStackTrace();
