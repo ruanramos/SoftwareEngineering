@@ -51,15 +51,15 @@ public class ClienteSearchDialogController {
         searchValue = searchTextField.getText();
         ClienteController clienteController = new ClienteController();
 
-        // TODO: e se não escolher nada?
         if (filterChoice.getValue().equals("CPF")) {
             clienteController.searchByCpf(clienteResult, searchValue);
         } else if (filterChoice.getValue().equals("Nome")) {
             clienteController.searchByNome(clienteResult, searchValue);
         } else if (filterChoice.getValue().equals("Telefone")) {
-//            clienteController.searchByLastName(clienteResult, searchValue);
+            // buscar por telefone?
+        } else {
+            ;
         }
-
         clienteTable.setItems(clienteResult);
      }
 
@@ -91,9 +91,6 @@ public class ClienteSearchDialogController {
 
             ClienteController clienteController = new ClienteController();
             clienteController.remove(selectedCliente);
-//            // TODO: não usar o DAO diretamente
-//            ClienteDao clienteDao = new ClienteDao();
-//            clienteDao.delete(selectedCliente);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Nenhuma seleção");

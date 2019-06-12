@@ -28,14 +28,13 @@
         <children><Label text="CPF" /><TextField fx:id="cpfField" GridPane.columnIndex="1" /><Label text="Nome" GridPane.rowIndex="1" /><Label text="Endereço" GridPane.rowIndex="2" /><TextField fx:id="nomeField" GridPane.columnIndex="1" GridPane.rowIndex="1" /><TextField fx:id="enderecoField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Celular" GridPane.rowIndex="3" />
             <Label text="Data de nascimento" GridPane.rowIndex="4" />
-            <Label text="Validade CNH" GridPane.rowIndex="5" />
             <TextField fx:id="telefoneField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <DatePicker fx:id="nascimentoPicker" GridPane.columnIndex="1" GridPane.rowIndex="4">
                 <GridPane.margin>
                     <Insets />
                 </GridPane.margin>
             </DatePicker>
-            <DatePicker fx:id="cnhPicker" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <DatePicker fx:id="validadeCnhPicker" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         </children>
     </GridPane>
         <HBox layoutX="197.1875" layoutY="241.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">

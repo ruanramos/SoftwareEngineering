@@ -21,7 +21,6 @@ public class ClienteController {
 
 			Cliente cliente = new Cliente();
 			form.fillObjectAttributes(cliente);
-
 			dao.insert(cliente);
 		}
 		catch(RuntimeException e) {
@@ -85,7 +84,7 @@ public class ClienteController {
 			errorMessage += "Data de nascimento inv�lida!\n";
 		}
 		
-		if (!isCnhExpiration(form.getAttribute("validadeCnh"))) {
+		if (!isCnhExpiration(form.getAttribute("validadecnh"))) {
 			errorMessage += "Validade da CNH inv�lida!\n";
 		}
 

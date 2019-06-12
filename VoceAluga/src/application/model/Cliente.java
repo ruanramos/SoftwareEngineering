@@ -13,7 +13,7 @@ public class Cliente {
 	private StringProperty endereco;
 	private StringProperty telefone;
 	private ObjectProperty<LocalDate> nascimento;
-	private ObjectProperty<LocalDate> validadeCnh;
+	private ObjectProperty<LocalDate> validadecnh;
 
 	public Cliente() {
 		this.cpf = new SimpleStringProperty("");
@@ -21,7 +21,7 @@ public class Cliente {
 		this.endereco = new SimpleStringProperty("");
 		this.telefone = new SimpleStringProperty("");
 		this.nascimento = new SimpleObjectProperty<LocalDate>(LocalDate.of(1900,1,1));
-		this.validadeCnh = new SimpleObjectProperty<LocalDate>(LocalDate.of(1900,1,1));
+		this.validadecnh = new SimpleObjectProperty<LocalDate>(LocalDate.of(1900,1,1));
 	}
 
 
@@ -85,15 +85,15 @@ public class Cliente {
 		this.nascimento.set(nascimento);
 	}
 	
-	public LocalDate getValidadeCnh() {
-		return validadeCnh.get();
+	public LocalDate getValidadecnh() {
+		return validadecnh.get();
 	}
 
-	public ObjectProperty<LocalDate> validadeCnhProperty() {
-		return validadeCnh;
+	public ObjectProperty<LocalDate> validadecnhProperty() {
+		return validadecnh;
 	}
 
-	public void setValidadeCnh(LocalDate validadeCnh) {
-		this.validadeCnh.set(validadeCnh);
+	public void setValidadecnh(LocalDate validadecnh) {
+		this.validadecnh.set(validadecnh);
 	}
 }

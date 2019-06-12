@@ -30,7 +30,7 @@ public class ClienteEditDialogController {
     @FXML
     private DatePicker nascimentoPicker;
     @FXML
-    private DatePicker cnhPicker;
+    private DatePicker validadeCnhPicker;
 
     private Cliente cliente;
     private boolean newEntryFlag;
@@ -49,7 +49,7 @@ public class ClienteEditDialogController {
             }
         });
 
-        cnhPicker.setConverter(new StringConverter<LocalDate>() {
+        validadeCnhPicker.setConverter(new StringConverter<LocalDate>() {
             @Override
             public String toString(LocalDate date) {
                 return DateUtil.format(date);
@@ -74,7 +74,7 @@ public class ClienteEditDialogController {
         enderecoField.setText(cliente.getEndereco());
         telefoneField.setText(cliente.getTelefone());
         nascimentoPicker.setValue(cliente.getNascimento());
-        cnhPicker.setValue(cliente.getValidadeCnh());
+        validadeCnhPicker.setValue(cliente.getValidadecnh());
     }
 
     @FXML
@@ -84,14 +84,15 @@ public class ClienteEditDialogController {
         clienteFields.put("nome", nomeField.getText());
         clienteFields.put("endereco", enderecoField.getText());
         clienteFields.put("telefone", telefoneField.getText());
-        clienteFields.put("cnh", cnhPicker.getValue().toString());
         clienteFields.put("nascimento", nascimentoPicker.getValue().toString());
+        clienteFields.put("validadecnh", validadeCnhPicker.getValue().toString());
 
         try {
             ClienteController clienteController = new ClienteController();
 
             if (newEntryFlag) {
                 clienteController.add(clienteFields);
+
             } else {
                 clienteController.edit(clienteFields);
             }
