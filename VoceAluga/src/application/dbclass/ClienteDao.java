@@ -24,7 +24,7 @@ public class ClienteDao extends DefaultDao<Cliente> {
         statement.setString(3, cliente.getEndereco());
         statement.setString(4, cliente.getTelefone());
         statement.setDate(5, Date.valueOf(cliente.getNascimento()));
-        statement.setDate(6, Date.valueOf(cliente.getValidadeCnh()));
+        statement.setDate(6, Date.valueOf(cliente.getValidadecnh()));
     }
 
     protected void fillDeleteStatement(PreparedStatement statement, Cliente cliente) throws SQLException {
@@ -36,7 +36,7 @@ public class ClienteDao extends DefaultDao<Cliente> {
         statement.setString(2, cliente.getEndereco());
         statement.setString(3, cliente.getTelefone());
         statement.setDate(4, Date.valueOf(cliente.getNascimento()));
-        statement.setDate(5, Date.valueOf(cliente.getValidadeCnh()));
+        statement.setDate(5, Date.valueOf(cliente.getValidadecnh()));
         statement.setString(6, cliente.getCpf());
     }
 
@@ -48,7 +48,7 @@ public class ClienteDao extends DefaultDao<Cliente> {
         cliente.setEndereco(set.getString("endereco"));
         cliente.setTelefone(set.getString("telefone"));
         cliente.setNascimento(set.getDate("nascimento").toLocalDate());
-        cliente.setValidadeCnh(set.getDate("validadecnh").toLocalDate());
+        cliente.setValidadecnh(set.getDate("validadecnh").toLocalDate());
         
         return cliente;
     }

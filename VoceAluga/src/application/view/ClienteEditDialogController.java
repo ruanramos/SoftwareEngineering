@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,36 +38,18 @@ public class ClienteEditDialogController {
 
     @FXML
     public void initialize() {
-        nascimentoPicker.setConverter(new StringConverter<LocalDate>() {
-            @Override
-            public String toString(LocalDate date) {
-                return DateUtil.format(date);
-            }
+        nascimentoPicker.setConverter(DateUtil.getStringConverter());
+        nascimentoPicker.getEditor().setText("01/01/2000");
 
-            @Override
-            public LocalDate fromString(String string) {
-                return DateUtil.parse(string);
-            }
-        });
-
-        validadeCnhPicker.setConverter(new StringConverter<LocalDate>() {
-            @Override
-            public String toString(LocalDate date) {
-                return DateUtil.format(date);
-            }
-
-            @Override
-            public LocalDate fromString(String string) {
-                return DateUtil.parse(string);
-            }
-        });
+        validadeCnhPicker.setConverter(DateUtil.getStringConverter());
+        validadeCnhPicker.getEditor().setText(DateUtil.format(LocalDate.now()));
     }
 
     public void setNewEntryFlag(boolean newEntryFlag) {
         cliente = new Cliente();
         this.newEntryFlag = newEntryFlag;
     }
-    // pode fazer a flag default true e fazê-la falsa aqui
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
         cpfField.setText(cliente.getCpf());
@@ -79,13 +62,8 @@ public class ClienteEditDialogController {
 
     @FXML
     private void handleOk() {
-        Map<String,String> clienteFields = new HashMap<>();
-        clienteFields.put("cpf", cpfField.getText());
-        clienteFields.put("nome", nomeField.getText());
-        clienteFields.put("endereco", enderecoField.getText());
-        clienteFields.put("telefone", telefoneField.getText());
-        clienteFields.put("nascimento", nascimentoPicker.getValue().toString());
-        clienteFields.put("validadecnh", validadeCnhPicker.getValue().toString());
+        Map<String,String> clienteFields = buildFieldsMap();
+        getDisplayedCliente();
 
         try {
             ClienteController clienteController = new ClienteController();
@@ -110,5 +88,25 @@ public class ClienteEditDialogController {
 
     private Stage getStage() {
         return (Stage) rootNode.getScene().getWindow();
+    }
+
+    private Map<String,String> buildFieldsMap() {
+        Map<String,String> fields = new HashMap<>();
+        fields.put("cpf", cpfField.getText());
+        fields.put("nome", nomeField.getText());
+        fields.put("endereco", enderecoField.getText());
+        fields.put("telefone", telefoneField.getText());
+        fields.put("nascimento", DateUtil.parse(nascimentoPicker.getEditor().getText()).toString());
+        fields.put("validadecnh", DateUtil.parse(validadeCnhPicker.getEditor().getText()).toString());
+        return fields;
+    }
+
+    private void getDisplayedCliente() {
+        cliente.setCpf(cpfField.getText());
+        cliente.setNome(nomeField.getText());
+        cliente.setEndereco(enderecoField.getText());
+        cliente.setTelefone(telefoneField.getText());
+        cliente.setNascimento(nascimentoPicker.getValue());
+        cliente.setValidadecnh(validadeCnhPicker.getValue());
     }
 }

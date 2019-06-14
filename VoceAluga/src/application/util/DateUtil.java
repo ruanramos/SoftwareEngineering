@@ -1,4 +1,6 @@
 package application.util;
+import javafx.util.StringConverter;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -51,5 +53,19 @@ public class DateUtil {
     public static boolean validDate(String dateString) {
     	// Try to convert the String.
         return DateUtil.parse(dateString) != null;
+    }
+
+    public static StringConverter<LocalDate> getStringConverter() {
+        return (new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                return DateUtil.format(date);
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                return DateUtil.parse(string);
+            }
+        });
     }
 }
