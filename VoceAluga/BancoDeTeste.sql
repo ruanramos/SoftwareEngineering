@@ -4,6 +4,8 @@ create database bancoDeDados
 default character set utf8
 default collate utf8_general_ci;
 
+grant all privileges on bancoDeDados.* to 'testuser'@'localhost';
+
 use bancoDeDados;
 
 create table clientes (
