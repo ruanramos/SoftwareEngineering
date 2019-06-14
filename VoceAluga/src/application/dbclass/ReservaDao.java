@@ -10,24 +10,23 @@ public class ReservaDao extends DefaultDao<Reserva> {
 	
 	public ReservaDao() {
         tableName = "reservas";
-        columnNames = "id,idcliente,data,grupo,modelo,duracaodias";
-        interrogationMarks = "?,?,?,?,?,?"; //mesmo número de interrogações que de colunas em 'columnNames'
+        columnNames = "idcliente,data,grupo,modelo,duracaodias";
+        interrogationMarks = "?,?,?,?,?"; //mesmo número de interrogações que de colunas em 'columnNames'
         formatForModifyingColumnsWhenUpdatingTableEntries =
-                "id=?,idcliente=?,data=?,grupo=?,modelo=?,duracaodias=?";
+                "idcliente=?,data=?,grupo=?,modelo=?,duracaodias=?";
+        primaryKey = "id";
     }
 
     protected void fillInsertStatement(PreparedStatement statement, Reserva reserva) throws SQLException {
-        statement.setInt(1, reserva.getId());
-        statement.setString(2, reserva.getIdcliente());
-        statement.setDate(3, Date.valueOf(reserva.getData()));
-        statement.setString(4, reserva.getGrupo());
-        statement.setString(5, reserva.getModelo());
-        statement.setInt(6, reserva.getDuracaodias());
+        statement.setString(1, reserva.getIdcliente());
+        statement.setDate(2, Date.valueOf(reserva.getData()));
+        statement.setString(3, reserva.getGrupo());
+        statement.setString(4, reserva.getModelo());
+        statement.setInt(5, reserva.getDuracaodias());
     }
 
     protected void fillDeleteStatement(PreparedStatement statement, Reserva reserva) throws SQLException {
-    	statement.setString(1, "id");
-    	statement.setInt(2, reserva.getId());
+    	statement.setInt(1, reserva.getId());
     }
 
     protected void fillUpdateStatement(PreparedStatement statement, Reserva reserva) throws SQLException {
