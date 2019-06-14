@@ -25,8 +25,8 @@ modelo varchar(20),
 primary key(placa)
 )default charset utf8;
 
-create table alocacoes(
-id int not null,
+create table locacoes(
+id int not null auto_increment,
 idcliente varchar(11) not null,
 idcarro varchar(7) not null,
 problema varchar(50),
@@ -36,7 +36,7 @@ foreign key(idcarro) references carros(placa)
 )default charset utf8;
 
 create table reservas(
-id int not null,
+id int not null auto_increment,
 idcliente varchar(11) not null,
 data date,
 grupo varchar(1),
