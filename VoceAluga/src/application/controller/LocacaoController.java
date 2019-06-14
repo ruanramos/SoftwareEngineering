@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import application.dbclass.LocacaoDao;
+import application.model.Cliente;
 import application.model.Locacao;
 
 public class LocacaoController {
@@ -45,7 +46,7 @@ private LocacaoDao dao;
 		Locacao locacao = new Locacao();
 		form.fillObjectAttributes(locacao);
 
-		dao.insert(locacao);
+		dao.update(locacao);
 	}
 
 	public <L extends List<Locacao>> void searchByModelo(L list, String modelo) {
@@ -60,6 +61,10 @@ private LocacaoDao dao;
 		dao.selectToList(list, "where placa like '%" + placa + "%'");
 	}
 
+	public <L extends List<Locacao>> void searchAll(L list) {
+		dao.selectToList(list);
+	}
+	
 	private static void validateLocacaotionFields(Form<Locacao> form) throws ControllerException {
 		String errorMessage = "";
 		

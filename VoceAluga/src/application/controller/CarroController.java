@@ -5,6 +5,7 @@ import java.util.Map;
 
 import application.dbclass.CarroDao;
 import application.model.Carro;
+import application.model.Cliente;
 
 public class CarroController {
 	private CarroDao dao;
@@ -50,7 +51,7 @@ public class CarroController {
 		Carro carro = new Carro();
 		form.fillObjectAttributes(carro);
 
-		dao.insert(carro);
+		dao.update(carro);
 	}
 
 	public <L extends List<Carro>> void searchByModelo(L list, String modelo) {
@@ -64,7 +65,11 @@ public class CarroController {
 	public <L extends List<Carro>> void searchByPlaca(L list, String placa) {
 		dao.selectToList(list, "where placa like '%" + placa + "%'");
 	}
-
+	
+	public <L extends List<Carro>> void searchAll(L list) {
+		dao.selectToList(list);
+	}
+	
 	private static void validateCarFields(Form<Carro> form) throws ControllerException {
 		String errorMessage = "";
 		
@@ -90,7 +95,7 @@ public class CarroController {
 	}
 	
 	private static boolean isPlateValid(String plate) {
-		return (plate != null && plate.matches("[A-Z]{3}\\d{4}|[A-Z]{3}\\d[A-Z]\\d{2}"));
+		return (plate != null && plate.matches("[A-Z]{3}\\-\\d{4}|[A-Z]{3}\\d[A-Z]\\d{2}"));
 	}
 	
 	private static boolean isModelValid(String model) {
@@ -104,6 +109,6 @@ public class CarroController {
 		return (age != null && age.matches("\\d+"));
 	}
 	private static boolean isMileageValid(String mileage) {
-		return (mileage != null && mileage.matches("\\d+"));
+		return (mileage != null && mileage.matches("\\d+(\\.\\d+)?"));
 	}
 }

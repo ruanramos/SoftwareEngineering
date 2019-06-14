@@ -27,7 +27,10 @@ public class LocacaoDao extends DefaultDao<Locacao> {
     }
 
     protected void fillUpdateStatement(PreparedStatement statement, Locacao locacao) throws SQLException {
-    	fillInsertStatement(statement, locacao);
+    	statement.setString(1, locacao.getIdcliente());
+        statement.setString(2, locacao.getIdcarro());
+        statement.setString(3, locacao.getProblema());
+        statement.setInt(4, locacao.getId());
     }
 
     protected Locacao getObjectWithDbInformation(ResultSet set) throws SQLException{

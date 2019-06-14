@@ -6,7 +6,7 @@ public class ConexaoBD {
 	
 	private static String user = "testuser";	//usuario do BD
 	private static String password = "123test";	//senha do BD
-	private static String schema = "testdb"; //nome do schema no mySQL
+	private static String schema = "bancoDeDados"; //nome do schema no mySQL
 	private static String serverName = "localhost"; //caminho do servidor do BD
 	
 	private static String statusDaConexao = "";

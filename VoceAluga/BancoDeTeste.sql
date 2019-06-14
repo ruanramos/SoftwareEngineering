@@ -19,7 +19,7 @@ primary key(cpf)
 )default charset utf8;
 
 create table carros(
-placa varchar(7) not null unique,
+placa varchar(8) not null unique,
 quilometragem int,
 grupo varchar(1),
 ano int,

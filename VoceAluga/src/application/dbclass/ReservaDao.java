@@ -30,7 +30,12 @@ public class ReservaDao extends DefaultDao<Reserva> {
     }
 
     protected void fillUpdateStatement(PreparedStatement statement, Reserva reserva) throws SQLException {
-    	fillInsertStatement(statement, reserva);
+    	statement.setString(1, reserva.getIdcliente());
+        statement.setDate(2, Date.valueOf(reserva.getData()));
+        statement.setString(3, reserva.getGrupo());
+        statement.setString(4, reserva.getModelo());
+        statement.setInt(5, reserva.getDuracaodias());
+        statement.setInt(6, reserva.getId());
     }
 
     protected Reserva getObjectWithDbInformation(ResultSet set) throws SQLException{

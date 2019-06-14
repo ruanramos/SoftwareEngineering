@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import application.dbclass.ReservaDao;
+import application.model.Cliente;
 import application.model.Reserva;
 
 public class ReservaController {
@@ -45,7 +46,7 @@ private ReservaDao dao;
 		Reserva reserva = new Reserva();
 		form.fillObjectAttributes(reserva);
 
-		dao.insert(reserva);
+		dao.update(reserva);
 	}
 
 	public <L extends List<Reserva>> void searchByModelo(L list, String modelo) {
@@ -58,6 +59,10 @@ private ReservaDao dao;
 	
 	public <L extends List<Reserva>> void searchByPlaca(L list, String placa) {
 		dao.selectToList(list, "where placa like '%" + placa + "%'");
+	}
+	
+	public <L extends List<Reserva>> void searchAll(L list) {
+		dao.selectToList(list);
 	}
 
 	private static void validateReservationFields(Form<Reserva> form) throws ControllerException {
