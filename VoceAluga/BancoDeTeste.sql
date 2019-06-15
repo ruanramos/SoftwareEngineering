@@ -4,6 +4,8 @@ create database bancoDeDados
 default character set utf8
 default collate utf8_general_ci;
 
+grant all privileges on bancoDeDados.* to 'testuser'@'localhost';
+
 use bancoDeDados;
 
 create table clientes (
@@ -17,7 +19,7 @@ primary key(cpf)
 )default charset utf8;
 
 create table carros(
-placa varchar(7) not null unique,
+placa varchar(8) not null unique,
 quilometragem int,
 grupo varchar(1),
 ano int,
@@ -25,8 +27,8 @@ modelo varchar(20),
 primary key(placa)
 )default charset utf8;
 
-create table alocacoes(
-id int not null,
+create table locacoes(
+id int not null auto_increment,
 idcliente varchar(11) not null,
 idcarro varchar(7) not null,
 problema varchar(50),
@@ -36,7 +38,7 @@ foreign key(idcarro) references carros(placa)
 )default charset utf8;
 
 create table reservas(
-id int not null,
+id int not null auto_increment,
 idcliente varchar(11) not null,
 data date,
 grupo varchar(1),

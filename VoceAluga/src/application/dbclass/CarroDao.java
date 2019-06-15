@@ -25,12 +25,15 @@ public class CarroDao extends DefaultDao<Carro> {
     }
 
     protected void fillDeleteStatement(PreparedStatement statement, Carro carro) throws SQLException {
-    	statement.setString(1, "placa");
-        statement.setString(2, carro.getPlaca());
+        statement.setString(1, carro.getPlaca());
     }
 
     protected void fillUpdateStatement(PreparedStatement statement, Carro carro) throws SQLException {
-    	fillInsertStatement(statement, carro);
+        statement.setDouble(1, carro.getQuilometragem());
+        statement.setString(2, carro.getGrupo());
+        statement.setInt(3, carro.getAno());
+        statement.setString(4, carro.getModelo());
+        statement.setString(5, carro.getPlaca());
     }
 
     protected Carro getObjectWithDbInformation(ResultSet set) throws SQLException{

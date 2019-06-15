@@ -29,13 +29,11 @@ public class ClienteSearchDialogController {
     @FXML
     private TableColumn<Cliente, String> telefoneColumn;
 
-    private Main main;
-    private String filter = "";
     private String searchValue = "";
 
     @FXML
     private void initialize() {
-        filterChoice.getItems().addAll("CPF", "Nome", "Telefone");
+        filterChoice.getItems().addAll("CPF", "Nome");
         filterChoice.setValue("CPF");
 
         clienteTable.setPlaceholder(new Label("Nenhum cliente encontrado."));
@@ -55,11 +53,8 @@ public class ClienteSearchDialogController {
             clienteController.searchByCpf(clienteResult, searchValue);
         } else if (filterChoice.getValue().equals("Nome")) {
             clienteController.searchByNome(clienteResult, searchValue);
-        } else if (filterChoice.getValue().equals("Telefone")) {
-            // buscar por telefone?
-        } else {
-            ;
         }
+
         clienteTable.setItems(clienteResult);
      }
 

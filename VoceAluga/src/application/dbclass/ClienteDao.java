@@ -14,7 +14,7 @@ public class ClienteDao extends DefaultDao<Cliente> {
         columnNames = "cpf,nome,endereco,telefone,nascimento,validadecnh";
         interrogationMarks = "?,?,?,?,?,?"; //mesmo número de interrogações que de colunas em 'columnNames'
         formatForModifyingColumnsWhenUpdatingTableEntries =
-                "nome=?,endereco=?,telefone=?,nascimento=?,validadecnh=?"; // sem a primaryKey
+                "nome=?,endereco=?,telefone=?,nascimento=?,validadecnh=?";
         primaryKey = "cpf";
     }
 
