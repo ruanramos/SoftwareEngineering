@@ -18,18 +18,19 @@ public class ClienteController {
 			Form<Cliente> form = new Form<>(Cliente.class);
 			form.addInfo(mapOfFields);
 			validateClienteFields(form);
-
 			Cliente cliente = new Cliente();
 			form.fillObjectAttributes(cliente);
 			dao.insert(cliente);
 		}
 		catch(RuntimeException e) {
-			String lowerCasedMessage = e.getMessage().toLowerCase();
-			if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("cpf")) {
-				throw new ControllerException("Ja existe um cliente com este cpf");
-			}
-			else {
-				throw e;
+			if(e.getMessage() != null) {
+				String lowerCasedMessage = e.getMessage().toLowerCase();
+				if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("cpf")) {
+					throw new ControllerException("Ja existe um cliente com este cpf");
+				}
+				else {
+					throw e;
+				}
 			}
 		}
 	}

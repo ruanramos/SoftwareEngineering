@@ -20,11 +20,21 @@ public class Cliente {
 		this.nome = new SimpleStringProperty("");
 		this.endereco = new SimpleStringProperty("");
 		this.telefone = new SimpleStringProperty("");
-		this.nascimento = new SimpleObjectProperty<LocalDate>(LocalDate.of(1900,1,1));
-		this.validadecnh = new SimpleObjectProperty<LocalDate>(LocalDate.of(1900,1,1));
+		this.nascimento = new SimpleObjectProperty<LocalDate>(LocalDate.of(2000,1,1));
+		this.validadecnh = new SimpleObjectProperty<LocalDate>(LocalDate.now());
 	}
-
-
+	/*
+	Para teste 
+	public void getAll() {
+		System.out.println("cpf "  + getCpf());
+		System.out.println("nome "  + getNome());
+		System.out.println("endereco "  + getEndereco());
+		System.out.println("telefone "  + getTelefone());
+		System.out.println("nascimento "  + getNascimento());
+		System.out.println("validadecnh "  + getValidadecnh());
+		
+	}
+	*/
 	public String getCpf() {
 		return cpf.get();
 	}

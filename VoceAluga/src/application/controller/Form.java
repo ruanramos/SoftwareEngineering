@@ -54,6 +54,7 @@ public class Form<T extends Object> {
 					Field field = type.getDeclaredField(entry.getKey());
 					field.setAccessible(true);
 					field.set(object, convertString(entry.getValue(), field));
+					
 				}
 			}
 		}
@@ -91,8 +92,8 @@ public class Form<T extends Object> {
 			return Float.parseFloat(string);
 		}
 		if(field.getType().equals(ObjectProperty.class)) {
-			if(((ParameterizedType)field.getGenericType()).getActualTypeArguments()[0].equals(LocalDate.class)) {
-				return new SimpleObjectProperty<LocalDate>(DateUtil.parse(string));
+			if(((ParameterizedType)field.getGenericType()).getActualTypeArguments()[0].equals(LocalDate.class)) {								
+				return new SimpleObjectProperty<LocalDate>(DateUtil.parse(string.replaceAll("-","/")));
 			}
 		}
 

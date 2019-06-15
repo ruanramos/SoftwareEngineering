@@ -74,19 +74,19 @@ public class CarroController {
 		String errorMessage = "";
 		
 		if (!isPlateValid(form.getAttribute("placa"))) {
-	    	errorMessage += "Placa invï¿½lida.\n";
+	    	errorMessage += "Placa inválida.\n";
 	    }
 		if (!isMileageValid(form.getAttribute("quilometragem"))) {
-	    	errorMessage += "Quilometragem invï¿½lida.\n";
+	    	errorMessage += "Quilometragem inválida.\n";
 	    }
 		if (!isGroupValid(form.getAttribute("grupo"))) {
-	    	errorMessage += "Grupo invï¿½lido.\n";
+	    	errorMessage += "Grupo inválido.\n";
 	    }
 		if (!isYearValid(form.getAttribute("ano"))) {
-	    	errorMessage += "Ano invï¿½lida.\n";
+	    	errorMessage += "Ano inválida.\n";
 	    }
 	    if (!isModelValid(form.getAttribute("modelo"))) {
-	    	errorMessage += "Modelo invï¿½lido.\n";
+	    	errorMessage += "Modelo inválido.\n";
 	    }
 	    
 	    if (errorMessage.length() != 0) {
@@ -96,6 +96,7 @@ public class CarroController {
 	
 	private static boolean isPlateValid(String plate) {
 		return (plate != null && plate.matches("[A-Z]{3}\\-\\d{4}|[A-Z]{3}\\d[A-Z]\\d{2}"));
+		
 	}
 	
 	private static boolean isModelValid(String model) {
