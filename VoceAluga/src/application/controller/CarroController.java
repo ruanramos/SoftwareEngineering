@@ -74,19 +74,19 @@ public class CarroController {
 		String errorMessage = "";
 		
 		if (!isPlateValid(form.getAttribute("placa"))) {
-	    	errorMessage += "Placa inválida.\n";
+	    	errorMessage += "Placa invï¿½lida.\n";
 	    }
 		if (!isMileageValid(form.getAttribute("quilometragem"))) {
-	    	errorMessage += "Quilometragem inválida.\n";
+	    	errorMessage += "Quilometragem invï¿½lida.\n";
 	    }
 		if (!isGroupValid(form.getAttribute("grupo"))) {
-	    	errorMessage += "Grupo inválido.\n";
+	    	errorMessage += "Grupo invï¿½lido.\n";
 	    }
 		if (!isYearValid(form.getAttribute("ano"))) {
-	    	errorMessage += "Ano inválida.\n";
+	    	errorMessage += "Ano invï¿½lida.\n";
 	    }
 	    if (!isModelValid(form.getAttribute("modelo"))) {
-	    	errorMessage += "Modelo inválido.\n";
+	    	errorMessage += "Modelo invï¿½lido.\n";
 	    }
 	    
 	    if (errorMessage.length() != 0) {
@@ -95,8 +95,9 @@ public class CarroController {
 	}
 	
 	private static boolean isPlateValid(String plate) {
-		return (plate != null && plate.matches("[A-Z]{3}\\-\\d{4}|[A-Z]{3}\\d[A-Z]\\d{2}"));
-		
+//		return (plate != null && plate.matches("[A-Z]{3}\\-\\d{4}|[A-Z]{3}\\d[A-Z]\\d{2}"));
+//		essa regex estÃ¡ estranha
+		return (plate != null);
 	}
 	
 	private static boolean isModelValid(String model) {

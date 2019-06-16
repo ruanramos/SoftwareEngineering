@@ -60,6 +60,7 @@ public class ClienteSearchDialogController {
 
     @FXML
     private void handleEditCustomer() throws IOException {
+        // TODO: e se não escolher nada?
         Cliente selectedCliente = clienteTable.getSelectionModel().getSelectedItem();
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ClienteEditDialog.fxml"));

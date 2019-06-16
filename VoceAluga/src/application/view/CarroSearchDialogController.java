@@ -49,7 +49,6 @@ public class CarroSearchDialogController {
         searchValue = searchTextField.getText();
         CarroController carroController = new CarroController();
 
-        // TODO: e se não escolher nada?
         if (filterChoice.getValue().equals("Placa")) {
             carroController.searchByPlaca(carroResult, searchValue);
         } else if (filterChoice.getValue().equals("Modelo")) {
@@ -63,6 +62,7 @@ public class CarroSearchDialogController {
 
     @FXML
     private void handleEditCar() throws IOException {
+        // TODO: e se não escolher nada?
         Carro selectedCarro = carroTable.getSelectionModel().getSelectedItem();
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CarroEditDialog.fxml"));

@@ -21,7 +21,6 @@ public class CarroEditDialogController {
     TextField modeloField;
     @FXML
     TextField grupoField;
-    // TODO: transformar no em um drop down
     @FXML
     TextField anoField;
     @FXML
@@ -63,8 +62,7 @@ public class CarroEditDialogController {
             if (newEntryFlag) {
                 carroController.add(carroFields);
             } else {
-//                carroFields.put("id", String.valueOf(carro.getId()));
-//                carroController.edit(carroFields);
+                carroController.edit(carroFields);
             }
         } catch (ControllerException e) {
             e.printStackTrace();
