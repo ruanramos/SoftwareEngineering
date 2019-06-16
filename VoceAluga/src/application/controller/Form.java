@@ -93,8 +93,14 @@ public class Form<T extends Object> {
 		}
 		if(field.getType().equals(ObjectProperty.class)) {
 			if(((ParameterizedType)field.getGenericType()).getActualTypeArguments()[0].equals(LocalDate.class)) {
-				return new SimpleObjectProperty<LocalDate>(LocalDate.parse(string));
 //				return new SimpleObjectProperty<LocalDate>(DateUtil.parse(string.replaceAll("-","/")));
+				LocalDate date = DateUtil.parse(string);
+				if (date == null) {
+					date = LocalDate.parse(string);
+				}
+				if (date != null ) {
+					return new SimpleObjectProperty<LocalDate>(date);
+				}
 			}
 		}
 
