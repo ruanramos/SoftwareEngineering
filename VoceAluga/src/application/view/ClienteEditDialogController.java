@@ -38,15 +38,8 @@ public class ClienteEditDialogController {
 
     @FXML
     public void initialize() {
-    	/*
-    	Com isso torna-se impossivel saber as datas do cliente já que sempre ao 
-    	abrir a janela de edit aparecerá essas datas na tela
         nascimentoPicker.setConverter(DateUtil.getStringConverter());
-        nascimentoPicker.getEditor().setText("01/01/2000");
-
         validadeCnhPicker.setConverter(DateUtil.getStringConverter());
-        validadeCnhPicker.getEditor().setText(DateUtil.format(LocalDate.now()));
-    	*/
     }
 
     public void setNewEntryFlag(boolean newEntryFlag) {
@@ -101,8 +94,8 @@ public class ClienteEditDialogController {
         fields.put("nome", nomeField.getText());
         fields.put("endereco", enderecoField.getText());
         fields.put("telefone", telefoneField.getText());
-        fields.put("nascimento", DateUtil.parse(nascimentoPicker.getEditor().getText()).format(formatter).toString());
-        fields.put("validadecnh", DateUtil.parse(validadeCnhPicker.getEditor().getText()).format(formatter).toString());
+        fields.put("nascimento", DateUtil.parse(nascimentoPicker.getEditor().getText()).toString());
+        fields.put("validadecnh", DateUtil.parse(validadeCnhPicker.getEditor().getText()).toString());
         return fields;
     }
 
