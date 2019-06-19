@@ -30,7 +30,13 @@ private ReservaDao dao;
 			dao.insert(reserva);
 		}
 		catch(RuntimeException e) {
-			throw e;
+			String lowerCasedMessage = e.getMessage().toLowerCase();
+			if(lowerCasedMessage.contains("a foreign key constraint fails")) {
+				throw new ControllerException("cliente nao encontrado");
+			}
+			else {
+				throw e;
+			}
 		}
 	}
 	
@@ -38,7 +44,7 @@ private ReservaDao dao;
 		dao.delete(reserva);
 	}
 	
-	public void edit(Map<String, String> mapOfFields) throws ControllerException {
+	public Reserva edit(Map<String, String> mapOfFields) throws ControllerException {
 		Form<Reserva> form = new Form<>(Reserva.class);
 		form.addInfo(mapOfFields);
 		validateReservationFields(form);
@@ -47,18 +53,11 @@ private ReservaDao dao;
 		form.fillObjectAttributes(reserva);
 
 		dao.update(reserva);
+		return reserva;
 	}
 
-	public <L extends List<Reserva>> void searchByModelo(L list, String modelo) {
-		dao.selectToList(list, "where modelo like '%" + modelo + "%'");
-	}
-
-	public <L extends List<Reserva>> void searchByGrupo(L list, String grupo) {
-		dao.selectToList(list, "where grupo like '%" + grupo + "%'");
-	}
-	
-	public <L extends List<Reserva>> void searchByPlaca(L list, String placa) {
-		dao.selectToList(list, "where placa like '%" + placa + "%'");
+	public <L extends List<Reserva>> void searchByCpf(L list, String cpf) {
+		dao.selectToList(list, "where idcliente like '%" + cpf + "%'");
 	}
 	
 	public <L extends List<Reserva>> void searchAll(L list) {
@@ -68,9 +67,6 @@ private ReservaDao dao;
 	private static void validateReservationFields(Form<Reserva> form) throws ControllerException {
 		String errorMessage = "";
 		
-		if (!isPlateValid(form.getAttribute("placa"))) {
-	    	errorMessage += "Placa inv�lida.\n";
-	    }
 		if (!isCpfValid(form.getAttribute("idcliente"))) {
 			errorMessage += "CPF inv�lido.\n";
 		}
@@ -93,12 +89,8 @@ private ReservaDao dao;
 	    
 	}
 	
-	private static boolean isPlateValid(String plate) {
-		return (plate != null && plate.matches("[A-Z]{3}\\d{4}|[A-Z]{3}\\d[A-Z]\\d{2}"));
-	}
-	
 	private static boolean isModelValid(String model) {
-		return (model != null && model.length() > 0);
+		return (model != null);
 	}
 	
 	private static boolean isGroupValid(String group) {

@@ -30,7 +30,7 @@ primary key(placa)
 create table locacoes(
 id int not null auto_increment,
 idcliente varchar(11) not null,
-idcarro varchar(7) not null,
+idcarro varchar(8) not null,
 problema varchar(50),
 primary key(id),
 foreign key(idcliente) references clientes(cpf),

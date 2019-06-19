@@ -14,7 +14,7 @@ public class CarroController {
 		this.dao = new CarroDao();
 	}
 	
-	public void add(Map<String, String> mapOfFields) throws ControllerException {
+	public Carro add(Map<String, String> mapOfFields) throws ControllerException {
 		try {
 			Form<Carro> form = new Form<>(Carro.class);
 			form.addInfo(mapOfFields);
@@ -24,6 +24,7 @@ public class CarroController {
 			form.fillObjectAttributes(carro);
 			
 			dao.insert(carro);
+			return carro;
 		}
 		catch(RuntimeException e) {
 			String lowerCasedMessage = e.getMessage().toLowerCase();
@@ -37,13 +38,10 @@ public class CarroController {
 	}
 	
 	public void remove(Carro carro) throws ControllerException {
-		if (carro.getPlaca() == "") {
-			throw new ControllerException("Carro precisa de placa para ser deletado");
-		}
 		dao.delete(carro);
 	}
 	
-	public void edit(Map<String, String> mapOfFields) throws ControllerException {
+	public Carro edit(Map<String, String> mapOfFields) throws ControllerException {
 		Form<Carro> form = new Form<>(Carro.class);
 		form.addInfo(mapOfFields);
 		validateCarFields(form);
@@ -52,6 +50,7 @@ public class CarroController {
 		form.fillObjectAttributes(carro);
 
 		dao.update(carro);
+		return carro;
 	}
 
 	public <L extends List<Carro>> void searchByModelo(L list, String modelo) {

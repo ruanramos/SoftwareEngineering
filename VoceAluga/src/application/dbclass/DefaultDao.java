@@ -26,7 +26,6 @@ public abstract class DefaultDao<T> {
 		}
 		
 		catch(SQLException e) {
-			System.out.println("Exception: " + e.getMessage());
 			throw new RuntimeException(e);
 		}
 	}
@@ -46,7 +45,6 @@ public abstract class DefaultDao<T> {
 		}
 		
 		catch(SQLException e) {
-			System.out.println("Exception: " + e.getMessage());
 			throw new RuntimeException(e);
 		}
 	}
@@ -66,7 +64,6 @@ public abstract class DefaultDao<T> {
 		}
 		
 		catch(SQLException e) {
-			System.out.println("Exception: " + e.getMessage());
 			throw new RuntimeException(e);
 		}
 	}
@@ -88,7 +85,6 @@ public abstract class DefaultDao<T> {
 
 			sqlCommand.close();
 		} catch(SQLException e) {
-			System.out.println("Exception: " + e.getMessage());
 			throw new RuntimeException(e);
 		}
 	}

@@ -15,10 +15,9 @@ class ClienteTest {
 
 	@Test
 	void addsValidClientAndEditsItAndRemovesIt() throws ControllerException {
-		Cliente c1 = new Cliente();
+		Cliente c1;
 		HashMap<String,String> map = new HashMap<String,String>();
 		ClienteController controller = new ClienteController();
-		ArrayList<Cliente> list = new ArrayList<Cliente>();
 
 		map.put("cpf","12345678910");
 		map.put("endereco","rua oito");
@@ -26,17 +25,11 @@ class ClienteTest {
 		map.put("nome","Debis Dibris");
 		map.put("telefone","22342212");
 		map.put("validadecnh","21/11/2020");
-		controller.add(map);
-		
-		controller.searchAll(list);
-		for (Cliente c : list) if(c.getNome().equals("Debis Dibris")) c1 = c;
+		c1 = controller.add(map);
 		assertEquals("Debis Dibris", c1.getNome());
 		
-		list = new ArrayList<Cliente>();
 		map.put("nome","Debus Dubrus");
-		controller.edit(map);
-		controller.searchAll(list);
-		for (Cliente c : list) if(c.getNome().equals("Debus Dubrus")) c1 = c;
+		c1 = controller.edit(map);
 		assertEquals("Debus Dubrus", c1.getNome());
 		
 		controller.remove(c1);

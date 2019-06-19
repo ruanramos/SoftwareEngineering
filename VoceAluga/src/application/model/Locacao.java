@@ -3,10 +3,10 @@ package application.model;
 import javafx.beans.property.*;
 
 public class Locacao {
-	private IntegerProperty id;
-	private StringProperty idcliente;
-	private StringProperty idcarro;
-	private StringProperty problema;
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty idcliente = new SimpleStringProperty("");
+	private StringProperty idcarro = new SimpleStringProperty("");
+	private StringProperty problema = new SimpleStringProperty("");
 	
 	public int getId() {
 		return id.get();
@@ -35,7 +35,7 @@ public class Locacao {
 		return idcarro;
 	}
 	public void setIdcarro(String idcarro) {
-		this.idcarro.set(idcarro);;
+		this.idcarro.set(idcarro);
 	}
 	
 	public String getProblema() {

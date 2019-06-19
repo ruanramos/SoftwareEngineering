@@ -13,7 +13,7 @@ public class ClienteController {
 		this.dao = new ClienteDao();
 	}
 
-	public void add(Map<String, String> mapOfFields) throws ControllerException {
+	public Cliente add(Map<String, String> mapOfFields) throws ControllerException {
 		try {
 			Form<Cliente> form = new Form<>(Cliente.class);
 			form.addInfo(mapOfFields);
@@ -21,16 +21,15 @@ public class ClienteController {
 			Cliente cliente = new Cliente();
 			form.fillObjectAttributes(cliente);
 			dao.insert(cliente);
+			return cliente;
 		}
 		catch(RuntimeException e) {
-			if(e.getMessage() != null) {
-				String lowerCasedMessage = e.getMessage().toLowerCase();
-				if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("cpf")) {
-					throw new ControllerException("Ja existe um cliente com este cpf");
-				}
-				else {
-					throw e;
-				}
+			String lowerCasedMessage = e.getMessage().toLowerCase();
+			if(lowerCasedMessage.contains("duplicate entry") && lowerCasedMessage.contains("cpf")) {
+				throw new ControllerException("Ja existe um cliente com este cpf");
+			}
+			else {
+				throw e;
 			}
 		}
 	}
@@ -39,7 +38,7 @@ public class ClienteController {
 		dao.delete(cliente);
 	}
 
-	public void edit(Map<String, String> mapOfFields) throws ControllerException {
+	public Cliente edit(Map<String, String> mapOfFields) throws ControllerException {
 		Form<Cliente> form = new Form<>(Cliente.class);
 		form.addInfo(mapOfFields);
 		validateClienteFields(form);
@@ -48,6 +47,7 @@ public class ClienteController {
 		form.fillObjectAttributes(cliente);
 
 		dao.update(cliente);
+		return cliente;
 	}
 
 	public <L extends List<Cliente>> void searchByCpf(L list, String cpf) {
