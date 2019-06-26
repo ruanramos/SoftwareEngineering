@@ -75,7 +75,7 @@ public class RootLayoutController {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ReservaSearchDialog.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-        stage.setTitle("Buscar reserva");
+        stage.setTitle("Buscar Reserva");
 //        stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
@@ -87,11 +87,37 @@ public class RootLayoutController {
 
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-        stage.setTitle("Criar Locaï¿½ï¿½o");
+        stage.setTitle("Criar Reserva");
 //        stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
 
         ReservaEditDialogController controller = loader.getController();
+        controller.setNewEntryFlag(true);
+
+        stage.showAndWait();
+    }
+    @FXML
+    private void handleSearchRental() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/LocacaoSearchDialog.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Buscar Locação");
+//        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    @FXML
+    private void handleNewRental() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/LocacaoEditDialog.fxml"));
+
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Criar Locação");
+//        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+
+        LocacaoEditDialogController controller = loader.getController();
         controller.setNewEntryFlag(true);
 
         stage.showAndWait();
