@@ -1,10 +1,17 @@
 package application.view;
 
+import application.controller.ClienteController;
 import application.controller.ControllerException;
 import application.controller.ReservaController;
+import application.model.Cliente;
 import application.model.Reserva;
+import application.util.DateUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -14,17 +21,19 @@ import java.util.Map;
 public class ReservaEditDialogController {
 
     @FXML
-    Node rootNode;
+    private Node rootNode;
     @FXML
-    TextField idField;
+    private TextField idField;
     @FXML
-    TextField reservationidField;
+    private ChoiceBox<String> idclienteField;
     @FXML
-    TextField categoryField;
+    private DatePicker dataPicker;
     @FXML
-    TextField ageField;
+    private TextField grupoField;
     @FXML
-    TextField mileageField;
+    private TextField modeloField;
+    @FXML
+    private TextField duracaodiasField;
 
     private Reserva reserva;
     private boolean newEntryFlag;
@@ -33,18 +42,36 @@ public class ReservaEditDialogController {
     public void initialize() {
         // bloqueia edição do id
         idField.setDisable(true);
+        //dataPicker.setConverter(DateUtil.getStringConverter());
     }
 
     public void setNewEntryFlag(boolean newEntryFlag) {
         reserva = new Reserva();
         this.newEntryFlag = newEntryFlag;
+        this.idclienteField.setItems(getIdsClienteField());
+        
     }
 
     public void setReserva(Reserva reserva) {
         this.reserva = reserva;
+        this.idField.setText(String.valueOf(reserva.getId()));
+        this.idclienteField.setValue(String.valueOf(reserva.getIdcliente()));
+        this.dataPicker.setValue(reserva.getData());
+        this.grupoField.setText(reserva.getGrupo());
+        this.modeloField.setText(reserva.getModelo());
+        this.duracaodiasField.setText(String.valueOf(reserva.getDuracaodias()));
         
     }
-
+    public ObservableList<String> getIdsClienteField() {
+    	ClienteController clienteController = new ClienteController();
+    	ObservableList<Cliente> clienteResult = FXCollections.observableArrayList();
+    	ObservableList<String> clientesCriados = FXCollections.observableArrayList();
+    	clienteController.searchByCpf(clienteResult,"");
+    	for( Cliente cliente : clienteResult){
+    		clientesCriados.add(cliente.getCpf());
+        }
+    	return clientesCriados;
+    }
     @FXML
     private void handleOk() {
         Map<String, String> reservationFields = new HashMap<>();

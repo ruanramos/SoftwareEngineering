@@ -51,7 +51,8 @@ public class LocacaoEditDialogController {
     public void setLocacao(Locacao locacao) {
         this.locacao = locacao;
         this.idField.setText(String.valueOf(locacao.getId()));
-
+        this.idclienteField.setValue(String.valueOf(locacao.getIdcliente()));
+        this.idcarroField.setValue(String.valueOf(locacao.getIdcarro()));
         this.problemaField.setText(String.valueOf(locacao.getProblema()));
     }
     public ObservableList<String> getIdsClienteField() {

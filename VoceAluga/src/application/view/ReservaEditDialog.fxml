@@ -27,14 +27,14 @@
   </rowConstraints>
 <children><Label text="Codigo" /><TextField fx:id="idField" GridPane.columnIndex="1" /><Label text="Cliente" GridPane.rowIndex="1" />
             <Label text="Data" GridPane.rowIndex="2" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ChoiceBox prefHeight="25.0" prefWidth="337.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dataPicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="idclienteField" prefHeight="25.0" prefWidth="337.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Duração (dias)" GridPane.rowIndex="5" />
             <Label prefHeight="25.0" prefWidth="47.0" text="Grupo" GridPane.rowIndex="3" />
-            <TextField fx:id="idField1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="idField2" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="grupoField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="duracaodiasField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label text="Modelo" GridPane.rowIndex="4" />
-            <TextField fx:id="idField21" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="modeloField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 </children>
 </GridPane>
 <HBox layoutX="197.1875" layoutY="241.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
