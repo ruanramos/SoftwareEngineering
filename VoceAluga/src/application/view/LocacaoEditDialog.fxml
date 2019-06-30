@@ -24,10 +24,10 @@
   </rowConstraints>
 <children><Label text="Codigo" /><TextField fx:id="idField" GridPane.columnIndex="1" /><Label text="Cliente" GridPane.rowIndex="1" />
             <Label text="Carro" GridPane.rowIndex="2" />
-            <ChoiceBox prefHeight="25.0" prefWidth="337.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="idclienteField" prefHeight="25.0" prefWidth="337.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label prefHeight="25.0" prefWidth="89.0" text="Problema" GridPane.rowIndex="3" />
-            <TextField fx:id="idField1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ChoiceBox prefHeight="25.0" prefWidth="337.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="problemaField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="idcarroField" prefHeight="25.0" prefWidth="337.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 </children>
 </GridPane>
 <HBox layoutX="197.1875" layoutY="241.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">

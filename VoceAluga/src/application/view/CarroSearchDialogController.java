@@ -58,8 +58,12 @@ public class CarroSearchDialogController {
         }
 
         carroTable.setItems(carroResult);
+        for( Carro carro : carroResult){
+        	System.out.println(carro.getPlaca());
+        }
+        
     }
-
+    
     @FXML
     private void handleEditCar() throws IOException {
         // TODO: e se não escolher nada?

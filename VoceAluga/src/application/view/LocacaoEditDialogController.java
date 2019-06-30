@@ -1,10 +1,16 @@
 package application.view;
-
+import application.controller.CarroController;
+import application.controller.ClienteController;
 import application.controller.ControllerException;
-import application.controller.ReservaController;
-import application.model.Reserva;
+import application.controller.LocacaoController;
+import application.model.Carro;
+import application.model.Cliente;
+import application.model.Locacao;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -18,45 +24,69 @@ public class LocacaoEditDialogController {
     @FXML
     TextField idField;
     @FXML
-    TextField reservationidField;
+    ChoiceBox<String> idclienteField;
     @FXML
-    TextField categoryField;
+    ChoiceBox<String> idcarroField;
     @FXML
-    TextField ageField;
-    @FXML
-    TextField mileageField;
+    TextField problemaField;
+ 
 
-    private Reserva reserva;
+    private Locacao locacao;
     private boolean newEntryFlag;
 
     @FXML
     public void initialize() {
         // bloqueia edição do id
         idField.setDisable(true);
+
     }
 
     public void setNewEntryFlag(boolean newEntryFlag) {
-        reserva = new Reserva();
+        locacao = new Locacao();
         this.newEntryFlag = newEntryFlag;
+        this.idclienteField.setItems(getIdsClienteField());
+        this.idcarroField.setItems(getIdsCarroField());
     }
 
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-        
-    }
+    public void setLocacao(Locacao locacao) {
+        this.locacao = locacao;
+        this.idField.setText(String.valueOf(locacao.getId()));
 
+        this.problemaField.setText(String.valueOf(locacao.getProblema()));
+    }
+    public ObservableList<String> getIdsClienteField() {
+    	ClienteController clienteController = new ClienteController();
+    	ObservableList<Cliente> clienteResult = FXCollections.observableArrayList();
+    	ObservableList<String> clientesCriados = FXCollections.observableArrayList();
+    	clienteController.searchByCpf(clienteResult,"");
+    	for( Cliente cliente : clienteResult){
+    		clientesCriados.add(cliente.getCpf());
+        }
+    	return clientesCriados;
+    }
+    public ObservableList<String> getIdsCarroField() {
+    	CarroController carroController = new CarroController();
+    	ObservableList<Carro> carroResult = FXCollections.observableArrayList();
+    	ObservableList<String> placasCriadas = FXCollections.observableArrayList();
+    	carroController.searchByPlaca(carroResult,"");
+    	for( Carro carro : carroResult){
+    		placasCriadas.add(carro.getPlaca());
+        }
+    	return placasCriadas;
+    }
+    
     @FXML
     private void handleOk() {
-        Map<String, String> reservationFields = new HashMap<>();
+        Map<String, String> locacaoFields = new HashMap<>();
        
 
         try {
-            ReservaController reservationManager = new ReservaController();
+            LocacaoController locacaoManager = new LocacaoController();
             if (newEntryFlag) {
-                reservationManager.add(reservationFields);
+                locacaoManager.add(locacaoFields);
             } else {
-                reservationFields.put("id", String.valueOf(reserva.getId()));
-                reservationManager.edit(reservationFields);
+                locacaoFields.put("id", String.valueOf(locacao.getId()));
+                locacaoManager.edit(locacaoFields);
             }
         } catch (ControllerException e) {
             e.printStackTrace();
