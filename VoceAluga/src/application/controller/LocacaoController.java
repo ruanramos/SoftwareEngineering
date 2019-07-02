@@ -78,10 +78,12 @@ public class LocacaoController {
 		manager.getAvailableCars(list);
 	}
 	
-	public <L extends List<Locacao>> void searchByCpf(L list, String modelo) {
-		dao.selectToList(list, "where idcliente like '%" + modelo + "%'");
+	public <L extends List<Locacao>> void searchByCpf(L list, String cpf) {
+		dao.selectToList(list, "where idcliente like '%" + cpf + "%'");
 	}
-
+	public <L extends List<Locacao>> void searchByPlaca(L list, String placa) {
+		dao.selectToList(list, "where idcarro like '%" + placa + "%'");
+	}
 	public <L extends List<Locacao>> void searchAll(L list) {
 		dao.selectToList(list);
 	}

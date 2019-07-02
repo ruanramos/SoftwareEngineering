@@ -1,12 +1,17 @@
 package application.view;
 
+import application.Main;
 import application.controller.ReservaController;
 import application.dbclass.ReservaDao;
+import application.model.Carro;
 import application.model.Reserva;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -57,7 +62,20 @@ public class ReservaSearchDialogController {
 
     @FXML
     private void handleEditReservation() throws IOException {
+        Reserva selectedReserva = reservaTable.getSelectionModel().getSelectedItem();
 
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/ReservaEditDialog.fxml"));
+
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Editar reserva");
+        stage.setScene(scene);
+
+        ReservaEditDialogController controller = loader.getController();
+        controller.setNewEntryFlag(false);
+        controller.setReserva(selectedReserva);
+
+        stage.showAndWait();
     }
 
     @FXML
