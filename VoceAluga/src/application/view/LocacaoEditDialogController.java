@@ -3,11 +3,9 @@ import application.controller.CarroController;
 import application.controller.ClienteController;
 import application.controller.ControllerException;
 import application.controller.LocacaoController;
-import application.model.Carro;
-import application.model.Cliente;
+
 import application.model.Locacao;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import application.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
@@ -44,8 +42,10 @@ public class LocacaoEditDialogController {
     public void setNewEntryFlag(boolean newEntryFlag) {
         locacao = new Locacao();
         this.newEntryFlag = newEntryFlag;
-        this.idclienteField.setItems(getIdsClienteField());
-        this.idcarroField.setItems(getIdsCarroField());
+        ClienteController clienteController = new ClienteController();
+        CarroController carroController = new CarroController();
+        this.idclienteField.setItems(clienteController.getIdsClienteField());
+        this.idcarroField.setItems(carroController.getIdsCarroField());
     }
 
     public void setLocacao(Locacao locacao) {
@@ -55,30 +55,18 @@ public class LocacaoEditDialogController {
         this.idcarroField.setValue(String.valueOf(locacao.getIdcarro()));
         this.problemaField.setText(String.valueOf(locacao.getProblema()));
     }
-    public ObservableList<String> getIdsClienteField() {
-    	ClienteController clienteController = new ClienteController();
-    	ObservableList<Cliente> clienteResult = FXCollections.observableArrayList();
-    	ObservableList<String> clientesCriados = FXCollections.observableArrayList();
-    	clienteController.searchByCpf(clienteResult,"");
-    	for( Cliente cliente : clienteResult){
-    		clientesCriados.add(cliente.getCpf());
-        }
-    	return clientesCriados;
-    }
-    public ObservableList<String> getIdsCarroField() {
-    	CarroController carroController = new CarroController();
-    	ObservableList<Carro> carroResult = FXCollections.observableArrayList();
-    	ObservableList<String> placasCriadas = FXCollections.observableArrayList();
-    	carroController.searchByPlaca(carroResult,"");
-    	for( Carro carro : carroResult){
-    		placasCriadas.add(carro.getPlaca());
-        }
-    	return placasCriadas;
+    private Map<String,String> buildFieldsMap() {
+    	Map<String,String> fields = new HashMap<>();
+    	fields.put("id",idField.getText());
+    	fields.put("idcliente", idclienteField.getValue());
+    	fields.put("idcarro", idcarroField.getValue());
+    	fields.put("problema",problemaField.getText());
+    	return fields;
     }
     
     @FXML
     private void handleOk() {
-        Map<String, String> locacaoFields = new HashMap<>();
+        Map<String, String> locacaoFields = buildFieldsMap();
        
 
         try {

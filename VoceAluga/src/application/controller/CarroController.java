@@ -5,7 +5,8 @@ import java.util.Map;
 
 import application.dbclass.CarroDao;
 import application.model.Carro;
-import application.model.Cliente;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class CarroController {
 	private CarroDao dao;
@@ -13,7 +14,15 @@ public class CarroController {
 	public CarroController() {
 		this.dao = new CarroDao();
 	}
-	
+    public ObservableList<String> getIdsCarroField() {  	
+    	ObservableList<Carro> carroResult = FXCollections.observableArrayList();
+    	ObservableList<String> placasCriadas = FXCollections.observableArrayList();
+    	searchByPlaca(carroResult,"");
+    	for( Carro carro : carroResult){
+    		placasCriadas.add(carro.getPlaca());
+        }
+    	return placasCriadas;
+    }
 	public Carro add(Map<String, String> mapOfFields) throws ControllerException {
 		try {
 			Form<Carro> form = new Form<>(Carro.class);

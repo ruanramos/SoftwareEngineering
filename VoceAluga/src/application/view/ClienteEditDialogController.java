@@ -1,7 +1,8 @@
 package application.view;
 
-import application.controller.ControllerException;
+
 import application.controller.ClienteController;
+import application.controller.ControllerException;
 import application.model.Cliente;
 import application.util.DateUtil;
 import javafx.fxml.FXML;
@@ -9,10 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

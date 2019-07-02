@@ -1,9 +1,7 @@
 package application.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import application.dbclass.LocacaoDao;
 import application.model.Locacao;
 import application.model.LocacaoManager;

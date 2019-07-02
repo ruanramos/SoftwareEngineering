@@ -2,9 +2,7 @@ package application.controller;
 
 import java.util.List;
 import java.util.Map;
-
 import application.dbclass.ReservaDao;
-import application.model.Cliente;
 import application.model.Reserva;
 
 public class ReservaController {
@@ -32,7 +30,7 @@ private ReservaDao dao;
 		catch(RuntimeException e) {
 			String lowerCasedMessage = e.getMessage().toLowerCase();
 			if(lowerCasedMessage.contains("a foreign key constraint fails")) {
-				throw new ControllerException("cliente nao encontrado");
+				throw new ControllerException("reserva nao encontrada");
 			}
 			else {
 				throw e;
@@ -59,7 +57,12 @@ private ReservaDao dao;
 	public <L extends List<Reserva>> void searchByCpf(L list, String cpf) {
 		dao.selectToList(list, "where idcliente like '%" + cpf + "%'");
 	}
-	
+	public <L extends List<Reserva>> void searchByGrupo(L list, String grupo) {
+		dao.selectToList(list, "where grupo like '%" + grupo + "%'");
+	}
+	public <L extends List<Reserva>> void searchByModelo(L list, String modelo) {
+		dao.selectToList(list, "where modelo like '%" + modelo + "%'");
+	}
 	public <L extends List<Reserva>> void searchAll(L list) {
 		dao.selectToList(list);
 	}
@@ -102,7 +105,7 @@ private ReservaDao dao;
 	private static boolean isDateValid(String date) {
 		return (date != null);
 	}
-	private static boolean isCpfValid(String cpf) {
+	private static boolean isCpfValid(String cpf) {		
 		return (cpf != null && cpf.matches("\\d{11}"));
 	}
 }

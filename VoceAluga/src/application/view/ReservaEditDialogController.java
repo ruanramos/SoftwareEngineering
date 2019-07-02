@@ -36,6 +36,8 @@ public class ReservaEditDialogController {
     private TextField duracaodiasField;
 
     private Reserva reserva;
+    
+    
     private boolean newEntryFlag;
 
     @FXML
@@ -47,8 +49,9 @@ public class ReservaEditDialogController {
 
     public void setNewEntryFlag(boolean newEntryFlag) {
         reserva = new Reserva();
+        ClienteController clienteController = new ClienteController();
         this.newEntryFlag = newEntryFlag;
-        this.idclienteField.setItems(getIdsClienteField());
+        this.idclienteField.setItems(clienteController.getIdsClienteField());
         
     }
 
@@ -62,20 +65,21 @@ public class ReservaEditDialogController {
         this.duracaodiasField.setText(String.valueOf(reserva.getDuracaodias()));
         
     }
-    public ObservableList<String> getIdsClienteField() {
-    	ClienteController clienteController = new ClienteController();
-    	ObservableList<Cliente> clienteResult = FXCollections.observableArrayList();
-    	ObservableList<String> clientesCriados = FXCollections.observableArrayList();
-    	clienteController.searchByCpf(clienteResult,"");
-    	for( Cliente cliente : clienteResult){
-    		clientesCriados.add(cliente.getCpf());
-        }
-    	return clientesCriados;
+    private Map<String,String> buildFieldsMap() {
+    	Map<String,String> fields = new HashMap<>();
+    	fields.put("id",idField.getText());
+    	fields.put("idcliente", idclienteField.getValue());
+    	fields.put("data", DateUtil.parse(dataPicker.getEditor().getText()).toString());
+    	fields.put("grupo", grupoField.getText());
+    	fields.put("modelo", modeloField.getText());
+    	fields.put("duracaodias", duracaodiasField.getText());
+    	return fields;
     }
+    
     @FXML
     private void handleOk() {
-        Map<String, String> reservationFields = new HashMap<>();
-       
+        Map<String, String> reservationFields = buildFieldsMap();
+
 
         try {
             ReservaController reservationManager = new ReservaController();

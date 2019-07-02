@@ -47,16 +47,19 @@ public class CarroEditDialogController {
         anoField.setText(String.valueOf(carro.getAno()));
         quilometragemField.setText(String.valueOf(carro.getQuilometragem()));
     }
-
-    @FXML
-    private void handleOk() {
-        Map<String, String> carroFields = new HashMap<>();
+    private Map<String,String> buildFieldsMap() {
+    	Map<String,String> carroFields = new HashMap<>();
         carroFields.put("placa", placaField.getText());
         carroFields.put("modelo", modeloField.getText());
         carroFields.put("grupo", grupoField.getText());
         carroFields.put("ano", anoField.getText());
-        carroFields.put("quilometragem", quilometragemField.getText());
-
+        carroFields.put("quilometragem", quilometragemField.getText());    	
+    	return carroFields;
+    }
+    @FXML
+    private void handleOk() {
+        Map<String, String> carroFields = buildFieldsMap();
+        
         try {
             CarroController carroController = new CarroController();
             if (newEntryFlag) {

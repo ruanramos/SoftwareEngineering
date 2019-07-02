@@ -2,6 +2,8 @@ package application.controller;
 
 import application.dbclass.ClienteDao;
 import application.model.Cliente;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,16 @@ public class ClienteController {
 	public ClienteController() {
 		this.dao = new ClienteDao();
 	}
+    public ObservableList<String> getIdsClienteField() {
+    	
+    	ObservableList<Cliente> clienteResult = FXCollections.observableArrayList();
+    	ObservableList<String> clientesCriados = FXCollections.observableArrayList();
+    	searchByCpf(clienteResult,"");
+    	for( Cliente cliente : clienteResult){
+    		clientesCriados.add(cliente.getCpf());
+        }
+    	return clientesCriados;
+    }
 
 	public Cliente add(Map<String, String> mapOfFields) throws ControllerException {
 		try {
