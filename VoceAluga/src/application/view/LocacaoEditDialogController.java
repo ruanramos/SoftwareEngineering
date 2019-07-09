@@ -8,6 +8,7 @@ import application.model.Locacao;
 import application.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -78,7 +79,12 @@ public class LocacaoEditDialogController {
                 locacaoManager.edit(locacaoFields);
             }
         } catch (ControllerException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(getStage());
+            alert.setTitle("Campo inválido");
+            alert.setHeaderText("Por favor corrija os campos inválidos.");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
 
         this.getStage().close();

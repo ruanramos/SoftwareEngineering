@@ -92,10 +92,10 @@ public class LocacaoController {
 		String errorMessage = "";
 		
 		if (!isCpfValid(form.getAttribute("idcliente"))) {
-			errorMessage += "CPF inv�lido.\n";
+			errorMessage += "CPF invalido.\n";
 		}
 		if (!isPlateValid(form.getAttribute("idcarro"))) {
-	    	errorMessage += "Placa inv�lida.\n";
+	    	errorMessage += "Placa invalida.\n";
 	    }
 		if (!isProblemValid(form.getAttribute("problema"))) {
 	    	errorMessage += "Problema invalido.\n";

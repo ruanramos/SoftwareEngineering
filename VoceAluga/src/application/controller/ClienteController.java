@@ -78,11 +78,11 @@ public class ClienteController {
 		String errorMessage = "";
 
 		if (!isCpfValid(form.getAttribute("cpf"))) {
-			errorMessage += "CPF inv�lido.\n";
+			errorMessage += "CPF invalido.\n";
 		}
 		
 		if (!isNameValid(form.getAttribute("nome"))) {
-			errorMessage += "Nome inv�lido.\n";
+			errorMessage += "Nome invalido.\n";
 		}
 		
 		if (!isAddressValid(form.getAttribute("endereco"))) {
@@ -94,11 +94,11 @@ public class ClienteController {
 		}
 		
 		if (!isBirthdayValid(form.getAttribute("nascimento"))) {
-			errorMessage += "Data de nascimento inv�lida!\n";
+			errorMessage += "Data de nascimento invalida!\n";
 		}
 		
 		if (!isCnhExpiration(form.getAttribute("validadecnh"))) {
-			errorMessage += "Validade da CNH inv�lida!\n";
+			errorMessage += "Validade da CNH invalida!\n";
 		}
 
 		if (errorMessage.length() != 0) {

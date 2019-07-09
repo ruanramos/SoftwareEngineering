@@ -71,19 +71,19 @@ private ReservaDao dao;
 		String errorMessage = "";
 		
 		if (!isCpfValid(form.getAttribute("idcliente"))) {
-			errorMessage += "CPF inv�lido.\n";
+			errorMessage += "CPF invalido.\n";
 		}
 		if (!isDateValid(form.getAttribute("data"))) {
-	    	errorMessage += "Data inv�lida.\n";
+	    	errorMessage += "Data invalida.\n";
 	    }
 		if (!isGroupValid(form.getAttribute("grupo"))) {
-	    	errorMessage += "Grupo inv�lido.\n";
+	    	errorMessage += "Grupo invalido.\n";
 	    }
 	    if (!isModelValid(form.getAttribute("modelo"))) {
-	    	errorMessage += "Modelo inv�lido.\n";
+	    	errorMessage += "Modelo invalido.\n";
 	    }
 	    if (!isDurationValid(form.getAttribute("duracaodias"))) {
-	    	errorMessage += "Duracao de dias inv�lida.\n";
+	    	errorMessage += "Duracao de dias invalida.\n";
 	    }
 	    
 	    if (errorMessage.length() != 0) {

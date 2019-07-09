@@ -101,7 +101,7 @@ public class RootLayoutController {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/LocacaoSearchDialog.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-        stage.setTitle("Buscar Locação");
+        stage.setTitle("Buscar LocaÃ§Ã£o");
 //        stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
@@ -113,7 +113,7 @@ public class RootLayoutController {
 
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-        stage.setTitle("Criar Locação");
+        stage.setTitle("Criar LocaÃ§Ã£o");
 //        stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
 

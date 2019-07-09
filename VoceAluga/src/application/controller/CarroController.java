@@ -82,19 +82,19 @@ public class CarroController {
 		String errorMessage = "";
 		
 		if (!isPlateValid(form.getAttribute("placa"))) {
-	    	errorMessage += "Placa inv�lida.\n";
+	    	errorMessage += "Placa inválida.\n";
 	    }
 		if (!isMileageValid(form.getAttribute("quilometragem"))) {
-	    	errorMessage += "Quilometragem inv�lida.\n";
+	    	errorMessage += "Quilometragem inválida.\n";
 	    }
 		if (!isGroupValid(form.getAttribute("grupo"))) {
-	    	errorMessage += "Grupo inv�lido.\n";
+	    	errorMessage += "Grupo inválido.\n";
 	    }
 		if (!isYearValid(form.getAttribute("ano"))) {
-	    	errorMessage += "Ano inv�lida.\n";
+	    	errorMessage += "Ano inválida.\n";
 	    }
 	    if (!isModelValid(form.getAttribute("modelo"))) {
-	    	errorMessage += "Modelo inv�lido.\n";
+	    	errorMessage += "Modelo inválido.\n";
 	    }
 	    
 	    if (errorMessage.length() != 0) {

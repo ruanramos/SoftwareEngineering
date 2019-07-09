@@ -7,6 +7,7 @@ import application.model.Cliente;
 import application.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -70,7 +71,12 @@ public class ClienteEditDialogController {
                 clienteController.edit(clienteFields);
             }
         } catch (ControllerException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(getStage());
+            alert.setTitle("Campo inválido");
+            alert.setHeaderText("Por favor corrija os campos inválidos.");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
 
         this.getStage().close();
@@ -86,14 +92,13 @@ public class ClienteEditDialogController {
     }
 
     private Map<String,String> buildFieldsMap() {
-    	
         Map<String,String> fields = new HashMap<>();
         fields.put("cpf", cpfField.getText());
         fields.put("nome", nomeField.getText());
         fields.put("endereco", enderecoField.getText());
         fields.put("telefone", telefoneField.getText());
-        fields.put("nascimento", DateUtil.parse(nascimentoPicker.getEditor().getText()).toString());
-        fields.put("validadecnh", DateUtil.parse(validadeCnhPicker.getEditor().getText()).toString());
+        fields.put("nascimento", String.valueOf(DateUtil.parse(nascimentoPicker.getEditor().getText())));
+        fields.put("validadecnh", String.valueOf(DateUtil.parse(validadeCnhPicker.getEditor().getText())));
         return fields;
     }
 

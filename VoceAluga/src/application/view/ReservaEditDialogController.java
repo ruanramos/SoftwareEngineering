@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -69,7 +70,7 @@ public class ReservaEditDialogController {
     	Map<String,String> fields = new HashMap<>();
     	fields.put("id",idField.getText());
     	fields.put("idcliente", idclienteField.getValue());
-    	fields.put("data", DateUtil.parse(dataPicker.getEditor().getText()).toString());
+    	fields.put("data", String.valueOf(DateUtil.parse(dataPicker.getEditor().getText())));
     	fields.put("grupo", grupoField.getText());
     	fields.put("modelo", modeloField.getText());
     	fields.put("duracaodias", duracaodiasField.getText());
@@ -90,7 +91,12 @@ public class ReservaEditDialogController {
                 reservationManager.edit(reservationFields);
             }
         } catch (ControllerException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(getStage());
+            alert.setTitle("Campo inválido");
+            alert.setHeaderText("Por favor corrija os campos inválidos.");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
 
         this.getStage().close();
