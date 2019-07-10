@@ -45,7 +45,7 @@ public class ReservaEditDialogController {
     public void initialize() {
         // bloqueia edição do id
         idField.setDisable(true);
-        //dataPicker.setConverter(DateUtil.getStringConverter());
+        dataPicker.setConverter(DateUtil.getStringConverter());
     }
 
     public void setNewEntryFlag(boolean newEntryFlag) {
@@ -80,7 +80,6 @@ public class ReservaEditDialogController {
     @FXML
     private void handleOk() {
         Map<String, String> reservationFields = buildFieldsMap();
-
 
         try {
             ReservaController reservationManager = new ReservaController();
